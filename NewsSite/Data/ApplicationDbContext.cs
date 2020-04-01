@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NewsSite.Models.Data;
 
 namespace NewsSite.Data
 {
@@ -11,6 +12,8 @@ namespace NewsSite.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+        DbSet<Article> Articles { get; set; }
     }
 }
