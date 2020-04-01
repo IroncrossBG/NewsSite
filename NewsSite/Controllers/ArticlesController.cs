@@ -17,26 +17,33 @@ namespace NewsSite.Controllers
             this.articlesService = articlesService;
         }
 
+        [HttpGet]
         public IActionResult New()
         {
             return View();
         }
 
-        public IActionResult Add()
+        [HttpPost]
+        public IActionResult New(AddArticleModel model)
         {
-            articlesService.AddArticle(new
+            if (ModelState.IsValid)
+            {
+                articlesService.AddArticle(new
                 AddArticleModel
-            { 
-                Title = "Test title",
-                Author = "Author",
-                Content = "Content",
-                Subtitle = "Test subtitle",
-            });
-            return this.Ok();
-        }
-        public IActionResult All()
-        {
+                {
+                    Title = model.Title,
+                    Author = model.Author,
+                    Content = model.Content,
+                    Subtitle = model.Subtitle,
+                });
+            }
             return View();
+        }
+
+        public IActionResult ById(int id)
+        {
+            var result = articlesService.GetById(id);
+            return Json(result);
         }
     }
 }

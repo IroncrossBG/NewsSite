@@ -14,6 +14,6 @@ namespace NewsSite.Data
         {
 
         }
-        DbSet<Article> Articles { get; set; }
+        public virtual DbSet<Article> Articles { get; set; }
     }
 }
