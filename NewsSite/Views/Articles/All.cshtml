@@ -20,7 +20,7 @@
             <td>@item.ModifiedOn</td>
             <td>
                 <button class="btn-primary">Edit</button>
-                <button class="btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Delete</button>
+                <button asp-controller="Articles" asp-action="Delete" class="btn-danger">Delete</button>
             </td>
         </tr>
     }

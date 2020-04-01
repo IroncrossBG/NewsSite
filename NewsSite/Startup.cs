@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsSite.Services;
+using NewsSite.Models.Data;
+using NewsSite.Data.Seeders;
 
 namespace NewsSite
 {
@@ -67,6 +69,9 @@ namespace NewsSite
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            var articleSeeder = new ArticleSeeder();
+            articleSeeder.Seed(app);
         }
     }
 }

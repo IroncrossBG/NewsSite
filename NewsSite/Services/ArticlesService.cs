@@ -38,12 +38,12 @@ namespace NewsSite.Services
 
         public IEnumerable<Article> GetAll()
         {
-            return this.db.Articles.ToArray();
+            return this.db.Articles.ToList();
         }
 
         public void Delete(int id)
         {
-            var article = this.db.Articles.Select(x => x.Id == id);
+            var article = this.db.Articles.FirstOrDefault(x => x.Id == id);
             if (article != null)
             {
                 this.db.Remove(article);

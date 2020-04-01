@@ -49,7 +49,6 @@ namespace NewsSite.Controllers
             var result = articlesService.GetById(id);
             return Json(result);
         }
-
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
