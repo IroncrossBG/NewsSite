@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "New";
+}
+
+<form method="post">
+    <div>
+        <label>Title:</label><br />
+        <input type="text" class="form-control" name="Title" />
+    </div>
+
+    <div>
+        <label>Subtitle:</label><br />
+        <input type="text" class="form-control" name="Subtitle" />
+    </div>
+
+    <div>
+        <label>Author:</label><br />
+        <input type="text" class="form-control" name="Author"/>
+    </div>
+
+    <div>
+        <label>Content:</label><br />
+        <textarea class="form-control" rows="15" name="Content"></textarea>
+    </div>
+
+    <hr />
+    <div>
+        <input type="submit" class="btn-primary" value="Submit"/>
+    </div>
+</form>
