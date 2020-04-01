@@ -17,14 +17,13 @@ namespace NewsSite.Controllers
             this.articlesService = articlesService;
         }
 
-        [HttpGet]
-        public IActionResult New()
+        public IActionResult Create()
         {
-            return View();
+            return View(new AddArticleModel());
         }
 
         [HttpPost]
-        public IActionResult New(AddArticleModel model)
+        public IActionResult Create(AddArticleModel model)
         {
             if (ModelState.IsValid)
             {
@@ -40,6 +39,11 @@ namespace NewsSite.Controllers
             }
             return View(model);
         }
+        public IActionResult Delete(int id)
+        {
+            articlesService.Delete(id);
+            return View("All", articlesService.GetAll());
+        }
 
         public IActionResult All()
         {
@@ -49,11 +53,6 @@ namespace NewsSite.Controllers
         {
             var result = articlesService.GetById(id);
             return Json(result);
-        }
-        public IActionResult Delete(int id)
-        {
-            articlesService.Delete(id);
-            return View("All", articlesService.GetAll());
         }
     }
 }

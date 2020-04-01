@@ -1,0 +1,31 @@
+﻿@model NewsSite.Models.Input.AddArticleModel
+@{
+    ViewData["Title"] = "New";
+}
+
+<form method="post">
+    <div>
+        <label>Title:</label><br />
+        <input type="text" class="form-control" name="Title" value="@Model.Title" />
+    </div>
+
+    <div>
+        <label>Subtitle:</label><br />
+        <input type="text" class="form-control" name="Subtitle" value="@Model.Subtitle"/>
+    </div>
+
+    <div>
+        <label>Author:</label><br />
+        <input type="text" class="form-control" name="Author" value="@Model.Author"/>
+    </div>
+
+    <div>
+        <label>Content:</label><br />
+        <textarea class="form-control" rows="15" name="Content" value="@Model.Content"></textarea>
+    </div>
+
+    <hr />
+    <div>
+        <input type="submit" class="btn-primary" value="Submit"/>
+    </div>
+</form>
