@@ -21,8 +21,9 @@ namespace NewsSite.Services
             {
                 Title = model.Title,
                 Subtitle = model.Subtitle,
-                Author = model.Title,
+                Author = model.Author,
                 CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow,
                 Content = model.Content,
             };
 
@@ -33,6 +34,21 @@ namespace NewsSite.Services
         public Article GetById(int id)
         {
             return this.db.Articles.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<Article> GetAll()
+        {
+            return this.db.Articles.ToArray();
+        }
+
+        public void Delete(int id)
+        {
+            var article = this.db.Articles.Select(x => x.Id == id);
+            if (article != null)
+            {
+                this.db.Remove(article);
+                this.db.SaveChanges();
+            }
         }
     }
 }

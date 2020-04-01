@@ -11,5 +11,9 @@ namespace NewsSite.Services
         Task AddArticle(AddArticleModel model);
 
         Article GetById(int id);
+
+        IEnumerable<Article> GetAll();
+
+        void Delete(int id);
     }
 }

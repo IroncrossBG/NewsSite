@@ -1,7 +1,28 @@
-﻿
+﻿@model IEnumerable<NewsSite.Models.Data.Article>;
 @{
     ViewData["Title"] = "All";
 }
 
-<h1>Hello</h1>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Created</th>
+        <th>Modified</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Author</td>
+            <td>@item.CreatedOn</td>
+            <td>@item.ModifiedOn</td>
+            <td>
+                <button class="btn-primary">Edit</button>
+                <button class="btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Delete</button>
+            </td>
+        </tr>
+    }
 
+</table>

@@ -40,10 +40,20 @@ namespace NewsSite.Controllers
             return View();
         }
 
+        public IActionResult All()
+        {
+            return View(articlesService.GetAll());
+        }
         public IActionResult ById(int id)
         {
             var result = articlesService.GetById(id);
             return Json(result);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            articlesService.Delete(id);
+            return View("All");
         }
     }
 }
