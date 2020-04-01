@@ -39,6 +39,7 @@ namespace NewsSite.Controllers
             }
             return View(model);
         }
+
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
