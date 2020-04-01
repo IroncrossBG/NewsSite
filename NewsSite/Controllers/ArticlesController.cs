@@ -17,6 +17,11 @@ namespace NewsSite.Controllers
             this.articlesService = articlesService;
         }
 
+        public IActionResult New()
+        {
+            return View();
+        }
+
         public IActionResult Add()
         {
             articlesService.AddArticle(new
@@ -25,7 +30,6 @@ namespace NewsSite.Controllers
                 Title = "Test title",
                 Author = "Author",
                 Content = "Content",
-                CreatedOn = DateTime.UtcNow,
                 Subtitle = "Test subtitle",
             });
             return this.Ok();
