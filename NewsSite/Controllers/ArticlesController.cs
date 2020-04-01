@@ -28,7 +28,7 @@ namespace NewsSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                articlesService.AddArticle(new
+                articlesService.Add(new
                 AddArticleModel
                 {
                     Title = model.Title,
@@ -36,8 +36,9 @@ namespace NewsSite.Controllers
                     Content = model.Content,
                     Subtitle = model.Subtitle,
                 });
+                return View("All", articlesService.GetAll());
             }
-            return View();
+            return View(model);
         }
 
         public IActionResult All()
@@ -52,7 +53,7 @@ namespace NewsSite.Controllers
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
-            return View("All");
+            return View("All", articlesService.GetAll());
         }
     }
 }

@@ -8,12 +8,12 @@ namespace NewsSite.Services
 {
     public interface IArticlesService
     {
-        Task AddArticle(AddArticleModel model);
+        void Add(AddArticleModel model);
+
+        void Delete(int id);
 
         Article GetById(int id);
 
         IEnumerable<Article> GetAll();
-
-        void Delete(int id);
     }
 }

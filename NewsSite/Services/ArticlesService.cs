@@ -15,7 +15,7 @@ namespace NewsSite.Services
         {
             this.db = db;
         }
-        public async Task AddArticle(AddArticleModel model)
+        public void Add(AddArticleModel model)
         {
             var newArticle = new Article
             {
@@ -27,18 +27,8 @@ namespace NewsSite.Services
                 Content = model.Content,
             };
 
-            await db.AddAsync(newArticle);
-            await db.SaveChangesAsync();
-        }
-
-        public Article GetById(int id)
-        {
-            return this.db.Articles.FirstOrDefault(x => x.Id == id);
-        }
-
-        public IEnumerable<Article> GetAll()
-        {
-            return this.db.Articles.ToList();
+            db.Add(newArticle);
+            db.SaveChanges();
         }
 
         public void Delete(int id)
@@ -49,6 +39,16 @@ namespace NewsSite.Services
                 this.db.Remove(article);
                 this.db.SaveChanges();
             }
+        }
+
+        public Article GetById(int id)
+        {
+            return this.db.Articles.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<Article> GetAll()
+        {
+            return this.db.Articles.ToList();
         }
     }
 }
