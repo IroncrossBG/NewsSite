@@ -10,8 +10,8 @@ using NewsSite.Data;
 namespace NewsSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401183934_DBSeeding")]
-    partial class DBSeeding
+    [Migration("20200402115342_AddedCategories")]
+    partial class AddedCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,38 +252,24 @@ namespace NewsSite.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "ASP.NET Core",
-                            Content = "Корона",
-                            CreatedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(8925),
-                            ModifiedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(9425),
-                            Title = "Коронавирус",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "ASP.NET Core",
-                            Content = "Бойко",
-                            CreatedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(9919),
-                            ModifiedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(9928),
-                            Title = "Борисов",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "ASP.NET Core",
-                            Content = "БГ",
-                            CreatedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(9934),
-                            ModifiedOn = new DateTime(2020, 4, 1, 18, 39, 33, 672, DateTimeKind.Utc).AddTicks(9935),
-                            Title = "България",
-                            Views = 0
-                        });
+            modelBuilder.Entity("NewsSite.Models.Data.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
