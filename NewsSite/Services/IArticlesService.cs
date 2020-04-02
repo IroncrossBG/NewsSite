@@ -10,6 +10,8 @@ namespace NewsSite.Services
     {
         void Add(AddArticleModel model);
 
+        void Edit(AddArticleModel model);
+
         void Delete(int id);
 
         Article GetById(int id);

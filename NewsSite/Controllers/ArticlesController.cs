@@ -46,6 +46,26 @@ namespace NewsSite.Controllers
             return View("All", articlesService.GetAll());
         }
 
+        public IActionResult Edit(int id)
+        {
+            var article = articlesService.GetById(id);
+            return View("Create", new AddArticleModel
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Author = article.Author,
+                Subtitle = article.Subtitle,
+                Content = article.Content
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddArticleModel model)
+        {
+            articlesService.Edit(model);
+            return View("All", articlesService.GetAll());
+        }
+
         public IActionResult All()
         {
             return View(articlesService.GetAll());

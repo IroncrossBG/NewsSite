@@ -8,6 +8,7 @@ namespace NewsSite.Models.Input
 {
     public class AddArticleModel
     {
+        public int Id { get; set; }
         [Required, MinLength(3)]
         public string Title { get; set; }
 

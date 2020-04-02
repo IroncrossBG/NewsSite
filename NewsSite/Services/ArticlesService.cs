@@ -31,6 +31,17 @@ namespace NewsSite.Services
             db.SaveChanges();
         }
 
+        public void Edit(AddArticleModel model)
+        {
+            var article = GetById(model.Id);
+            article.Title = model.Title;
+            article.Subtitle = model.Subtitle;
+            article.Author = model.Author;
+            article.Content = model.Content;
+            article.ModifiedOn = DateTime.UtcNow;
+            db.SaveChanges();
+        }
+        
         public void Delete(int id)
         {
             var article = this.db.Articles.FirstOrDefault(x => x.Id == id);
