@@ -11,6 +11,7 @@ namespace NewsSite.Services
     public class ArticlesService : IArticlesService
     {
         private readonly ApplicationDbContext db;
+
         public ArticlesService(ApplicationDbContext db)
         {
             this.db = db;
@@ -25,6 +26,7 @@ namespace NewsSite.Services
                 CreatedOn = DateTime.UtcNow,
                 ModifiedOn = DateTime.UtcNow,
                 Content = model.Content,
+                CategoryId = model.CategoryId
             };
 
             db.Add(newArticle);
@@ -39,6 +41,7 @@ namespace NewsSite.Services
             article.Author = model.Author;
             article.Content = model.Content;
             article.ModifiedOn = DateTime.UtcNow;
+            article.CategoryId = model.CategoryId;
             db.SaveChanges();
         }
         
@@ -59,7 +62,12 @@ namespace NewsSite.Services
 
         public IEnumerable<Article> GetAll()
         {
-            return this.db.Articles.ToList();
+            var result = this.db.Articles.ToList();
+            foreach (var item in result)
+            {
+                item.Category = this.db.Categories.FirstOrDefault(x => x.Id == item.CategoryId);
+            }
+            return result;
         }
     }
 }

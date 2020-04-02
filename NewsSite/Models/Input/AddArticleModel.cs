@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsSite.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace NewsSite.Models.Input
 
         [Required, MinLength(100)]
         public string Content { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }
