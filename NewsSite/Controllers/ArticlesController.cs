@@ -35,7 +35,7 @@ namespace NewsSite.Controllers
                     Content = model.Content,
                     Subtitle = model.Subtitle,
                 });
-                return View("All", articlesService.GetAll());
+                return Redirect("All");
             }
             return View(model);
         }
@@ -43,7 +43,7 @@ namespace NewsSite.Controllers
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
-            return View("All", articlesService.GetAll());
+            return Redirect("/Articles/All");
         }
 
         public IActionResult Edit(int id)
@@ -63,7 +63,7 @@ namespace NewsSite.Controllers
         public IActionResult Edit(AddArticleModel model)
         {
             articlesService.Edit(model);
-            return View("All", articlesService.GetAll());
+            return Redirect("/Articles/All");
         }
 
         public IActionResult All()
