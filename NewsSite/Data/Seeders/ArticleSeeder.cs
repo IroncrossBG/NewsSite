@@ -18,14 +18,15 @@ namespace NewsSite.Data.Seeders
                 if (context.Articles.Count() == 0)
                 {
                     context.Articles.Add(
-                    new Article
-                    {
-                        Title = "Coronavirus",
-                        Author = "ASP.NET Core",
-                        Content = "Corona",
-                        CreatedOn = DateTime.UtcNow,
-                        ModifiedOn = DateTime.UtcNow
-                    });
+                        new Article
+                        {
+                            Title = "Coronavirus",
+                            Author = "ASP.NET Core",
+                            Content = "Corona",
+                            CreatedOn = DateTime.UtcNow,
+                            ModifiedOn = DateTime.UtcNow,
+                            CategoryId = 3
+                        });
 
                     context.Articles.Add(
                         new Article
@@ -34,7 +35,8 @@ namespace NewsSite.Data.Seeders
                             Author = "ASP.NET Core",
                             Content = "Boiko",
                             CreatedOn = DateTime.UtcNow,
-                            ModifiedOn = DateTime.UtcNow
+                            ModifiedOn = DateTime.UtcNow,
+                            CategoryId = 1
                         });
 
                     context.Articles.Add(
@@ -44,7 +46,8 @@ namespace NewsSite.Data.Seeders
                             Author = "ASP.NET Core",
                             Content = "EU",
                             CreatedOn = DateTime.UtcNow,
-                            ModifiedOn = DateTime.UtcNow
+                            ModifiedOn = DateTime.UtcNow,
+                            CategoryId = 2
                         });
 
                     context.SaveChanges();

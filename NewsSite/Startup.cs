@@ -70,6 +70,16 @@ namespace NewsSite
                 endpoints.MapRazorPages();
             });
 
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+                context.Database.EnsureCreated();
+            }
+
+            //SEEDERS
+            var categorySeeder = new CategorySeeder();
+            categorySeeder.Seed(app);
+
             var articleSeeder = new ArticleSeeder();
             articleSeeder.Seed(app);
         }
