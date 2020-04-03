@@ -23,7 +23,7 @@
 
         <div>
             <label>Category:</label><br />
-            <select class="form-control" name="CategoryId">
+            <select class="form-control custom-select-sm" name="CategoryId">
                 @foreach (var category in Model.Categories)
                 {
                     @if (Model.CategoryId == category.Id)
