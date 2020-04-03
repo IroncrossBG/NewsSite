@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsSite.Models.Input;
+using NewsSite.Models.View;
 using NewsSite.Services;
 using System;
 using System.Collections.Generic;
@@ -78,10 +79,22 @@ namespace NewsSite.Controllers
         {
             return View(articlesService.GetAll());
         }
-        public IActionResult ById(int id)
+        public IActionResult Id(int id)
         {
-            var result = articlesService.GetById(id);
-            return Json(result);
+            articlesService.IncreaseViews(id);
+            var article = articlesService.GetById(id);
+            var result = new ArticleViewModel()
+            {
+                Title = article.Title,
+                Subtitle = article.Subtitle,
+                Author = article.Author,
+                CreatedOn = article.CreatedOn,
+                Content = article.Content,
+                Views = article.Views,
+                CategoryId = article.CategoryId,
+            };
+
+            return View(result);
         }
     }
 }

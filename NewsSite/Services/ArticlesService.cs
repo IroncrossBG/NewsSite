@@ -54,6 +54,11 @@ namespace NewsSite.Services
                 this.db.SaveChanges();
             }
         }
+        public void IncreaseViews(int id)
+        {
+            this.db.Articles.FirstOrDefault(x => x.Id == id).Views += 1;
+            db.SaveChanges();
+        }
 
         public Article GetById(int id)
         {

@@ -14,6 +14,8 @@ namespace NewsSite.Services
 
         void Delete(int id);
 
+        void IncreaseViews(int id);
+
         Article GetById(int id);
 
         IEnumerable<Article> GetAll();
