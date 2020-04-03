@@ -16,7 +16,7 @@ namespace NewsSite.Services
         {
             this.db = db;
         }
-        public void Add(AddArticleModel model)
+        public void Add(CreateEditArticleInputModel model)
         {
             var newArticle = new Article
             {
@@ -33,7 +33,7 @@ namespace NewsSite.Services
             db.SaveChanges();
         }
 
-        public void Edit(AddArticleModel model)
+        public void Edit(CreateEditArticleInputModel model)
         {
             var article = GetById(model.Id);
             article.Title = model.Title;

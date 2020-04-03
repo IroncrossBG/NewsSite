@@ -1,13 +1,10 @@
 ﻿using NewsSite.Models.Data;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NewsSite.Models.Input
 {
-    public class AddArticleModel
+    public class CreateEditArticleInputModel
     {
         public int Id { get; set; }
         [Required, MinLength(3)]
@@ -22,5 +19,7 @@ namespace NewsSite.Models.Input
         public string Content { get; set; }
 
         public int CategoryId { get; set; }
+
+        public virtual IEnumerable<Category> Categories { get; set; }
     }
 }

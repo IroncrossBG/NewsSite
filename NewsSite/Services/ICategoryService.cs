@@ -8,5 +8,7 @@ namespace NewsSite.Services
     public interface ICategoryService
     {
         Category GetById(int id);
+
+        IEnumerable<Category> GetAll();
     }
 }

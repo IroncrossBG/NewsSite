@@ -1,4 +1,4 @@
-﻿@model NewsSite.Models.Input.AddArticleModel
+﻿@model NewsSite.Models.Input.CreateEditArticleInputModel
 @{
     ViewData["Title"] = "New";
 }
@@ -22,6 +22,24 @@
         </div>
 
         <div>
+            <label>Category:</label><br />
+            <select class="form-control" name="CategoryId">
+                @foreach (var category in Model.Categories)
+                {
+                    @if (Model.CategoryId == category.Id)
+                    {
+                        <option value="@category.Id" selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div>
             <label>Content:</label><br />
             <textarea class="form-control" rows="15" name="Content">@Model.Content</textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
@@ -29,6 +47,6 @@
 
         <hr />
         <div>
-            <input type="submit" class="btn-primary" value="Submit" />
+            <input type="submit" class="btn btn-primary" value="Submit" />
         </div>
     </form>

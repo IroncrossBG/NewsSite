@@ -8,9 +8,9 @@ namespace NewsSite.Services
 {
     public interface IArticlesService
     {
-        void Add(AddArticleModel model);
+        void Add(CreateEditArticleInputModel model);
 
-        void Edit(AddArticleModel model);
+        void Edit(CreateEditArticleInputModel model);
 
         void Delete(int id);
 
