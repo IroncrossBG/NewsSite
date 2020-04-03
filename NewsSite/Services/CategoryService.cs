@@ -1,5 +1,6 @@
 ﻿using NewsSite.Data;
 using NewsSite.Models.Data;
+using NewsSite.Models.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,25 @@ namespace NewsSite.Services
         public CategoryService(ApplicationDbContext db)
         {
             this.db = db;
+        }
+        public void Add(CreateEditCategoryInputModel model)
+        {
+            var newCategory = new Category
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
+
+            db.Add(newCategory);
+            db.SaveChanges();
+        }
+
+        public void Edit(CreateEditCategoryInputModel model)
+        {
+            var category = GetById(model.Id);
+            category.Name = model.Name;
+            category.Description = model.Description;
+            db.SaveChanges();
         }
 
         public Category GetById(int id)
