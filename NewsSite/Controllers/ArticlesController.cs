@@ -12,19 +12,15 @@ namespace NewsSite.Controllers
     public class ArticlesController : Controller
     {
         private readonly IArticlesService articlesService;
-        private readonly ICategoryService categoryService;
 
         public ArticlesController(IArticlesService articlesService, ICategoryService categoryService)
         {
             this.articlesService = articlesService;
-            this.categoryService = categoryService;
         }
 
         public IActionResult Create()
         {
-            var result = new CreateEditArticleInputModel();
-            result.Categories = categoryService.GetAll();
-            return View(result);
+            return View(new CreateEditArticleInputModel());
         }
 
         [HttpPost]
@@ -40,7 +36,6 @@ namespace NewsSite.Controllers
                     Content = model.Content,
                     Subtitle = model.Subtitle,
                     CategoryId = model.CategoryId,
-                    Categories = model.Categories,
                 });
                 return Redirect("All");
             }
@@ -63,8 +58,7 @@ namespace NewsSite.Controllers
                 Author = article.Author,
                 Subtitle = article.Subtitle,
                 Content = article.Content,
-                CategoryId = article.CategoryId,
-                Categories = categoryService.GetAll()
+                CategoryId = article.CategoryId
         });
         }
 
@@ -92,6 +86,7 @@ namespace NewsSite.Controllers
                 Content = article.Content,
                 Views = article.Views,
                 CategoryId = article.CategoryId,
+                Category = article.Category
             };
 
             return View(result);

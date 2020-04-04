@@ -44,7 +44,7 @@ namespace NewsSite.Services
             article.CategoryId = model.CategoryId;
             db.SaveChanges();
         }
-        
+
         public void Delete(int id)
         {
             var article = this.db.Articles.FirstOrDefault(x => x.Id == id);
@@ -60,19 +60,36 @@ namespace NewsSite.Services
             db.SaveChanges();
         }
 
-        public Article GetById(int id)
-        {
-            return this.db.Articles.FirstOrDefault(x => x.Id == id);
-        }
+        public Article GetById(int id) =>
+             this.db.Articles.Select(x => new Article
+             {
+                 Id = x.Id,
+                 Title = x.Title,
+                 Subtitle = x.Subtitle,
+                 Author = x.Author,
+                 CreatedOn = x.CreatedOn,
+                 ModifiedOn = x.ModifiedOn,
+                 Content = x.Content,
+                 Views = x.Views,
+                 CategoryId = x.CategoryId,
+                 Category = x.Category
+             })
+            .FirstOrDefault(x => x.Id == id);
 
         public IEnumerable<Article> GetAll()
-        {
-            var result = this.db.Articles.ToList();
-            foreach (var item in result)
+            => this.db.Articles.Select(x => new Article
             {
-                item.Category = this.db.Categories.FirstOrDefault(x => x.Id == item.CategoryId);
-            }
-            return result;
-        }
+                Id = x.Id,
+                Title = x.Title,
+                Subtitle = x.Subtitle,
+                Author = x.Author,
+                CreatedOn = x.CreatedOn,
+                ModifiedOn = x.ModifiedOn,
+                Content = x.Content,
+                Views = x.Views,
+                CategoryId = x.CategoryId,
+                Category = x.Category
+            })
+            .ToArray();
     }
 }

@@ -32,7 +32,7 @@ namespace NewsSite.Controllers
                     Name = model.Name,
                     Description = model.Description
                 });
-                return Redirect("Home");
+                return Redirect("/");
             }
             return View(model);
         }

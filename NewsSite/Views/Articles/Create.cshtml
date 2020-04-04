@@ -1,6 +1,9 @@
 ﻿@model NewsSite.Models.Input.CreateEditArticleInputModel
+@using NewsSite.Services
+@inject ICategoryService categoryService;
 @{
-    ViewData["Title"] = "New";
+    ViewData["Title"] = "Create new article";
+    var categories = categoryService.GetAll();
 }
 
     <form method="post">
@@ -24,7 +27,7 @@
         <div>
             <label>Category:</label><br />
             <select class="form-control custom-select-sm" name="CategoryId">
-                @foreach (var category in Model.Categories)
+                @foreach (var category in categories)
                 {
                     @if (Model.CategoryId == category.Id)
                     {

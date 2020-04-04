@@ -1,6 +1,8 @@
-﻿@model IEnumerable<NewsSite.Models.Data.Article>;
+﻿@using NewsSite.Services
+@inject IArticlesService articlesService;
 @{
     ViewData["Title"] = "All";
+    var articles = articlesService.GetAll();
 }
 
 <form>
@@ -14,7 +16,7 @@
             <th>Category</th>
             <th>Actions</th>
         </tr>
-        @foreach (var item in Model)
+        @foreach (var item in articles)
         {
             <tr>
                 <td>@item.Id</td>

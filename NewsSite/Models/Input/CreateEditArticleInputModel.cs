@@ -21,7 +21,5 @@ namespace NewsSite.Models.Input
 
         [Required]
         public int CategoryId { get; set; }
-
-        public virtual IEnumerable<Category> Categories { get; set; }
     }
 }

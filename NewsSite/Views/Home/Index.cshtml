@@ -1,9 +1,7 @@
 ﻿@using NewsSite.Services
-@inject ICategoryService categoryService;
 @inject IArticlesService articlesService;
 @{
     ViewData["Title"] = "Home Page";
-    var categories = categoryService.GetAll();
     var articles = articlesService.GetAll();
 }
 
@@ -14,16 +12,3 @@
         <hr />
     </div>
 }
-
-
-
-
-
-
-
-@*<nav class="navbar navbar-clean">
-        @foreach (var category in categories)
-        {
-            <h5 class="nav-item">@category.Name</h5>
-        }
-    </nav>*@
