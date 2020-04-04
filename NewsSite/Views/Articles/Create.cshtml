@@ -25,6 +25,12 @@
         </div>
 
         <div>
+            <label>Image URL:</label><br />
+            <input type="text" class="form-control" name="ImageUrl" value="@Model.ImageUrl" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div>
             <label>Category:</label><br />
             <select class="form-control custom-select-sm" name="CategoryId">
                 @foreach (var category in categories)

@@ -26,6 +26,7 @@ namespace NewsSite.Services
                 CreatedOn = DateTime.UtcNow,
                 ModifiedOn = DateTime.UtcNow,
                 Content = model.Content,
+                ImageUrl = model.ImageUrl,
                 CategoryId = model.CategoryId
             };
 
@@ -35,12 +36,13 @@ namespace NewsSite.Services
 
         public void Edit(CreateEditArticleInputModel model)
         {
-            var article = GetById(model.Id);
+            var article = this.db.Articles.FirstOrDefault(x => x.Id == model.Id);
             article.Title = model.Title;
             article.Subtitle = model.Subtitle;
             article.Author = model.Author;
             article.Content = model.Content;
             article.ModifiedOn = DateTime.UtcNow;
+            article.ImageUrl = model.ImageUrl;
             article.CategoryId = model.CategoryId;
             db.SaveChanges();
         }
@@ -71,6 +73,7 @@ namespace NewsSite.Services
                  ModifiedOn = x.ModifiedOn,
                  Content = x.Content,
                  Views = x.Views,
+                 ImageUrl = x.ImageUrl,
                  CategoryId = x.CategoryId,
                  Category = x.Category
              })
@@ -87,6 +90,7 @@ namespace NewsSite.Services
                 ModifiedOn = x.ModifiedOn,
                 Content = x.Content,
                 Views = x.Views,
+                ImageUrl = x.ImageUrl,
                 CategoryId = x.CategoryId,
                 Category = x.Category
             })

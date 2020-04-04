@@ -19,6 +19,8 @@ namespace NewsSite.Models.Input
         [Required]
         public string Content { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
     }

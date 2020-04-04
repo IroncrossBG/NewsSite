@@ -35,6 +35,7 @@ namespace NewsSite.Controllers
                     Author = model.Author,
                     Content = model.Content,
                     Subtitle = model.Subtitle,
+                    ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
                 });
                 return Redirect("All");
@@ -58,8 +59,9 @@ namespace NewsSite.Controllers
                 Author = article.Author,
                 Subtitle = article.Subtitle,
                 Content = article.Content,
+                ImageUrl = article.ImageUrl,
                 CategoryId = article.CategoryId
-        });
+            });
         }
 
         [HttpPost]
@@ -85,6 +87,7 @@ namespace NewsSite.Controllers
                 CreatedOn = article.CreatedOn,
                 Content = article.Content,
                 Views = article.Views,
+                ImageUrl = article.ImageUrl,
                 CategoryId = article.CategoryId,
                 Category = article.Category
             };
