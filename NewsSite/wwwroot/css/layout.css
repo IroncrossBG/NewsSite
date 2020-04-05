@@ -1,0 +1,96 @@
+nav.navbar {
+    background-color: #333;    
+  }
+
+  nav.navbar.main {
+    border-bottom:4px solid;
+    border-color: rgb(29, 81, 160);
+    border-image: linear-gradient(to right, #333,rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160), #333);
+    border-image-slice: 1;
+  }
+
+  nav.navbar.category {
+    border-top:4px solid;
+    border-color: rgb(29, 81, 160);
+    border-image: linear-gradient(to right, #333,rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160),rgb(29, 81, 160), #333);
+    border-image-slice: 1;
+  }
+
+  nav.navbar.logo {
+    border-bottom:0px solid;
+  }
+
+  a.nav-link {
+    text-align: center;
+    color: white;
+    width: 32px;
+  }
+
+  a.nav-link.category {
+    text-align: center;
+    color: white;
+    width: auto;
+  }
+
+  a.nav-link.active, a.nav-link:hover {
+    background-color: rgb(29, 81, 160);
+  }
+
+  a.nav-link.social.mobile:hover {
+    color: #a4c639;
+    background-color: #333;
+  }
+
+  a.nav-link.social.facebook:hover {
+    color: #3b5998;
+    background-color: #333;
+  }
+
+  a.nav-link.social.twitter:hover {
+    color: #00acee;
+    background-color: #333;
+  }
+
+  a.nav-link.social.youtube:hover {
+    color: #c4302b;
+    background-color: #333
+  }
+
+  a.nav-link.social.rss:hover {
+    color: #ee802f;
+    background-color: #333
+  }
+
+  a.nav-link.social.github:hover {
+    color: #670067;
+    background-color: #333
+  }
+
+  .btn-primary.custom-btn {
+      background-color: rgb(29, 81, 160);
+      border-color:rgb(29, 81, 160);
+  }
+  .btn-primary.custom-btn:hover {
+      background-color: rgb(44, 96, 173);
+  }
+
+  .imageContainer {
+    background-color: #333;
+    height: 200px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .container.cards {
+    background-color: #333;
+    min-width: 100%;
+  }
+
+  html {
+   font-size: 15px;
+  }
+
+  #imageLogo {
+      height: 36px;
+      padding: 0;
+  }
