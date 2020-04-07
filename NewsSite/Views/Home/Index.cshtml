@@ -5,10 +5,77 @@
     var articles = articlesService.GetAll();
 }
 
-@foreach (var article in articles)
-{
-    <div>
-        <a href="/Articles/Id/@article.Id">@article.Title</a>
-        <hr />
+<div class="card-deck">
+    @foreach (var article in articles)
+    {
+        <div class="card m-1 p-1 rounded-0">
+            <p class="categoryText w-100 text-left my-0 py-0">@article.Category.Name.ToUpper()</p>
+            <img style="height:150px;" class="card-img-top rounded-0" src="@article.ImageUrl" alt="Card image cap">
+            <div class="card-body m-1 p-1">
+                <h6 class="card-title">@article.Title</h6>
+                <p class="card-text"><small class="text-muted">@article.CreatedOn</small></p>
+                <a class="stretched-link" href="/Articles/Id/@article.Id"></a>
+            </div>
+        </div>
+    }
+</div>
+
+<div style="width: 100%;">
+    <div style="display: table-row">
+        <div style="width: 33.33%; display: table-cell;">
+        </div>
     </div>
-}
+</div>
+
+
+<div style="width: 100%; display: table;">
+    <div class="container-fluid" style="display: table-row">
+
+        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
+            <h5 class="text-left">ПОСЛЕДНИ</h5>
+            <div class="row">
+                <div class="list-group bg-light ">
+
+                    @foreach (var article in articles.OrderByDescending(x => x.CreatedOn))
+                    {
+                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
+                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
+                            <h6 class="text-left my-auto">@article.Title</h6>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
+            <h5>НАЙ-ЧЕТЕНИ</h5>
+            <div class="row">
+                <div class="list-group">
+                    @foreach (var article in articles.OrderByDescending(x => x.Views))
+                    {
+                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
+                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
+                            <h6 class="text-left my-auto">@article.Title</h6>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
+            <h5>НАЙ-КОМЕНТИРАНИ</h5>
+            <div class="row">
+                <div class="list-group">
+                    @foreach (var article in articles.OrderByDescending(x => x.Views))
+                    {
+                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
+                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
+                            <h6 class="text-left my-auto">@article.Title</h6>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

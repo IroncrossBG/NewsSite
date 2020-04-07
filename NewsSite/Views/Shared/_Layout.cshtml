@@ -1,8 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using NewsSite.Services
+@inject ICategoryService categoryService;
+@{
+    var categories = categoryService.GetAll();
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <title>@ViewData["Title"] - NewsSite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
@@ -12,6 +19,7 @@
 </head>
 <body>
     <header>
+
         <nav style="background-color:black" class="navbar main navbar-expand py-0">
             <div class="container">
                 <ul class="navbar-nav">
@@ -44,45 +52,136 @@
                     <li class="nav-item">
                         <a class="nav-link category active" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">НОВИНИ</a>
+
+                    @*@foreach (var category in categories)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">@category.Name</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>
+                    }*@
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">НОВИНИ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">БЪЛГАРИЯ</i></a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">БЪЛГАРИЯ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">СВЯТ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">СВЯТ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">ПОЛИТИКА</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ПОЛИТИКА</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">КРИМИНАЛНИ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">КРИМИНАЛНИ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">ИКОНОМИКА</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ИКОНОМИКА</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">МНЕНИЯ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">МНЕНИЯ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">РЕГИОНАЛНИ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">РЕГИОНАЛНИ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">НАУКА</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">НАУКА</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">СПОРТ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">СПОРТ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">ЗДРАВЕ</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЗДРАВЕ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">КУЛТУРА</i></a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">КУЛТУРА</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link category" href="#">ЛАФЙСТАЙЛ</i></a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЛАФЙСТАЙЛ</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </li>
+
                 </ul>
             </div>
         </nav>
