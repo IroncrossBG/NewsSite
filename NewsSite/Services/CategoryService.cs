@@ -39,9 +39,14 @@ namespace NewsSite.Services
             return this.db.Categories.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Category> GetAll()
-        {
-            return this.db.Categories.ToList();
-        }
+        public IEnumerable<Category> GetAll()  => 
+           this.db.Categories.Select(x => new Category
+           {
+               Id = x.Id,
+               Name = x.Name,
+               Description = x.Description,
+               Articles = this.db.Articles.Where(a => x.Id == a.CategoryId).ToArray()
+           })
+           .ToArray();
     }
 }

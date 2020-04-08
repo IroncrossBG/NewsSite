@@ -1,5 +1,5 @@
     html {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .dropdown:hover > .dropdown-menu {
@@ -86,8 +86,4 @@ div .card:hover p.categoryText {
     height: 300px;
     margin-bottom: 10px;
     overflow-x: hidden;
-}
-
-body {
-    
 }

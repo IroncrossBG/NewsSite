@@ -1,20 +1,31 @@
 ﻿@using NewsSite.Services
+@using NewsSite.Models.Data
 @inject IArticlesService articlesService;
+@inject ICategoryService categoryService;
 @{
     ViewData["Title"] = "Home Page";
     var articles = articlesService.GetAll();
+    var categories = categoryService.GetAll();
+    var lastArticles = new List<Article>();
+    foreach (var category in categories)
+    {
+        if (category.Articles.Count > 0)
+        {
+            lastArticles.Add(category.Articles.OrderByDescending(x => x.CreatedOn).FirstOrDefault());
+        }
+    }
 }
 
 <div class="card-deck">
-    @foreach (var article in articles)
+    @foreach (var lastArticle in lastArticles)
     {
         <div class="card m-1 p-1 rounded-0">
-            <p class="categoryText w-100 text-left my-0 py-0">@article.Category.Name.ToUpper()</p>
-            <img style="height:150px;" class="card-img-top rounded-0" src="@article.ImageUrl" alt="Card image cap">
+            <p class="categoryText w-100 text-left my-0 py-0">@lastArticle.Category.Name.ToUpper()</p>
+            <img style="height:150px;" class="card-img-top rounded-0" src="@lastArticle.ImageUrl" alt="Card image cap">
             <div class="card-body m-1 p-1">
-                <h6 class="card-title">@article.Title</h6>
-                <p class="card-text"><small class="text-muted">@article.CreatedOn</small></p>
-                <a class="stretched-link" href="/Articles/Id/@article.Id"></a>
+                <h6 class="card-title">@lastArticle.Title</h6>
+                <p class="card-text"><small class="text-muted">@lastArticle.CreatedOn</small></p>
+                <a class="stretched-link" href="/Articles/Id/@lastArticle.Id"></a>
             </div>
         </div>
     }
