@@ -38,6 +38,7 @@
                                             </p>
                                         </div>
                                         <div class="card-footer text-muted">
+                                            <i class="far fa-clock" aria-hidden="true"></i>
                                             @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
                                         </div>
                                     </div>
@@ -49,14 +50,18 @@
 
                 </div>
                 <!--main articles-->
-                <div class="col-4 p-0" style="max-height: 72.5vh;">
+                <div class="col-4 p-0" style="max-height: 60.0vh;">
                     <ul class="nav nav-tabs h-100" id="tabs" style="overflow-y: scroll; display:block;" role="tablist">
 
                         @for (int i = 0; i < articles.Count - 1; i++)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#articleTab@(i)" role="tab" aria-controls="home">
-                                    @articles[i].Title
+                                <a class="nav-link text-left" href="/Articles/Id/@articles[i].Id" data-target="#articleTab@(i)" role="tab">
+                                    <i class="far fa-newspaper" aria-hidden="true"></i> @articles[i].Title
+                                    <p class="text-muted small">
+                                        <i class="far fa-clock" aria-hidden="true"></i>
+                                        @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
+                                    </p>
                                 </a>
                             </li>
                         }
