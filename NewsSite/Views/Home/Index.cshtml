@@ -38,7 +38,9 @@
                                             </p>
                                         </div>
                                         <div class="card-footer text-muted">
-                                            <i class="far fa-clock" aria-hidden="true"></i>
+                                            <i class="far fa-list-alt"></i>
+                                            @articles[i].Category.Name | 
+                                            <i class="far fa-clock"></i>
                                             @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
                                         </div>
                                     </div>
@@ -57,9 +59,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-left" href="/Articles/Id/@articles[i].Id" data-target="#articleTab@(i)" role="tab">
-                                    <i class="far fa-newspaper" aria-hidden="true"></i> @articles[i].Title
+                                    <i class="far fa-newspaper"></i> @articles[i].Title
                                     <p class="text-muted small">
-                                        <i class="far fa-clock" aria-hidden="true"></i>
+                                        <i class="far fa-clock"></i>
                                         @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
                                     </p>
                                 </a>
