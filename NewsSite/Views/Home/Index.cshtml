@@ -4,88 +4,221 @@
 @inject ICategoryService categoryService;
 @{
     ViewData["Title"] = "Home Page";
-    var articles = articlesService.GetAll();
+    var articles = articlesService.GetAll().OrderByDescending(x => x.CreatedOn).ToList();
     var categories = categoryService.GetAll();
-    var lastArticles = new List<Article>();
-    foreach (var category in categories)
-    {
-        if (category.Articles.Count > 0)
-        {
-            lastArticles.Add(category.Articles.OrderByDescending(x => x.CreatedOn).FirstOrDefault());
-        }
-    }
+    var topRead = articles.OrderByDescending(x => x.Views).Take(10).ToList();
 }
 
-<div class="card-deck">
-    @foreach (var lastArticle in lastArticles)
-    {
-        <div class="card m-1 p-1 rounded-0">
-            <p class="categoryText w-100 text-left my-0 py-0">@lastArticle.Category.Name.ToUpper()</p>
-            <img style="height:150px;" class="card-img-top rounded-0" src="@lastArticle.ImageUrl" alt="Card image cap">
-            <div class="card-body m-1 p-1">
-                <h6 class="card-title">@lastArticle.Title</h6>
-                <p class="card-text"><small class="text-muted">@lastArticle.CreatedOn</small></p>
-                <a class="stretched-link" href="/Articles/Id/@lastArticle.Id"></a>
-            </div>
-        </div>
-    }
-</div>
+<div class="container">
+    <div class="container-fluid p-0 mt-1">
+        <!--left column-->
+        <div class="col-9 p-0">
+            <!--top article and menu-->
+            <div class="row w-100">
+                <!--main article-->
+                <div class="col-8 p-0" style="height: 60.0vh;">
 
-<div style="width: 100%;">
-    <div style="display: table-row">
-        <div style="width: 33.33%; display: table-cell;">
-        </div>
-    </div>
-</div>
+                    <div class="tab-content h-100">
+                        <!--tab -->
+                        @for (int i = 0; i < articles.Count - 1; i++)
+                        {
+                            <div class="tab-pane @(i == 0 ? "active " : "")h-100" id="articleTab@(i)" role="tabpanel">
+                                <div class="sv-tab-panel h-100">
+                                    <div class="card h-100 w-100">
+                                        <img class="card-img-top w-100"
+                                             src="@articles[i].ImageUrl"
+                                             alt="Card image cap"
+                                             style="" />
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                @articles[i].Title
+                                            </h5>
+                                            <p class="card-text">
+                                                @articles[i].Subtitle
+                                            </p>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
+                    </div>
 
-<div style="width: 100%; display: table;">
-    <div class="container-fluid" style="display: table-row">
+                </div>
+                <!--main articles-->
+                <div class="col-4 p-0" style="max-height: 72.5vh;">
+                    <ul class="nav nav-tabs h-100" id="tabs" style="overflow-y: scroll; display:block;" role="tablist">
 
-        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
-            <h5 class="text-left">ПОСЛЕДНИ</h5>
-            <div class="row">
-                <div class="list-group bg-light ">
-
-                    @foreach (var article in articles.OrderByDescending(x => x.CreatedOn))
-                    {
-                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
-                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
-                            <h6 class="text-left my-auto">@article.Title</h6>
-                        </a>
-                    }
+                        @for (int i = 0; i < articles.Count - 1; i++)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#articleTab@(i)" role="tab" aria-controls="home">
+                                    @articles[i].Title
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
-        </div>
 
-        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
-            <h5>НАЙ-ЧЕТЕНИ</h5>
-            <div class="row">
-                <div class="list-group">
-                    @foreach (var article in articles.OrderByDescending(x => x.Views))
-                    {
-                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
-                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
-                            <h6 class="text-left my-auto">@article.Title</h6>
-                        </a>
-                    }
+            <div class="row w-100">
+                <ul class="nav nav-tabs w-100">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#mostRead" role="tab" aria-controls="home">НАЙ-ЧЕТЕНИ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#mostCommented" role="tab" aria-controls="home">НАЙ-КОМЕНТИРАНИ</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row w-100">
+                <!--Most read, most commented bar-->
+
+                <div class="tab-content h-100 w-100">
+                    <!--tab most read -->
+                    <div class="tab-pane active h-100 w-100" id="mostRead" role="tabpanel">
+                        <div class="sv-tab-panel h-100 w-100">
+                            <!--bottom lists-->
+                            @if (topRead.Count > 0)
+                            {
+                                <div class="list-group h-100 w-50 float-left">
+                                    @for (int i = 0; i <= topRead.Count; i++)
+                                    {
+                                        <div class="list-group-item p-1">
+                                            <img class="float-left"
+                                                 src="@topRead[i].ImageUrl"
+                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                            <p class="mainText m-0 pl-1">
+                                                @topRead[i].Title
+                                            </p>
+                                            <a class="stretched-link" href="/Articles/Id/@topRead[i].Id"></a>
+                                        </div>
+                                        @if (i == 4)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </div>
+                            }
+                            @if (topRead.Count > 5)
+                            {
+                                <div class="list-group h-100 w-50 float-right">
+                                    @for (int i = 5; i < topRead.Count; i++)
+                                    {
+                                        <div class="list-group-item p-1">
+                                            <img class="float-left"
+                                                 src="@topRead[i].ImageUrl"
+                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                            <p class="mainText m-0 pl-1">
+                                                @topRead[i].Title
+                                            </p>
+                                            <a class="stretched-link" href="/Articles/Id/@topRead[i].Id"></a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!--tab most commented TO IMPLEMENT -->
+                    <div class="tab-pane h-100 w-100" id="mostCommented" role="tabpanel">
+                        <div class="sv-tab-panel h-100 w-100">
+                            <div class="list-group h-100 w-50 float-left">
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+                            </div>
+                            <div class="list-group h-100 w-50 float-right">
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                                <div class="list-group-item p-1">
+                                    <img class="float-left"
+                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
+                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
+                                    <a class="stretched-link" href=""></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-
-        <div class="container-fluid" style="width: 33.33%; display: table-cell;">
-            <h5>НАЙ-КОМЕНТИРАНИ</h5>
-            <div class="row">
-                <div class="list-group">
-                    @foreach (var article in articles.OrderByDescending(x => x.Views))
-                    {
-                        <a class="list-group-item clearfix p-0" href="\Articles\Id\@article.Id">
-                            <img class="float-left mr-2" src="@article.ImageUrl" style="width:64px; height:64px;" />
-                            <h6 class="text-left my-auto">@article.Title</h6>
-                        </a>
-                    }
-                </div>
-            </div>
+        <!--right column-->
+        <div class="col-3 p-0">
         </div>
 
     </div>

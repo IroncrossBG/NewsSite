@@ -70,3 +70,42 @@ body {
   line-height: 30px; /* Vertically center the text there */
 }
 
+.mainText {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 1rem;
+    line-height: 1.2em;
+    font-weight: normal;
+}
+
+.card {
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    min-height: 70%;
+    max-height: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.card-body {
+    height: 30%;
+}
+
+.card-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}

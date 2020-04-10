@@ -68,22 +68,3 @@
         color: #670067;
         background-color: black
     }
-
-div .card:hover {
-    background-color: ghostwhite;
-}
-
-div .card p.categoryText {
-    background-color: lightgray;
-    clip-path: polygon(0 0, 80% 0%, 100% 100%, 0% 100%);
-}
-
-div .card:hover p.categoryText {
-    background-color: gray;
-}
-
-.list-group {
-    height: 300px;
-    margin-bottom: 10px;
-    overflow-x: hidden;
-}

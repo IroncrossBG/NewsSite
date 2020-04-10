@@ -57,16 +57,16 @@
                     </li>
 
                     @*@foreach (var category in categories)
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">@category.Name</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
-                    }*@
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">@category.Name</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </li>
+                        }*@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">НОВИНИ</a>
@@ -204,6 +204,13 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script>
+        $('.nav-tabs > li > a').hover(function () {
+            $(this).tab('show');
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
