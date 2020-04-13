@@ -13,6 +13,10 @@ namespace NewsSite.Data
 
         public virtual DbSet<Category> Categories { get; set; }
 
+        public virtual DbSet<Comment> Comments { get; set; }
+
+        public virtual DbSet<Vote> Votes { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
