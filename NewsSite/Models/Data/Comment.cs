@@ -8,7 +8,13 @@ namespace NewsSite.Models.Data
 {
     public class Comment
     {
+        public Comment()
+        {
+            User = new IdentityUser();
+        }
         public int Id { get; set; }
+
+        public string Content { get; set; }
 
         public int ArticleId { get; set; }
 

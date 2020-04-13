@@ -39,6 +39,7 @@ namespace NewsSite
             services.AddRazorPages();
             services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +84,9 @@ namespace NewsSite
 
             var articleSeeder = new ArticleSeeder();
             articleSeeder.Seed(app);
+
+            var commentsSeeder = new CommentSeeder();
+            commentsSeeder.Seed(app);
         }
     }
 }

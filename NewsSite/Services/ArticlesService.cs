@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace NewsSite.Services
 {
     public class ArticlesService : IArticlesService
     {
         private readonly ApplicationDbContext db;
-
         public ArticlesService(ApplicationDbContext db)
         {
             this.db = db;
@@ -75,7 +75,16 @@ namespace NewsSite.Services
                  Views = x.Views,
                  ImageUrl = x.ImageUrl,
                  CategoryId = x.CategoryId,
-                 Category = x.Category
+                 Category = x.Category,
+                 Comments = this.db.Comments.Where(a => x.Id == a.ArticleId).Select(y => new Comment
+                 {
+                     Id = y.Id,
+                     Article = this.db.Articles.FirstOrDefault(ca => ca.Id == y.ArticleId),
+                     ArticleId = y.ArticleId,
+                     Content = y.Content,
+                     CreatedOn = y.CreatedOn,
+                     User = y.User,
+                 }).ToArray()
              })
             .FirstOrDefault(x => x.Id == id);
 
@@ -92,7 +101,16 @@ namespace NewsSite.Services
                 Views = x.Views,
                 ImageUrl = x.ImageUrl,
                 CategoryId = x.CategoryId,
-                Category = x.Category
+                Category = x.Category,
+                Comments = this.db.Comments.Where(a => x.Id == a.ArticleId).Select(y => new Comment
+                {
+                    Id = y.Id,
+                    Article = this.db.Articles.FirstOrDefault(ca => ca.Id == y.ArticleId),
+                    ArticleId = y.ArticleId,
+                    Content = y.Content,
+                    CreatedOn = y.CreatedOn,
+                    User = y.User,
+                }).ToArray()
             })
             .ToArray();
     }
