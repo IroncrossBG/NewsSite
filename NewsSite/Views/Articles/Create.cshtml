@@ -1,60 +1,65 @@
 ﻿@model NewsSite.Models.Input.CreateEditArticleInputModel
 @using NewsSite.Services
+@using Ganss.XSS;
 @inject ICategoryService categoryService;
 @{
     ViewData["Title"] = "Create new article";
-    var categories = categoryService.GetAll();
+ var categories = categoryService.GetAll();
+ var sanitizer = new HtmlSanitizer();
 }
 
-    <form method="post">
-        <div>
-            <label>Title:</label><br />
-            <input type="text" class="form-control" name="Title" value="@Model.Title" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
+<form method="post">
+    <div>
+        <label>Title:</label><br />
+        <input type="text" class="form-control" name="Title" value="@Model.Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
 
-        <div>
-            <label>Subtitle:</label><br />
-            <input type="text" class="form-control" name="Subtitle" value="@Model.Subtitle" />
-        </div>
+    <div>
+        <label>Subtitle:</label><br />
+        <input type="text" class="form-control" name="Subtitle" value="@Model.Subtitle" />
+    </div>
 
-        <div>
-            <label>Author:</label><br />
-            <input type="text" class="form-control" name="Author" value="@Model.Author" />
-            <span asp-validation-for="Author" class="text-danger"></span>
-        </div>
+    <div>
+        <label>Author:</label><br />
+        <input type="text" class="form-control" name="Author" value="@Model.Author" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
 
-        <div>
-            <label>Image URL:</label><br />
-            <input type="text" class="form-control" name="ImageUrl" value="@Model.ImageUrl" />
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
-        </div>
+    <div>
+        <label>Image URL:</label><br />
+        <input type="text" class="form-control" name="ImageUrl" value="@Model.ImageUrl" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
 
-        <div>
-            <label>Category:</label><br />
-            <select class="form-control custom-select-sm" name="CategoryId">
-                @foreach (var category in categories)
+    <div>
+        <label>Category:</label><br />
+        <select class="form-control custom-select-sm" name="CategoryId">
+            @foreach (var category in categories)
+            {
+                @if (Model.CategoryId == category.Id)
                 {
-                    @if (Model.CategoryId == category.Id)
-                    {
-                        <option value="@category.Id" selected>@category.Name</option>
-                    }
-                    else
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
+                    <option value="@category.Id" selected>@category.Name</option>
                 }
-            </select>
-            <span asp-validation-for="CategoryId" class="text-danger"></span>
-        </div>
-        <div>
-            <label>Content:</label><br />
-            <textarea class="form-control" rows="15" name="Content">@Model.Content</textarea>
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
+                else
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Content:</label><br />
+        <textarea class="form-control" rows="15" name="Content">@Html.Raw(sanitizer.Sanitize(Model.Content))</textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
 
-        <hr />
-        <div>
-            <input type="submit" class="btn btn-primary" value="Submit" />
-        </div>
-    </form>
+    <hr />
+    <div>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
