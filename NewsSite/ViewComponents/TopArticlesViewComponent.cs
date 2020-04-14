@@ -18,19 +18,19 @@ namespace NewsSite.ViewComponents
             this.articlesService = articlesService;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int count)
         {
             var articles = articlesService
                 .GetAll()
                 .ToList();
             var topRead = articles
                 .OrderByDescending(x => x.Views)
-                .Take(10)
+                .Take(count)
                 .ToList();
             var topCommented = articles
                 .Where(x => x.Comments.Count() > 0)
                 .OrderByDescending(x => x.Comments.Count())
-                .Take(10)
+                .Take(count)
                 .ToList();
 
             var resultModel = new TopArticlesViewModel

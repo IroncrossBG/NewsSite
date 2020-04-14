@@ -1,11 +1,6 @@
-﻿@using NewsSite.Services
-@using NewsSite.Models.Data
-@inject IArticlesService articlesService;
-@inject ICategoryService categoryService;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home Page";
-    var categories = categoryService.GetAll();
 }
 
 <div class="container">
@@ -16,7 +11,7 @@
         </div>
         <!--right column-->
         <div class="col-3 h-100 p-0 float-right">
-            <vc:top-articles></vc:top-articles>
+            <vc:top-articles count="10"></vc:top-articles>
         </div>
     </div>
 </div>
