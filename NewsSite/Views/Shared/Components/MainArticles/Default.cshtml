@@ -1,0 +1,57 @@
+﻿@model NewsSite.Models.View.MainArticlesViewModel
+
+<div class="row w-100">
+    <div class="col-8 p-0" style="height: 60.0vh;">
+
+        <div class="tab-content h-100">
+            <!--tab -->
+            @for (int i = 0; i < Model.Articles.Count() - 1; i++)
+            {
+                <div class="tab-pane @(i == 0 ? "active " : "")h-100" id="articleTab@(i)" role="tabpanel">
+                    <div class="sv-tab-panel h-100">
+                        <div class="card h-100 w-100">
+                            <img class="card-img-top w-100"
+                                 src="@Model.Articles[i].ImageUrl"
+                                 alt="Card image cap"
+                                 style="" />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @Model.Articles[i].Title
+                                </h5>
+                                <p class="card-text">
+                                    @Model.Articles[i].Subtitle
+                                </p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <i class="far fa-list-alt"></i>
+                                @Model.Articles[i].Category.Name |
+                                <i class="far fa-clock"></i>
+                                @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm") |
+                                <i class="far fa-comment-dots"></i>
+                                @Model.Articles[i].Comments.Count()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!--main articles-->
+    <div class="col-4 p-0" style="max-height: 60.0vh;">
+        <ul class="nav nav-tabs h-100" id="tabs" style="overflow-y: scroll; display:block;" role="tablist">
+
+            @for (int i = 0; i < Model.Articles.Count() - 1; i++)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-left" href="/Articles/Id/@Model.Articles[i].Id" data-target="#articleTab@(i)" role="tab">
+                        <i class="far fa-newspaper"></i> @Model.Articles[i].Title
+                        <p class="text-muted small">
+                            <i class="far fa-clock"></i>
+                            @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
+                        </p>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

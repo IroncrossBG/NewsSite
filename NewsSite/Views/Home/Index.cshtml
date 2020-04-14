@@ -2,194 +2,21 @@
 @using NewsSite.Models.Data
 @inject IArticlesService articlesService;
 @inject ICategoryService categoryService;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home Page";
-    var articles = articlesService.GetAll().OrderByDescending(x => x.CreatedOn).ToList();
     var categories = categoryService.GetAll();
-    var topRead = articles.OrderByDescending(x => x.Views).Take(10).ToList();
-    var topCommented = articles
-        .Where(x => x.Comments.Count() > 0)
-        .OrderByDescending(x => x.Comments.Count())
-        .Take(10)
-        .ToList();
 }
 
 <div class="container">
     <div class="container-fluid p-0 mt-1">
         <!--left column-->
-        <div class="col-9 p-0">
-            <!--top article and menu-->
-            <div class="row w-100">
-                <!--main article-->
-                <div class="col-8 p-0" style="height: 60.0vh;">
-
-                    <div class="tab-content h-100">
-                        <!--tab -->
-                        @for (int i = 0; i < articles.Count - 1; i++)
-                        {
-                            <div class="tab-pane @(i == 0 ? "active " : "")h-100" id="articleTab@(i)" role="tabpanel">
-                                <div class="sv-tab-panel h-100">
-                                    <div class="card h-100 w-100">
-                                        <img class="card-img-top w-100"
-                                             src="@articles[i].ImageUrl"
-                                             alt="Card image cap"
-                                             style="" />
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                @articles[i].Title
-                                            </h5>
-                                            <p class="card-text">
-                                                @articles[i].Subtitle
-                                            </p>
-                                        </div>
-                                        <div class="card-footer text-muted">
-                                            <i class="far fa-list-alt"></i>
-                                            @articles[i].Category.Name |
-                                            <i class="far fa-clock"></i>
-                                            @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm") |
-                                            <i class="far fa-comment-dots"></i>
-                                            @articles[i].Comments.Count()
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                    </div>
-
-                </div>
-                <!--main articles-->
-                <div class="col-4 p-0" style="max-height: 60.0vh;">
-                    <ul class="nav nav-tabs h-100" id="tabs" style="overflow-y: scroll; display:block;" role="tablist">
-
-                        @for (int i = 0; i < articles.Count - 1; i++)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-left" href="/Articles/Id/@articles[i].Id" data-target="#articleTab@(i)" role="tab">
-                                    <i class="far fa-newspaper"></i> @articles[i].Title
-                                    <p class="text-muted small">
-                                        <i class="far fa-clock"></i>
-                                        @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
-                                    </p>
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row w-100">
-                <ul class="nav nav-tabs w-100">
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#mostRead" role="tab" aria-controls="home">НАЙ-ЧЕТЕНИ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#mostCommented" role="tab" aria-controls="home">НАЙ-КОМЕНТИРАНИ</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="row w-100">
-                <!--Most read, most commented bar-->
-
-                <div class="tab-content h-100 w-100">
-                    <!--tab most read -->
-                    <div class="tab-pane active h-100 w-100" id="mostRead" role="tabpanel">
-                        <div class="sv-tab-panel h-100 w-100">
-                            <!--bottom lists-->
-                            @if (topRead.Count > 0)
-                            {
-                                <div class="list-group h-100 w-50 float-left">
-                                    @for (int i = 0; i < topRead.Count; i++)
-                                    {
-                                        <div class="list-group-item p-1">
-                                            <img class="float-left"
-                                                 src="@topRead[i].ImageUrl"
-                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                            <p class="mainText m-0 pl-1">
-                                                @topRead[i].Title
-                                            </p>
-                                            <a class="stretched-link" href="/Articles/Id/@topRead[i].Id"></a>
-                                        </div>
-                                        @if (i == 4)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                </div>
-                            }
-                            @if (topRead.Count > 5)
-                            {
-                                <div class="list-group h-100 w-50 float-right">
-                                    @for (int i = 5; i < topRead.Count; i++)
-                                    {
-                                        <div class="list-group-item p-1">
-                                            <img class="float-left"
-                                                 src="@topRead[i].ImageUrl"
-                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                            <p class="mainText m-0 pl-1">
-                                                @topRead[i].Title
-                                            </p>
-                                            <a class="stretched-link" href="/Articles/Id/@topRead[i].Id"></a>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                        </div>
-                    </div>
-
-                    <!--tab most commented TO IMPLEMENT -->
-                    <div class="tab-pane h-100 w-100" id="mostCommented" role="tabpanel">
-                        <div class="sv-tab-panel h-100 w-100">
-
-                            @if (topCommented.Count > 0)
-                            {
-                                <div class="list-group h-100 w-50 float-left">
-                                    @for (int i = 0; i < topCommented.Count; i++)
-                                    {
-                                        <div class="list-group-item p-1">
-                                            <img class="float-left"
-                                                 src="@topCommented[i].ImageUrl"
-                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                            <p class="mainText m-0 pl-1">
-                                                @topCommented[i].Title
-                                            </p>
-                                            <a class="stretched-link" href="/Articles/Id/@topCommented[i].Id"></a>
-                                        </div>
-                                        @if (i == 4)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                </div>
-                            }
-                            @if (topCommented.Count > 5)
-                            {
-                                <div class="list-group h-100 w-50 float-right">
-                                    @for (int i = 5; i < topCommented.Count; i++)
-                                    {
-                                        <div class="list-group-item p-1">
-                                            <img class="float-left"
-                                                 src="@topCommented[i].ImageUrl"
-                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                            <p class="mainText m-0 pl-1">
-                                                @topCommented[i].Title
-                                            </p>
-                                            <a class="stretched-link" href="/Articles/Id/@topCommented[i].Id"></a>
-                                        </div>
-                                    }
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="col-9 pr-2 float-left">
+            <vc:main-articles></vc:main-articles>
         </div>
         <!--right column-->
-        <div class="col-3 p-0">
+        <div class="col-3 h-100 p-0 float-right">
+            <vc:top-articles></vc:top-articles>
         </div>
-
     </div>
 </div>

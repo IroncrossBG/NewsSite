@@ -1,9 +1,9 @@
 ﻿@using NewsSite.Services
+@using NewsSite.ViewComponents
 @inject ICategoryService categoryService;
 @{
     var categories = categoryService.GetAll();
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,6 @@
 </head>
 <body>
     <header>
-
         <nav style="background-color:black" class="navbar main navbar-expand py-0">
             <div class="container">
                 <ul class="navbar-nav">
