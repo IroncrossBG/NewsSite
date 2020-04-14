@@ -7,6 +7,11 @@
     var articles = articlesService.GetAll().OrderByDescending(x => x.CreatedOn).ToList();
     var categories = categoryService.GetAll();
     var topRead = articles.OrderByDescending(x => x.Views).Take(10).ToList();
+    var topCommented = articles
+        .Where(x => x.Comments.Count() > 0)
+        .OrderByDescending(x => x.Comments.Count())
+        .Take(10)
+        .ToList();
 }
 
 <div class="container">
@@ -39,9 +44,11 @@
                                         </div>
                                         <div class="card-footer text-muted">
                                             <i class="far fa-list-alt"></i>
-                                            @articles[i].Category.Name | 
+                                            @articles[i].Category.Name |
                                             <i class="far fa-clock"></i>
-                                            @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
+                                            @articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm") |
+                                            <i class="far fa-comment-dots"></i>
+                                            @articles[i].Comments.Count()
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +100,7 @@
                             @if (topRead.Count > 0)
                             {
                                 <div class="list-group h-100 w-50 float-left">
-                                    @for (int i = 0; i <= topRead.Count; i++)
+                                    @for (int i = 0; i < topRead.Count; i++)
                                     {
                                         <div class="list-group-item p-1">
                                             <img class="float-left"
@@ -134,90 +141,46 @@
                     <!--tab most commented TO IMPLEMENT -->
                     <div class="tab-pane h-100 w-100" id="mostCommented" role="tabpanel">
                         <div class="sv-tab-panel h-100 w-100">
-                            <div class="list-group h-100 w-50 float-left">
 
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
+                            @if (topCommented.Count > 0)
+                            {
+                                <div class="list-group h-100 w-50 float-left">
+                                    @for (int i = 0; i < topCommented.Count; i++)
+                                    {
+                                        <div class="list-group-item p-1">
+                                            <img class="float-left"
+                                                 src="@topCommented[i].ImageUrl"
+                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                            <p class="mainText m-0 pl-1">
+                                                @topCommented[i].Title
+                                            </p>
+                                            <a class="stretched-link" href="/Articles/Id/@topCommented[i].Id"></a>
+                                        </div>
+                                        @if (i == 4)
+                                        {
+                                            break;
+                                        }
+                                    }
                                 </div>
+                            }
+                            @if (topCommented.Count > 5)
+                            {
+                                <div class="list-group h-100 w-50 float-right">
+                                    @for (int i = 5; i < topCommented.Count; i++)
+                                    {
+                                        <div class="list-group-item p-1">
+                                            <img class="float-left"
+                                                 src="@topCommented[i].ImageUrl"
+                                                 alt="Card image cap" style="height: 4rem; width: 4rem;">
+                                            <p class="mainText m-0 pl-1">
+                                                @topCommented[i].Title
+                                            </p>
+                                            <a class="stretched-link" href="/Articles/Id/@topCommented[i].Id"></a>
+                                        </div>
+                                    }
+                                </div>
+                            }
 
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-                            </div>
-                            <div class="list-group h-100 w-50 float-right">
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                                <div class="list-group-item p-1">
-                                    <img class="float-left"
-                                         src="https://segabg.com/sites/default/files/_sega/styles/sega-max600-nocrop-watermark-conditional/public/2019/10/1_21.jpg?itok=qnLjxXUN"
-                                         alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">БНБ разреши кредитни ваканции до 6 месеца</p>
-                                    <a class="stretched-link" href=""></a>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
