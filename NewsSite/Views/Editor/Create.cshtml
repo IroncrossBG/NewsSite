@@ -4,36 +4,36 @@
 @inject ICategoryService categoryService;
 @{
     ViewData["Title"] = "Create new article";
- var categories = categoryService.GetAll();
- var sanitizer = new HtmlSanitizer();
+    var categories = categoryService.GetAll();
+    var sanitizer = new HtmlSanitizer();
 }
 
 <form method="post">
     <div>
-        <label>Title:</label><br />
+        <label>Заглавие:</label><br />
         <input type="text" class="form-control" name="Title" value="@Model.Title" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div>
-        <label>Subtitle:</label><br />
+        <label>Подзаглавие:</label><br />
         <input type="text" class="form-control" name="Subtitle" value="@Model.Subtitle" />
     </div>
 
     <div>
-        <label>Author:</label><br />
+        <label>Автор:</label><br />
         <input type="text" class="form-control" name="Author" value="@Model.Author" />
         <span asp-validation-for="Author" class="text-danger"></span>
     </div>
 
     <div>
-        <label>Image URL:</label><br />
+        <label>Линк на снимка:</label><br />
         <input type="text" class="form-control" name="ImageUrl" value="@Model.ImageUrl" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
 
     <div>
-        <label>Category:</label><br />
+        <label>Категория:</label><br />
         <select class="form-control custom-select-sm" name="CategoryId">
             @foreach (var category in categories)
             {
@@ -50,8 +50,8 @@
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <div>
-        <label>Content:</label><br />
-        <textarea class="form-control" rows="15" name="Content">@Html.Raw(sanitizer.Sanitize(Model.Content))</textarea>
+        <label>Съдържание:</label><br />
+        <textarea class="form-control" rows="25" name="Content">@Html.Raw(sanitizer.Sanitize(Model.Content))</textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
 
