@@ -1,16 +1,27 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "BG NOVINI";
 }
 
 <div class="container">
-    <div class="container-fluid p-0 mt-1">
+    <div class="container-fluid p-0 mt-1 mb-3">
         <!--left column-->
-        <div class="col-9 pr-2 float-left">
+
+
+
+        <div class="col-9 pr-2 pl-0 float-left">
+
+
             <vc:main-articles></vc:main-articles>
+            <hr />
+            <vc:last-articles category-name="Bulgaria"></vc:last-articles>
+            <hr />
+            <vc:last-articles category-name="World"></vc:last-articles>
+            <hr />
+            <vc:last-articles category-name="Europe"></vc:last-articles>
+            <hr />
         </div>
         <!--right column-->
-        <div class="col-3 h-100 p-0 float-right">
+        <div class="col-3 p-0 float-right">
             <vc:top-articles count="10"></vc:top-articles>
         </div>
     </div>

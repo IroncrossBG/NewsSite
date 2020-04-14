@@ -12,7 +12,9 @@ namespace NewsSite.Services
 
         void Edit(CreateEditCategoryInputModel model);
 
-        Category GetById(int id);
+        Category GetById(int id, bool returnArticles);
+
+        Category GetByName(string name, bool returnArticles);
 
         IEnumerable<Category> GetAll();
     }

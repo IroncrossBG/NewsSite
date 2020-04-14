@@ -28,18 +28,33 @@ namespace NewsSite.Services
 
         public void Edit(CreateEditCategoryInputModel model)
         {
-            var category = GetById(model.Id);
+            var category = GetById(model.Id, false);
             category.Name = model.Name;
             category.Description = model.Description;
             db.SaveChanges();
         }
 
-        public Category GetById(int id)
+        public Category GetById(int id, bool returnArticles)
         {
-            return this.db.Categories.FirstOrDefault(x => x.Id == id);
+            var category = this.db.Categories.FirstOrDefault(x => x.Id == id);
+            if (returnArticles)
+            {
+                category.Articles = this.db.Articles.Where(a => category.Id == a.CategoryId).ToArray();
+            }
+            return category;
         }
 
-        public IEnumerable<Category> GetAll()  => 
+        public Category GetByName(string name, bool returnArticles)
+        {
+            var category = this.db.Categories.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+            if (returnArticles)
+            {
+                category.Articles = this.db.Articles.Where(a => category.Id == a.CategoryId).ToArray();
+            }
+            return category;
+        }
+
+        public IEnumerable<Category> GetAll() =>
            this.db.Categories.Select(x => new Category
            {
                Id = x.Id,

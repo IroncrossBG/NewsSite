@@ -1,8 +1,10 @@
 ﻿@model NewsSite.Models.View.MainArticlesViewModel
 
-<div class="row w-100">
-    <div class="col-8 p-0" style="height: 60.0vh;">
-
+<div class="row w-100" ">
+    <h5>ВОДЕЩИ</h5>
+</div>
+<div class="row w-100" style="height: 60.0vh;">
+    <div class="col-8 p-0 h-100">
         <div class="tab-content h-100">
             <!--tab -->
             @for (int i = 0; i < Model.Articles.Count() - 1; i++)
@@ -13,7 +15,7 @@
                             <img class="card-img-top w-100"
                                  src="@Model.Articles[i].ImageUrl"
                                  alt="Card image cap"
-                                 style="" />
+                                 style="height: 40vh; object-fit: cover;" />
                             <div class="card-body">
                                 <h5 class="card-title">
                                     @Model.Articles[i].Title
