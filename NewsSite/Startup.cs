@@ -40,6 +40,7 @@ namespace NewsSite
             services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IWeatherService, WeatherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
