@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-NewsSite-49FC3675-5CA3-4755-B005-5F80C5360C3E</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="HtmlSanitizer" Version="5.0.310" />

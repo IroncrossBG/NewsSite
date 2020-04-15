@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using NewsSite.API;
 
 namespace NewsSite.Models.View
 {
     public class WeatherViewModel
     {
-        public string Condition { get; set; }
+        public string City { get; set; }
+        public Weather Weather { get; set; }
         public double Temperature { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
@@ -15,5 +13,7 @@ namespace NewsSite.Models.View
         public int Pressure { get; set; }
         public int Humidity { get; set; }
         public double WindSpeed { get; set; }
+
+        public string IconUrl { get; set; }
     }
 }

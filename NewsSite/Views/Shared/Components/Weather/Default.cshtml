@@ -1,0 +1,45 @@
+﻿@model NewsSite.Models.View.WeatherViewModel
+
+<div class="row w-100">
+
+    <div class="card w-100">
+        <div class="card-header">ВРЕМЕТО</div>
+        <div class="card-body">
+
+            <h4 class="card-title font-weight-bold">@Model.City</h4>
+
+            <p class="card-text">@Model.Weather.description</p>
+            <div class="d-flex">
+                <img src="@Model.IconUrl">
+                <p class="card-text display-4 font-weight-bold">@Model.Temperature°</p>
+            </div>
+            <p class="card-text">
+                <i class="fa fa-thermometer-half" style="color:goldenrod"></i>
+                Усеща се: @Model.FeelsLikeTemperature°
+            </p>
+
+            <p class="card-text">
+                <i class="fa fa-thermometer-empty" style="color: blue;"></i>
+                Минимална: @Model.MinTemperature°
+            </p>
+
+            <p class="card-text">
+                <i class="fa fa-thermometer-full" style="color: red;"></i>
+                Максимална: @Model.MaxTemperature°
+            </p>
+            <p class="card-text">
+                <i class="fa fa-angle-double-down" style="color: #ccccff;"></i>
+                Налягане: @Model.Pressure hPa
+            </p>
+            <p class="card-text">
+                <i class="fa fa-tint" style="color: #33b5e5;"></i>
+                Влажност: @Model.Humidity%
+            </p>
+            <p class="card-text">
+                <i class="fa fa-leaf" style="color: green;"></i>
+                Вятър: @Model.WindSpeed км/ч
+            </p>
+
+        </div>
+    </div>
+</div>
