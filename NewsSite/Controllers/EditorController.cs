@@ -36,7 +36,7 @@ namespace NewsSite.Controllers
                     ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
                 });
-                return Redirect("All");
+                return RedirectToAction("All");
             }
             return View(model);
         }
@@ -44,7 +44,7 @@ namespace NewsSite.Controllers
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
-            return Redirect("All");
+            return RedirectToAction("All");
         }
 
         public IActionResult Edit(int id)
@@ -66,7 +66,7 @@ namespace NewsSite.Controllers
         public IActionResult Edit(CreateEditArticleInputModel model)
         {
             articlesService.Edit(model);
-            return Redirect("All");
+            return RedirectToAction("All");
         }
 
         public IActionResult All()
