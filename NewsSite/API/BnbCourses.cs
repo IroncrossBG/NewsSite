@@ -11,17 +11,15 @@ namespace NewsSite
     {
         private readonly HttpClient client;
         private readonly HtmlDocument document;
-        private readonly string Url;
-        public BnbCourses(HttpClient client, string url)
+        public BnbCourses(HttpClient client)
         {
             this.client = client;
             this.document = new HtmlDocument();
-            this.Url = url;
         }
 
-        public async Task<List<List<string>>> GetExchangesRawAsync()
+        public async Task<List<List<string>>> GetExchangesAsync(string url)
         {
-            var html = client.GetAsync(Url);
+            var html = client.GetAsync(url);
             document.LoadHtml(await html.Result.Content.ReadAsStringAsync());
 
             var coursesRaw = new List<List<string>>();
@@ -45,41 +43,5 @@ namespace NewsSite
             }
             return coursesRaw;
         }
-
-        public async Task<List<ExchangeCourseModel>> GetExchangesAsync()
-        {
-            var rawExchanges = await GetExchangesRawAsync();
-            var modelExchanges = new List<ExchangeCourseModel>();
-
-            rawExchanges.RemoveAt(0);
-
-            foreach (var item in rawExchanges)
-            {
-                modelExchanges.Add(new ExchangeCourseModel
-                {
-                    Name = item[0],
-                    Code = item[1],
-                    PerUnit = int.Parse(item[2]),
-                    Course = double.Parse(item[3]),
-                    ReverseCourse = double.Parse(item[4])
-                });
-            }
-
-            return modelExchanges;
-        }
-
-        public class ExchangeCourseModel
-        {
-            public string Name { get; set; }
-
-            public string Code { get; set; }
-
-            public int PerUnit { get; set; }
-
-            public double Course { get; set; }
-
-            public double ReverseCourse { get; set; }
-        }
-
     }
 }

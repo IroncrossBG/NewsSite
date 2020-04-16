@@ -13,7 +13,6 @@ namespace NewsSite.Models.View
         public int Pressure { get; set; }
         public int Humidity { get; set; }
         public double WindSpeed { get; set; }
-
         public string IconUrl { get; set; }
     }
 }
