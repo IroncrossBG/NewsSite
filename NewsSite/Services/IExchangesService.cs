@@ -7,6 +7,8 @@ namespace NewsSite.Services
 {
     public interface IExchangesService
     {
-        List<List<string>> GetExchanges(string url);
+        void Add(string url);
+        List<List<string>> Get(string date);
+        public bool Check(string date);
     }
 }

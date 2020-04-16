@@ -21,7 +21,7 @@ namespace NewsSite.API
         {
             try
             {
-                var url = string.Concat("https://api.openweathermap.org/data/2.5/weather?q=", nameCity, "&units=metric&appid=", apiKey);
+                var url = string.Concat("https://api.openweathermap.org/data/2.5/weather?q=", nameCity, "&units=metric&appid=", apiKey, "&lang=bg");
                 var response = await client.GetAsync(url);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<OpenWeatherMapRootObject>(responseContent);

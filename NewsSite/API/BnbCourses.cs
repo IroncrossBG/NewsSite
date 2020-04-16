@@ -36,10 +36,20 @@ namespace NewsSite
                 {
                     if (childTd.Name == "td")
                     {
-                        resultCourse.Add(childTd.FirstChild.InnerText);
+                        if (childTd.FirstChild != null)
+                        {
+                            resultCourse.Add(childTd.FirstChild.InnerText);
+                        }
+                        else
+                        {
+                            resultCourse.Add(String.Empty);
+                        }
                     }
                 }
-                coursesRaw.Add(resultCourse);
+                if (resultCourse.Count == 5)
+                {
+                    coursesRaw.Add(resultCourse);
+                }                
             }
             return coursesRaw;
         }

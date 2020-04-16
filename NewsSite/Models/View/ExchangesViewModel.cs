@@ -11,10 +11,10 @@ namespace NewsSite.Models.View
 
         public string Code { get; set; }
 
-        public int PerUnit { get; set; }
+        public string PerUnit { get; set; }
 
-        public double Course { get; set; }
+        public string Course { get; set; }
 
-        public double ReverseCourse { get; set; }
+        public string ReverseCourse { get; set; }
     }
 }

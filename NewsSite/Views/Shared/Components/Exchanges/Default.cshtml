@@ -1,12 +1,27 @@
 ﻿@model List<NewsSite.Models.View.ExchangesViewModel>
 
-@foreach (var item in Model)
-{
-    <hr />
-    <p>@item.Name</p>
-    <p>@item.Code</p>
-    <p>@item.PerUnit</p>
-    <p>@item.Course</p>
-    <p>@item.ReverseCourse</p>
-    <hr />
-}
+<div class="row w-100">
+
+    <div class="card w-100">
+        <div class="card-header">БНБ Фиксинги - @DateTime.Now.ToString("dd.MM.yyyy")</div>
+        <div class="card-body">
+
+            <table>
+                <tr>
+                    <th>Име</th>
+                    <th>Единица</th>
+                    <th>Цена(BGN)</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.PerUnit</td>
+                        <td>@item.Course</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

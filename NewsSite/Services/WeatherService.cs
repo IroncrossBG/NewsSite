@@ -15,7 +15,7 @@ namespace NewsSite.Services
         {
             if (weatherData.ContainsKey(cityName))
             {
-                if (DateTime.Now >= weatherData[cityName].ExpiresOn)
+                if (DateTime.UtcNow >= weatherData[cityName].ExpiresOn)
                 {
                     var rootObject = weather.GetWeatherData(cityName, apiKey);
                     if (rootObject.Result.cod == 200)

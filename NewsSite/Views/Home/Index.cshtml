@@ -6,8 +6,6 @@
     <div class="container-fluid p-0 mt-1 mb-3">
         <!--left column-->
         <div class="col-9 pr-2 pl-0 float-left">
-
-
             <vc:main-articles></vc:main-articles>
             <hr />
             <vc:last-articles category-name="Bulgaria"></vc:last-articles>
@@ -20,9 +18,9 @@
         <!--right column-->
         <div class="col-3 p-0 float-right">
             <vc:weather></vc:weather>
+            <vc:exchanges filter="EUR,USD,GBP,CHF,RUB"></vc:exchanges>
             <vc:top-articles count="10"></vc:top-articles>
         </div>
     </div>
 </div>
 
-<vc:exchanges></vc:exchanges>

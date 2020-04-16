@@ -10,10 +10,38 @@ namespace NewsSite.Services
     {
         static readonly HttpClient client = new HttpClient();
         static readonly BnbCourses courses = new BnbCourses(client);
-
-        public List<List<string>> GetExchanges(string url)
+        static readonly Dictionary<string, List<List<string>>> exchanges = new Dictionary<string, List<List<string>>>();
+        public void Add(string url)
         {
-            return courses.GetExchangesAsync(url).Result;
+            string date = DateTime.Now.ToString("dd.MM.yyyy");
+            if (!exchanges.ContainsKey(date))
+            {
+                var exchange = courses.GetExchangesAsync(url).Result;
+                exchange.Remove(exchange.FirstOrDefault());
+                exchanges.Add(date, exchange);
+            }
+            else
+            {
+                var exchange = courses.GetExchangesAsync(url).Result;
+                exchange.Remove(exchange.FirstOrDefault());
+                exchanges[date].AddRange(courses.GetExchangesAsync(url).Result);
+            }
+        }
+        public List<List<string>> Get(string date)
+        {
+            if (exchanges.ContainsKey(date))
+            {
+                return exchanges[date];
+            }
+            else
+            {
+                throw new ArgumentException("Exchange doesn't exist!");
+            }
+        }
+
+        public bool Check(string date)
+        {
+            return exchanges.ContainsKey(date);
         }
     }
 }
