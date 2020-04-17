@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using NewsSite.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NewsSite.Data;
 using NewsSite.Services;
 using NewsSite.Models.Data;
 using NewsSite.Data.Seeders;
@@ -40,6 +40,7 @@ namespace NewsSite
             services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<ISearchService, SearchService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddSingleton<IExchangesService, ExchangesService>();
         }
