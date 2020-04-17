@@ -19,9 +19,9 @@ namespace NewsSite.Controllers
         public IActionResult Index(string q)
         {
             string query = Request.Query["q"].ToString();
-            var searchResult = searchService.Search(query);
+            var searchResult = searchService.Search(query).OrderByDescending(x => x.CreatedOn).ToList();
 
-            return View();
+            return View(searchResult);
         }
     }
 }
