@@ -4,6 +4,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @{
     var sanitizer = new HtmlSanitizer();
+    ViewData["Title"] = @Model.Title;
 }
 
 <body>
