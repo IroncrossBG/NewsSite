@@ -2,11 +2,9 @@
     ViewData["Title"] = "BG NOVINI";
 }
 
-<a asp-controller="Home" asp-action="Scrapper">SCRAP</a>
-
 <div class="container">
     <div class="container-fluid p-0 mt-1 mb-3">
-        <!--left column-->
+
         <div class="col-9 pr-2 pl-0 float-left">
             <vc:main-articles></vc:main-articles>
             <hr />
@@ -17,12 +15,12 @@
             <vc:last-articles category-name="Икономика"></vc:last-articles>
             <hr />
         </div>
-        <!--right column-->
+
         <div class="col-3 p-0 float-right">
 
             <vc:search></vc:search>
             <vc:weather></vc:weather>
-            <vc:exchanges filter="EUR,USD,GBP,CHF,RUB"></vc:exchanges>
+            @*<vc:exchanges filter="EUR,USD,GBP,CHF,RUB"></vc:exchanges>*@
         </div>
     </div>
 </div>

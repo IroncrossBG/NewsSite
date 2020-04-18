@@ -2,7 +2,7 @@
 @using NewsSite.ViewComponents
 @inject ICategoryService categoryService;
 @{
-    var categories = categoryService.GetAll();
+    var categories = categoryService.GetAll().OrderBy(x => x.Name).ToList();
 }
 
 <!DOCTYPE html>
@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="~/css/layout.css" />
 
 </head>
-<body>
+<body class="d-flex flex-column">
     <header>
-        <nav style="background-color:black" class="navbar main navbar-expand py-0">
+        <nav class="navbar main navbar-expand py-0" style="background-color:black">
             <div class="container">
                 <ul class="navbar-nav">
                     <li class="navbar-brand">
@@ -49,135 +49,27 @@
         </nav>
 
         <nav class="navbar category navbar-expand py-0">
-            <div class="container">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link category active" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i></a>
+            <div class="container w-100">
+                <ul class="navbar-nav mx-auto w-100">
+                    <li class="nav-item" style="width:2.5%">
+                        <a class="nav-link category active py-3" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i></a>
                     </li>
 
-                    @*@foreach (var category in categories)
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">@category.Name</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </li>
-                        }*@
+                    @foreach (var item in categories)
+                    {
+                        <li class="nav-item dropdown overflow-hidden w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" asp-controller="Categories" asp-action="Index" asp-route-name="@item.Name">@item.Name.ToUpper()</a>
+                        </li>
+                    }
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" asp-controller="Categories" asp-action="Index" asp-route-name="World" >НОВИНИ</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">БЪЛГАРИЯ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">СВЯТ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ПОЛИТИКА</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">КРИМИНАЛНИ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ИКОНОМИКА</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">МНЕНИЯ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">РЕГИОНАЛНИ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">НАУКА</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">СПОРТ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЗДРАВЕ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">КУЛТУРА</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЛАЙФСТАЙЛ</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
+                    @*<li class="nav-item dropdown">
+            <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЛАЙФСТАЙЛ</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+        </li>*@
 
                 </ul>
             </div>
@@ -185,16 +77,16 @@
     </header>
 
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 flex-fill">
             @RenderBody()
         </main>
     </div>
 
-    @*<footer style="background-color:black;" class="border-top navbar-fixed-bottom footer text-muted my-0 py-0">
+    <footer class="border-top navbar-fixed-bottom footer text-muted m-auto" style="background-color:black;" >
         <div class="container">
             &copy; 2020 - NewsSite - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>*@
+    </footer>
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

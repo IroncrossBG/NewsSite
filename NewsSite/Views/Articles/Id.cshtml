@@ -15,18 +15,22 @@
             <!-- Post Content Column -->
             <div class="col-9 pr-2 pl-0 float-left">
                 <div class="row w-100">
-
                     <h1>@Model.Title</h1>
                     <p class="lead w-100"><a href="#">@Model.Author</a></p>
-                    <p>@Model.CreatedOn</p>
-                    <img class="img-fluid rounded w-100" src="@Model.ImageUrl" alt="">
+                    <p class="m-0"><i class="far fa-clock"></i> @Model.CreatedOn.ToString("dd.MM.yyyy | HH.mm") | <i class="far fa-eye"></i> @Model.Views</p>
+                </div>
+                <hr class="row w-100" />
+                <div class="row w-100" style="height:80vh;">
+                    <img class="img-fluid rounded w-100 h-100" src="@Model.ImageUrl" style="object-fit: cover; object-position: 50% 0;">
+                </div>
+                <div class="row w-100">
+                    <hr />
                     <p class="lead">@Html.Raw(sanitizer.Sanitize(Model.Content))</p>
                 </div>
-
-                <div class="row w-100">
+                <div class="row">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <div class="card my-4 w-100">
+                        <div class="card my-4 mt-1 w-100">
                             <h5 class="card-header">Коментар</h5>
                             <div class="card-body">
                                 <form method="post">
@@ -40,34 +44,38 @@
                     }
                     else
                     {
-                <h5>
-                    Трябва да сте регистриран за да коментирате
-                    <a asp-area="Identity" asp-page="/Account/Login">Вход</a>
-                    |
-                    <a asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
-                </h5>
+
+                        <h5 class="mt-1 mb-3">
+                            Трябва да сте регистриран за да коментирате
+                            <a asp-area="Identity" asp-page="/Account/Login">Вход</a>
+                            |
+                            <a asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                        </h5>
 
                     }
-                </div>
-                @foreach (var comment in @Model.Comments)
-                {
-                    <div class="row w-100">
-                        <div class="media mb-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">@comment.User.UserName</h5>
-                                @comment.Content
+                    @foreach (var comment in @Model.Comments)
+                    {
+                        <div class="row w-100">
+                            <div class="media mb-4" style="word-break: break-all;">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0">@comment.User.UserName</h5>
+                                    <h6 class="mt-0">@comment.CreatedOn.ToString("dd.MM.yyyy | HH.mm")</h6>>
+
+                                    @comment.Content
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-            <!-- Sidebar Widgets Column -->
-            <div class="col-3 p-0 float-right">
 
-                <vc:search></vc:search>
-                <vc:top-articles count="10"></vc:top-articles>
-            </div>
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-3 p-0 float-right">
+
+            <vc:search></vc:search>
+            <vc:top-articles count="10"></vc:top-articles>
         </div>
     </div>
 </body>

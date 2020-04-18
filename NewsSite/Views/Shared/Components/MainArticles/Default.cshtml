@@ -10,11 +10,11 @@
             {
                 <div class="tab-pane @(i == 0 ? "active " : "")h-100" id="articleTab@(i)" role="tabpanel">
                     <div class="sv-tab-panel h-100">
-                        <div class="card h-100 w-100">
+                        <div class="card h-100 w-100 overflow-hidden">
                             <img class="card-img-top w-100"
                                  src="@Model.Articles[i].ImageUrl"
                                  alt="Card image cap"
-                                 style="height: 40vh; object-fit: cover;" />
+                                 style="height: 40vh; object-fit: cover; object-position: 50% 0;" />
                             <div class="card-body">
                                 <h5 class="card-title">
                                     @Model.Articles[i].Title
