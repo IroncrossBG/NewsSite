@@ -9,12 +9,12 @@
     <table class="table table-hover table-bordered table">
         <tr>
             <th>Id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Category</th>
-            <th>Actions</th>
+            <th>Заглавие</th>
+            <th>Автор</th>
+            <th>Създадена на</th>
+            <th>Последна промяна</th>
+            <th>Категория</th>
+            <th>Действия</th>
         </tr>
         @foreach (var item in articles)
         {
@@ -22,8 +22,8 @@
                 <td>@item.Id</td>
                 <td>@item.Title</td>
                 <td>@item.Author</td>
-                <td>@item.CreatedOn</td>
-                <td>@item.ModifiedOn</td>
+                <td>@item.CreatedOn.ToString("dd.MM.yyyy - HH:mm")</td>
+                <td>@item.ModifiedOn.ToString("dd.MM.yyyy - HH:mm")</td>
                 <td>@item.Category.Name</td>
                 <td>
                     <div class="btn-group">

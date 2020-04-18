@@ -5,7 +5,7 @@
 <div class="container">
     <div class="container-fluid p-0 mt-1 mb-3">
 
-        <div class="col-9 pr-2 pl-0 float-left">
+        <div class="col-9 pr-2 pl-0 float-left leftColumn">
             <vc:main-articles></vc:main-articles>
             <hr />
             <vc:last-articles category-name="България"></vc:last-articles>
@@ -15,13 +15,10 @@
             <vc:last-articles category-name="Икономика"></vc:last-articles>
             <hr />
         </div>
-
-        <div class="col-3 p-0 float-right">
-
+        <div class="col-3 p-0 float-right mobile-element rightColumn">
             <vc:search></vc:search>
             <vc:weather></vc:weather>
-            <vc:exchanges filter="EUR,USD,GBP,CHF,RUB"></vc:exchanges>
+            @*<vc:exchanges filter="EUR,USD,GBP,CHF,RUB"></vc:exchanges>*@
         </div>
     </div>
 </div>
-

@@ -63,13 +63,13 @@
                     }
 
                     @*<li class="nav-item dropdown">
-            <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЛАЙФСТАЙЛ</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-        </li>*@
+                            <a class="nav-link mainNav" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">ЛАЙФСТАЙЛ</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>*@
 
                 </ul>
             </div>
@@ -82,22 +82,47 @@
         </main>
     </div>
 
-    <footer class="border-top navbar-fixed-bottom footer text-muted m-auto" style="background-color:black;" >
+    <footer class="border-top navbar-fixed-bottom footer text-muted m-auto" style="background-color:black;">
         <div class="container">
             &copy; 2020 - NewsSite - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
 
     <script>
+        function hideColumns() {
+            if (window.innerWidth <= 576) {
+                if ($(".rightColumn").is(":visible")) {
+                    $(".rightColumn").hide();
+                }
+                if ($(".leftColumn").hasClass("col-9")) {
+                    $(".leftColumn").removeClass("col-9");
+                    $(".leftColumn").addClass("col");
+                }
+            } else {
+                if ($(".rightColumn").is(":hidden")) {
+                    $(".rightColumn").show();
+                }
+                if ($(".leftColumn").hasClass("col")) {
+                    $(".leftColumn").removeClass("col");
+                    $(".leftColumn").addClass("col-9");
+                }
+            }
+        }
+
         $('.nav-tabs > li > a').hover(function () {
             $(this).tab('show');
         });
+
+        window.onresize = hideColumns;
+        window.onload = hideColumns;
+
     </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
