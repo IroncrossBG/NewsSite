@@ -20,23 +20,59 @@ namespace NewsSite.Data.Seeders
                     context.Categories.Add(
                     new Category
                     {
-                        Name = "Bulgaria",
-                        Description = "Bulgarian Category",
+                        Name = "Мнения",
+                        Description = "",
                     });
 
                     context.Categories.Add(
                     new Category
                     {
-                        Name = "Europe",
-                        Description = "Europe Category",
+                        Name = "България",
+                        Description = "",
                     });
 
                     context.Categories.Add(
                     new Category
                     {
-                        Name = "World",
-                        Description = "World Category",
+                        Name = "Икономика",
+                        Description = "",
                     });
+
+                    context.Categories.Add(
+                    new Category
+                    {
+                        Name = "Свят",
+                        Description = "",
+                    });
+
+                    context.Categories.Add(
+                    new Category
+                    {
+                        Name = "Култура",
+                        Description = "",
+                    });
+
+                    context.Categories.Add(
+                    new Category
+                    {
+                        Name = "Образование",
+                        Description = "",
+                    });
+
+                    context.Categories.Add(
+                    new Category
+                    {
+                        Name = "Здравеопазване",
+                        Description = "",
+                    });
+
+                    context.Categories.Add(
+                    new Category
+                    {
+                        Name = "Европа",
+                        Description = "",
+                    });
+
 
                     context.SaveChanges();
                 }

@@ -17,40 +17,7 @@ namespace NewsSite.Data.Seeders
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
                 if (context.Articles.Count() == 0)
                 {
-                    context.Articles.Add(
-                        new Article
-                        {
-                            Title = "Coronavirus",
-                            Author = "ASP.NET Core",
-                            Content = "Corona",
-                            CreatedOn = DateTime.UtcNow,
-                            ModifiedOn = DateTime.UtcNow,
-                            CategoryId = 3
-                        });
-
-                    context.Articles.Add(
-                        new Article
-                        {
-                            Title = "Boiko Borisov",
-                            Author = "ASP.NET Core",
-                            Content = "Boiko",
-                            CreatedOn = DateTime.UtcNow,
-                            ModifiedOn = DateTime.UtcNow,
-                            CategoryId = 1
-                        });
-
-                    context.Articles.Add(
-                        new Article
-                        {
-                            Title = "Evropeiski",
-                            Author = "ASP.NET Core",
-                            Content = "EU",
-                            CreatedOn = DateTime.UtcNow,
-                            ModifiedOn = DateTime.UtcNow,
-                            CategoryId = 2
-                        });
-
-                    context.SaveChanges();
+                    
                 }
             }
         }

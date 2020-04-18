@@ -47,7 +47,7 @@ namespace NewsSite.Services
         public Category GetByName(string name, bool returnArticles)
         {
             var category = this.db.Categories.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
-            if (returnArticles)
+            if (returnArticles == true)
             {
                 category.Articles = this.db.Articles.Where(a => category.Id == a.CategoryId).ToArray();
             }

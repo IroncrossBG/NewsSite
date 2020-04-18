@@ -36,5 +36,11 @@ namespace NewsSite.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Index(string name)
+        {
+            var result = categoryService.GetByName(name, true);
+            return View(result);
+        }
     }
 }

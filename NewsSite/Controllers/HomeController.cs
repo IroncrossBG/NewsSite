@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NewsSite.Models;
+using NewsSite.Services;
 
 namespace NewsSite.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IScrapperService scrapperService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IScrapperService scrapperService)
         {
             _logger = logger;
+            this.scrapperService = scrapperService;
         }
 
         public IActionResult Index()
@@ -32,6 +35,12 @@ namespace NewsSite.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Scrapper()
+        {
+            scrapperService.RunSegaScrapper();
+            return Redirect("/Editor/All");
         }
     }
 }

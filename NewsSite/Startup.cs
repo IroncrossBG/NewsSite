@@ -15,6 +15,7 @@ using NewsSite.Data;
 using NewsSite.Services;
 using NewsSite.Models.Data;
 using NewsSite.Data.Seeders;
+using NewsSite.Scrappers;
 
 namespace NewsSite
 {
@@ -41,6 +42,7 @@ namespace NewsSite
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IScrapperService, ScrapperService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddSingleton<IExchangesService, ExchangesService>();
         }
