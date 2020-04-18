@@ -2,8 +2,6 @@
 <div style="height: 60.0vh">
 
     <div class="row w-100 h-100">
-        <!--Most read, most commented bar-->
-
         <ul class="nav nav-tabs w-100">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#mostRead" role="tab" aria-controls="home">НАЙ-ЧЕТЕНИ</a>
@@ -14,24 +12,19 @@
         </ul>
 
         <div class="tab-content h-100 w-100">
-            <!--tab most read -->
             <div class="tab-pane active h-100 w-100" id="mostRead" role="tabpanel" style="overflow-y: scroll;">
                 <div class="sv-tab-panel h-100 w-100">
-                    <!--bottom lists-->
-
                     @if (Model.TopRead.Count() > 0)
                     {
                         <div class="list-group h-100 w-100">
-
                             @foreach (var article in Model.TopRead)
                             {
                                 <div class="list-group-item p-1">
                                     <img class="float-left"
                                          src="@article.ImageUrl"
                                          alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">
-                                        @article.Title
-                                    </p>
+                                    <p class="mainText m-0 pl-1">@article.Title</p>
+                                    <p class="text-muted m-0">@article.CreatedOn.ToString("dd.MM.yyyy | hh.mm")</p>
                                     <a class="stretched-link" href="/Articles/Id/@article.Id"></a>
                                 </div>
                             }
@@ -53,15 +46,13 @@
                                     <img class="float-left"
                                          src="@article.ImageUrl"
                                          alt="Card image cap" style="height: 4rem; width: 4rem;">
-                                    <p class="mainText m-0 pl-1">
-                                        @article.Title
-                                    </p>
-                                    <a class="stretched-link" href="/Articles/Id/@article.Id"></a>
+                                    <p class="mainText m-0 pl-1">@article.Title</p>
+                                    <p class="text-muted m-0">@article.CreatedOn.ToString("dd.MM.yyyy | hh.mm")</p>
+                                    <a class="stretched-link" asp-controller="Articles" asp-action="Id"asp-route-id="@article.Id"></a>
                                 </div>
                             }
                         </div>
                     }
-
                 </div>
             </div>
         </div>

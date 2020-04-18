@@ -1,18 +1,18 @@
-    html {
-        font-size: 12px;
-    }
+html {
+    font-size: 12px;
+}
 
-    .dropdown:hover > .dropdown-menu {
-        display: block;
-    }
-    
-    .dropdown > .dropdown-toggle:active {
-        pointer-events: none;
-    }
-    
-    nav.navbar {
-        background-color: #333;
-    }
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown > .dropdown-toggle:active {
+    pointer-events: none;
+}
+
+nav.navbar {
+    background-color: #333;
+}
 
     nav.navbar.main {
         border-color: gray;
@@ -26,7 +26,14 @@
 
     a.nav-link {
         text-align: center;
+    }
+
+    a.nav-link.mainNav {
         color: white;
+    }
+
+    a.nav-link.mainArticles {
+        color: black;
     }
 
     a.nav-link.category {

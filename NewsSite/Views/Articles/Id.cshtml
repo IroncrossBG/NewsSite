@@ -16,45 +16,37 @@
             <div class="col-9 pr-2 pl-0 float-left">
                 <div class="row w-100">
 
-                    <!-- Title -->
                     <h1>@Model.Title</h1>
-
-                    <!-- Author -->
-                    <p class="lead w-100">
-                        by
-                        <a href="#">@Model.Author</a>
-                    </p>
-
-                    <hr>
-
-                    <!-- Date/Time -->
+                    <p class="lead w-100"><a href="#">@Model.Author</a></p>
                     <p>@Model.CreatedOn</p>
-
-                    <hr>
-
                     <img class="img-fluid rounded w-100" src="@Model.ImageUrl" alt="">
-
-                    <hr>
-
                     <p class="lead">@Html.Raw(sanitizer.Sanitize(Model.Content))</p>
-                    <hr>
                 </div>
 
                 <div class="row w-100">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <!-- Comments Form -->
                         <div class="card my-4 w-100">
-                            <h5 class="card-header">Leave a Comment:</h5>
+                            <h5 class="card-header">Коментар</h5>
                             <div class="card-body">
                                 <form method="post">
                                     <div class="form-group">
                                         <textarea class="form-control" rows="3" name="commentContent"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Коментирай</button>
                                 </form>
                             </div>
                         </div>
+                    }
+                    else
+                    {
+                <h5>
+                    Трябва да сте регистриран за да коментирате
+                    <a asp-area="Identity" asp-page="/Account/Login">Вход</a>
+                    |
+                    <a asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </h5>
+
                     }
                 </div>
                 @foreach (var comment in @Model.Comments)
@@ -74,7 +66,7 @@
             <div class="col-3 p-0 float-right">
 
                 <vc:search></vc:search>
-
+                <vc:top-articles count="10"></vc:top-articles>
             </div>
         </div>
     </div>

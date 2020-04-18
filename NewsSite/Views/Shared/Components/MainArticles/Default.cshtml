@@ -1,12 +1,11 @@
 ﻿@model NewsSite.Models.View.MainArticlesViewModel
 
 <div class="row w-100">
-    <h5>ВОДЕЩИ</h5>
+    <h5 class="p-0 m-0 w-100 componentTitle"><i class="fas fa-fire-alt" style="color: Orangered"></i> ВОДЕЩИ</h5>
 </div>
 <div class="row w-100" style="height: 60.0vh;">
     <div class="col-8 p-0 h-100">
         <div class="tab-content h-100">
-            <!--tab -->
             @for (int i = 0; i < Model.Articles.Count() - 1; i++)
             {
                 <div class="tab-pane @(i == 0 ? "active " : "")h-100" id="articleTab@(i)" role="tabpanel">
@@ -38,14 +37,13 @@
             }
         </div>
     </div>
-    <!--main articles-->
     <div class="col-4 p-0" style="max-height: 60.0vh;">
         <ul class="nav nav-tabs h-100" id="tabs" style="overflow-y: scroll; display:block;" role="tablist">
 
             @for (int i = 0; i < Model.Articles.Count() - 1; i++)
             {
                 <li class="nav-item">
-                    <a class="nav-link text-left" href="/Articles/Id/@Model.Articles[i].Id" data-target="#articleTab@(i)" role="tab">
+                    <a class="nav-link text-left mainArticles" href="/Articles/Id/@Model.Articles[i].Id" data-target="#articleTab@(i)" role="tab">
                         <i class="far fa-newspaper"></i> @Model.Articles[i].Title
                         <p class="text-muted small">
                             <i class="far fa-clock"></i>

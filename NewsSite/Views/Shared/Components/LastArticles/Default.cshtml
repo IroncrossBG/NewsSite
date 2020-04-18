@@ -1,7 +1,7 @@
 ﻿@model NewsSite.Models.View.LastArticlesViewModel
 
 <div class="row w-100">
-    <h5>@Model.Title</h5>
+    <h5 class="componentTitle w-100 m-0"><i class="far fa-list-alt ml-1"></i> @Model.Title</h5>
     <div class="card-group w-100">
         @foreach (var article in Model.Articles)
         {
@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <p class="card-title mainText">@article.Title</p>
                     <p class="card-text text-muted">@article.CreatedOn.ToString("dd.MM.yyyy | hh:mm")</p>
+                    <a class="stretched-link" asp-controller="Articles" asp-action="Id" asp-route-id="@article.Id"></a>
                 </div>
             </div>
         }
