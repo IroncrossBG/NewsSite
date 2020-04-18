@@ -39,7 +39,7 @@ namespace NewsSite.Controllers
 
         public IActionResult Scrapper()
         {
-            scrapperService.RunSegaScrapper();
+            scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
             return Redirect("/Editor/All");
         }
     }

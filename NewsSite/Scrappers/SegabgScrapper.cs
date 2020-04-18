@@ -23,7 +23,7 @@ namespace NewsSite.Scrappers
             { "health", "https://www.segabg.com/category-zdrave" }
         };
 
-        public async Task<List<Dictionary<string, string>>> Run()
+        public async Task<List<Dictionary<string, string>>> Run(DateTime fromTime, DateTime toTime)
         {
             var observerLinks = await GetArticleLinks(categoriesLinks["observer"]);
             var bulgariaLinks = await GetArticleLinks(categoriesLinks["bulgaria"]);
@@ -37,38 +37,75 @@ namespace NewsSite.Scrappers
 
             foreach (var link in observerLinks)
             {
-                articles.Add(await ScrapeArticle(link, "observer"));
+                var result = await ScrapeArticle(link, "observer");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }             
             }
             foreach (var link in bulgariaLinks)
             {
-                articles.Add(await ScrapeArticle(link, "bulgaria"));
+                var result = await ScrapeArticle(link, "bulgaria");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
             foreach (var link in economyLinks)
             {
-                articles.Add(await ScrapeArticle(link, "economy"));
+
+                var result = await ScrapeArticle(link, "economy");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
             foreach (var link in foreignLinks)
             {
-                articles.Add(await ScrapeArticle(link, "foreign"));
+
+                var result = await ScrapeArticle(link, "foreign");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
             foreach (var link in cultureLinks)
             {
-                articles.Add(await ScrapeArticle(link, "culture"));
+                var result = await ScrapeArticle(link, "culture");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
             foreach (var link in educationLinks)
             {
-                articles.Add(await ScrapeArticle(link, "education"));
+                var result = await ScrapeArticle(link, "education");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
             foreach (var link in healthLinks)
             {
-                articles.Add(await ScrapeArticle(link, "health"));
+                var result = await ScrapeArticle(link, "health");
+                var publishedDate = DateTime.Parse(result["DatePublished"]);
+                if (publishedDate >= fromTime && publishedDate <= toTime)
+                {
+                    articles.Add(result);
+                }
             }
 
             articles.Reverse();
             return articles;
         }
 
-        public async Task<List<string>> GetArticleLinks(string categoryLink)
+        protected async Task<List<string>> GetArticleLinks(string categoryLink)
         {
             var client = new HttpClient();
             var html = await client.GetAsync(categoryLink);
@@ -91,7 +128,7 @@ namespace NewsSite.Scrappers
             return resultLinks;
         }
 
-        public async Task<Dictionary<string, string>> ScrapeArticle(string url, string category)
+        protected async Task<Dictionary<string, string>> ScrapeArticle(string url, string category)
         {
             var client = new HttpClient();
             var html = await client.GetAsync(url);
@@ -104,7 +141,8 @@ namespace NewsSite.Scrappers
             var resultAuthor = document.DocumentNode.SelectSingleNode("//div[contains(@class, 'sega-authors')]/span/a");
             var resultImageUrl = document.DocumentNode.SelectSingleNode("//div[contains(@class, 'sega-image-wrap')]/a");
             var resultContent = document.DocumentNode.SelectSingleNode("//div[contains(@class, 'sega-body')]");
-            var resultDate = document.DocumentNode.SelectSingleNode("//div[contains(@class, 'sega-article-date')]");
+            var resultDatePublish = document.DocumentNode.SelectSingleNode("//meta[contains(@property, 'article:published_time')]").Attributes["content"].Value;
+            var resultDateModified = document.DocumentNode.SelectSingleNode("//meta[contains(@property, 'article:modified_time')]").Attributes["content"].Value;
 
             if (resultTitle != null)
             {
@@ -151,13 +189,22 @@ namespace NewsSite.Scrappers
                 result.Add("Content", "");
             }
 
-            if (resultDate != null)
+            if (resultDatePublish != null)
             {
-                result.Add("Date", resultDate.InnerText.Substring(0, 2));
+                result.Add("DatePublished", resultDatePublish);
             }
             else
             {
-                result.Add("Date", "");
+                result.Add("DatePublished", "");
+            }
+
+            if (resultDateModified != null)
+            {
+                result.Add("DateModified", resultDateModified);
+            }
+            else
+            {
+                result.Add("DateModified", "");
             }
 
             result.Add("Category", category);

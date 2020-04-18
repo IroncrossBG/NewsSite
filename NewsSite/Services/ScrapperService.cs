@@ -19,9 +19,9 @@ namespace NewsSite.Services
             this.categoryService = categoryService;
             segabgScrapper = new SegabgScrapper();
         }
-        public void RunSegaScrapper()
+        public void RunSegaScrapper(DateTime from, DateTime to)
         {
-            var articlesRaw = segabgScrapper.Run().Result;
+            var articlesRaw = segabgScrapper.Run(from, to).Result;
 
             foreach (var item in articlesRaw)
             {
@@ -36,8 +36,8 @@ namespace NewsSite.Services
                 resultArticle.Author = item["Author"];
                 resultArticle.ImageUrl = item["ImageUrl"];
                 resultArticle.Content = item["Content"];
-                resultArticle.CreatedOn = DateTime.Now;
-                resultArticle.ModifiedOn = resultArticle.CreatedOn;
+                resultArticle.CreatedOn = DateTime.Parse(item["DatePublished"]);
+                resultArticle.ModifiedOn = DateTime.Parse(item["DateModified"]);
                 switch (item["Category"])
                 {
                     case "observer": resultArticle.CategoryId = categoryService.GetByName("Мнения", false).Id; break;

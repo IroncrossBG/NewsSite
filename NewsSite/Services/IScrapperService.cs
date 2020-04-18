@@ -7,6 +7,6 @@ namespace NewsSite.Services
 {
     public interface IScrapperService
     {
-        void RunSegaScrapper();
+        public void RunSegaScrapper(DateTime from, DateTime to);
     }
 }
