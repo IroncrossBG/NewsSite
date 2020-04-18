@@ -27,7 +27,7 @@
                                 <i class="far fa-list-alt"></i>
                                 @Model.Articles[i].Category.Name |
                                 <i class="far fa-clock"></i>
-                                @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm") |
+                                @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | HH:mm") |
                                 <i class="far fa-comment-dots"></i>
                                 @Model.Articles[i].Comments.Count()
                             </div>
@@ -47,7 +47,9 @@
                         <i class="far fa-newspaper"></i> @Model.Articles[i].Title
                         <p class="text-muted small">
                             <i class="far fa-clock"></i>
-                            @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | hh:mm")
+                            @Model.Articles[i].CreatedOn.ToString("dd.MM.yyyy | HH:mm")
+                            | <i class="far fa-comment-dots"></i>
+                            @Model.Articles[i].Comments.Count()
                         </p>
                     </a>
                 </li>
