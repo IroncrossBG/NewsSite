@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using NewsSite.Models.Data;
@@ -24,6 +25,7 @@ namespace NewsSite.Controllers
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Id(int id)
         {
             articlesService.IncreaseViews(id);
@@ -46,6 +48,7 @@ namespace NewsSite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Editor, Member")]
         public async Task<IActionResult> Id(int id, string commentContent)
         {
             var result = new CreateEditCommentInputModel

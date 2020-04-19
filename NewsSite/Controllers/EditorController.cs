@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewsSite.Models.Input;
 using NewsSite.Services;
 
 namespace NewsSite.Controllers
 {
+    [Authorize(Roles = "Administrator, Editor")]
     public class EditorController : Controller
     {
         private readonly IArticlesService articlesService;
@@ -16,6 +18,7 @@ namespace NewsSite.Controllers
         {
             this.articlesService = articlesService;
         }
+
         public IActionResult Create()
         {
             return View(new CreateEditArticleInputModel());

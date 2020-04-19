@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using NewsSite.Data;
 using NewsSite.Services;
 using NewsSite.Models.Data;
-using NewsSite.Data.Seeders;
 using NewsSite.Scrappers;
 
 namespace NewsSite
@@ -26,6 +25,56 @@ namespace NewsSite
             Configuration = configuration;
         }
 
+        private void CreateRoles(IServiceProvider serviceProvider)
+        {
+
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            Task<IdentityResult> roleResult;
+
+            string[] roles = { "Administrator", "Editor", "Moderator", "Member" };
+
+            //ADD ROLES
+            foreach (var role in roles)
+            {
+                Task<bool> hasRole = roleManager.RoleExistsAsync(role);
+                hasRole.Wait();
+
+                if (!hasRole.Result)
+                {
+                    roleResult = roleManager.CreateAsync(new IdentityRole(role));
+                    roleResult.Wait();
+                }
+            }
+        }
+
+        private void CreateAdminAccount(IServiceProvider serviceProvider)
+        {
+
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            Task<IdentityResult> roleResult;
+
+            Task<IdentityUser> adminUser = userManager.FindByNameAsync("admin");
+            adminUser.Wait();
+
+            if (adminUser.Result == null)
+            {
+                IdentityUser administrator = new IdentityUser();
+                administrator.Email = "admin@bgnovini.com";
+                administrator.UserName = "admin";
+
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "Admin!23");
+                newUser.Wait();
+
+                if (newUser.Result.Succeeded)
+                {
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, "Administrator");
+                    newUserRole.Wait();
+                }
+            }
+        }
+
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
@@ -33,7 +82,10 @@ namespace NewsSite
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddUserManager<UserManager<IdentityUser>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -47,7 +99,7 @@ namespace NewsSite
             services.AddSingleton<IExchangesService, ExchangesService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -63,7 +115,6 @@ namespace NewsSite
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -81,15 +132,8 @@ namespace NewsSite
                 context.Database.EnsureCreated();
             }
 
-            //SEEDERS
-            var categorySeeder = new CategorySeeder();
-            categorySeeder.Seed(app);
-
-            var articleSeeder = new ArticleSeeder();
-            articleSeeder.Seed(app);
-
-            var commentsSeeder = new CommentSeeder();
-            commentsSeeder.Seed(app);
+            CreateRoles(serviceProvider);
+            CreateAdminAccount(serviceProvider);
         }
     }
 }

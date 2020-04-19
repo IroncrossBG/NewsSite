@@ -85,6 +85,10 @@ namespace NewsSite.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    //Default user role
+                    Task<IdentityResult> newUserRole = _userManager.AddToRoleAsync(user, "Member");
+                    newUserRole.Wait();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
