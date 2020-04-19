@@ -53,7 +53,7 @@ namespace NewsSite.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin, Editor, Member")]
+        [Authorize(Roles = "Administrator, Editor, Member")]
         public async Task<IActionResult> Id(int id, string commentContent)
         {
             var result = new CreateEditCommentInputModel
