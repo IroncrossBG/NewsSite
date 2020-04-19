@@ -37,6 +37,20 @@ namespace NewsSite.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult ErrorStatus(int? statusCode = null)
+        {
+            if (statusCode.HasValue)
+            {
+                if (statusCode.Value == 404)
+                {
+                    var viewName = statusCode.ToString();
+                    return View(statusCode);
+                }
+            }
+            return View();
+        }
+
         public IActionResult Scrapper()
         {
             scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);

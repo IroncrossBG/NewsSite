@@ -111,12 +111,14 @@ namespace NewsSite
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            app.UseExceptionHandler("/Home/Error");
+            app.UseStatusCodePagesWithReExecute("/Home/ErrorStatus", "?statusCode={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -129,7 +131,7 @@ namespace NewsSite
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
 
             CreateRoles(serviceProvider);

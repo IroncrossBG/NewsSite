@@ -1,0 +1,7 @@
+﻿@model int
+
+@switch (Model)
+   {
+    case 404: <img src="~/404-not-found.jpg" /> break;
+    case 500: <img src="~/500-internal-server-error.jpg" /> break;
+}
