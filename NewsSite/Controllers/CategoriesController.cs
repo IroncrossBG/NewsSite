@@ -40,6 +40,10 @@ namespace NewsSite.Controllers
         public IActionResult Index(string name)
         {
             var result = categoryService.GetByName(name, true);
+            if (result == null)
+            {
+                return View("ErrorStatus", 404);
+            }
             return View(result);
         }
     }

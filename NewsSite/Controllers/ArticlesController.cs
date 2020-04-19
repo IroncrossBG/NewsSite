@@ -28,8 +28,13 @@ namespace NewsSite.Controllers
         [AllowAnonymous]
         public IActionResult Id(int id)
         {
-            articlesService.IncreaseViews(id);
             var article = articlesService.GetById(id);
+            if (article == null)
+            {
+                return View("ErrorStatus", 404);
+            }
+
+            articlesService.IncreaseViews(id);
             var result = new ArticleViewModel()
             {
                 Title = article.Title,
