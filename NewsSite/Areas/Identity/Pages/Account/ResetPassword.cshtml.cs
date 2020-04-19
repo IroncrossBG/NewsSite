@@ -32,13 +32,13 @@ namespace NewsSite.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Паролата {0} трябва да бъде поне {2} и максимално {1} символа дълга.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Потвърди парола")]
+            [Compare("Password", ErrorMessage = "Паролата и паролата за потвърждение не съвпадат!")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
@@ -48,7 +48,7 @@ namespace NewsSite.Areas.Identity.Pages.Account
         {
             if (code == null)
             {
-                return BadRequest("A code must be supplied for password reset.");
+                return BadRequest("Въведете код за възстановите паролата си.");
             }
             else
             {

@@ -44,14 +44,14 @@ namespace NewsSite.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "User Name")]
+            [Display(Name = "Потребителско име")]
             public string UserName { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Запомни ме?")]
             public bool RememberMe { get; set; }
         }
 
