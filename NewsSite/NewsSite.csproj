@@ -23,4 +23,11 @@
     <PackageReference Include="TinyMCE" Version="5.2.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
+  </ItemGroup>
+
 </Project>

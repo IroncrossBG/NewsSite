@@ -11,6 +11,10 @@
 
         <div class="col-9 pr-2 pl-0 float-left leftColumn">
             <div class="row w-100">
+                @if (Model.Articles.Count == 0)
+                {
+                    <h1>Няма намерени материали</h1>
+                }
                 @foreach (var item in Model.Articles)
                 {
                     <div class="card w-100 my-2">
