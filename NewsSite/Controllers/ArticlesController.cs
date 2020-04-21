@@ -65,5 +65,11 @@ namespace NewsSite.Controllers
             commentsService.Create(result);
             return RedirectToAction("Id", id);
         }
+
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            commentsService.Delete(id);
+            return Redirect(Request.Path);
+        }
     }
 }

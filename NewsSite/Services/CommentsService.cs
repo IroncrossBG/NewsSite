@@ -3,6 +3,7 @@ using NewsSite.Data;
 using NewsSite.Models.Data;
 using NewsSite.Models.Input;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsSite.Services
@@ -27,14 +28,14 @@ namespace NewsSite.Services
             db.SaveChanges();
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Edit()
-        {
-            throw new NotImplementedException();
+            var comment = this.db.Comments.FirstOrDefault(x => x.Id == id);
+            if (comment != null)
+            {
+                this.db.Remove(comment);
+                this.db.SaveChanges();
+            }
         }
     }
 }

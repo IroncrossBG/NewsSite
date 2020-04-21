@@ -8,7 +8,6 @@
 }
 
 <body>
-
     <div class="container">
         <div class="container-fluid p-0 mt-1 mb-3">
 
@@ -55,13 +54,18 @@
                     }
                     @foreach (var comment in @Model.Comments)
                     {
-                        <div class="row w-100">
+                        <div class="row w-100">              
                             <div class="media mb-4" style="word-break: break-all;">
-                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                                 <div class="media-body">
-                                    <h5 class="mt-0">@comment.User.UserName</h5>
-                                    <h6 class="mt-0">@comment.CreatedOn.ToString("dd.MM.yyyy | HH.mm")</h6>
+                                    <h5 class="mt-0">
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+                                        {
+                                            <a class="btn btn-danger" asp-controller="Articles" asp-action="DeleteComment" asp-route-id="@comment.Id"><i class="far fa-trash-alt"></i></a>
+                                        }
 
+                                        @comment.User.UserName
+                                    </h5>
+                                    <h6 class="mt-0">@comment.CreatedOn.ToString("dd.MM.yyyy | HH.mm")</h6>
                                     @comment.Content
                                 </div>
                             </div>
@@ -69,11 +73,9 @@
                     }
                 </div>
             </div>
-
         </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-3 p-0 float-right rightColumn">
 
+        <div class="col-3 p-0 float-right rightColumn">
             <vc:search></vc:search>
             <vc:top-articles count="10"></vc:top-articles>
         </div>

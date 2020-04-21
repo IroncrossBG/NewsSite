@@ -9,8 +9,6 @@ namespace NewsSite.Services
     {
         void Create(CreateEditCommentInputModel model);
 
-        void Edit();
-
-        void Delete();
+        public void Delete(int id);
     }
 }
