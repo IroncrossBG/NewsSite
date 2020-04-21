@@ -16,26 +16,6 @@ namespace NewsSite.Controllers
         {
             this.categoryService = categoryService;
         }
-        public IActionResult Create()
-        {
-            return View(new CreateEditCategoryInputModel());
-        }
-
-        [HttpPost]
-        public IActionResult Create(CreateEditCategoryInputModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                categoryService.Add(new
-                CreateEditCategoryInputModel
-                {
-                    Name = model.Name,
-                    Description = model.Description
-                });
-                return Redirect("/");
-            }
-            return View(model);
-        }
 
         public IActionResult Index(string name)
         {

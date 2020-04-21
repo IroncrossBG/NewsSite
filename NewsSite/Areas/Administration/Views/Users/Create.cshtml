@@ -1,0 +1,49 @@
+﻿@model NewsSite.Areas.Administration.Models.UserInputModel
+@using Microsoft.AspNetCore.Identity;
+@inject RoleManager<IdentityRole> roleManager;
+@{
+    var roles = roleManager.Roles.ToList();
+}
+
+    <form method="post" class="h-100" style="overflow-y: scroll;">
+        <div>
+            <label>Потребителско име:</label><br />
+            <input type="text" class="form-control" name="UserName" value="@Model.UserName" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Имейл:</label><br />
+            <input type="text" class="form-control" name="Email" value="@Model.Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Парола:</label><br />
+            <input type="password" class="form-control" name="Password" value="@Model.Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Роля:</label><br />
+            <select class="form-control custom-select-sm" name="RoleId">
+                @foreach (var role in roles)
+                {
+                    @if (Model.RoleId == role.Id)
+                    {
+                        <option value="@role.Id" selected>@role.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@role.Id">@role.Name</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="RoleId" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <div>
+            <input type="submit" class="btn btn-primary" value="Създай" />
+        </div>
+    </form>

@@ -8,9 +8,6 @@ namespace NewsSite.Services
 {
     public interface ICategoryService
     {
-        void Add(CreateEditCategoryInputModel model);
-
-        void Edit(CreateEditCategoryInputModel model);
 
         Category GetById(int id, bool returnArticles);
 
