@@ -12,9 +12,9 @@ namespace NewsSite.Services
     {
         static readonly HttpClient client = new HttpClient();
         static readonly IPinfo ipInfo = new IPinfo(client);
-        public async Task<IPInfoRootObject> GetIpInfo(string ip, string token)
+        public async Task<IPInfoRootObject> GetIpInfoAsync(string ip, string token)
         {
-            return await ipInfo.GetIpData(ip, token);
+            return await ipInfo.GetIpDataAsync(ip, token);
         }
     }
 }

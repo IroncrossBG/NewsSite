@@ -18,7 +18,7 @@ namespace NewsSite.ViewComponents
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             return View();
         }

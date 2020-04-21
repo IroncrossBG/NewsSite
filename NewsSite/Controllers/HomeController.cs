@@ -50,11 +50,5 @@ namespace NewsSite.Controllers
             }
             return View();
         }
-
-        public IActionResult Scrapper()
-        {
-            scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
-            return Redirect("/Editor/All");
-        }
     }
 }

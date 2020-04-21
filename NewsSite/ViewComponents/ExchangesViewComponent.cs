@@ -17,7 +17,7 @@ namespace NewsSite.ViewComponents
         {
             this.exchangesService = exchangesService;
         }
-        public IViewComponentResult Invoke(string filter)
+        public async Task<IViewComponentResult> InvokeAsync(string filter)
         {
             var baseExchange = new List<List<string>>();
             var modelExchanges = new List<ExchangesViewModel>();
@@ -28,8 +28,8 @@ namespace NewsSite.ViewComponents
             {
                 if (!exchangesService.Check(dateMinus))
                 {
-                    exchangesService.Add("https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERFixed/index.htm");
-                    exchangesService.Add("https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm");
+                    await exchangesService.Add("https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERFixed/index.htm");
+                    await exchangesService.Add("https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm");
                     baseExchange = exchangesService.Get(date);
                 }
                 else

@@ -8,16 +8,16 @@ namespace NewsSite.Services
 {
     public interface IArticlesService
     {
-        void Add(CreateEditArticleInputModel model);
+        Task AddAsync(CreateEditArticleInputModel model);
 
-        void Edit(CreateEditArticleInputModel model);
+        Task EditAsync(CreateEditArticleInputModel model);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
-        void IncreaseViews(int id);
+        Task IncreaseViewsAsync(int id);
 
-        Article GetById(int id);
+        Task<Article> GetByIdAsync(int id);
 
-        IEnumerable<Article> GetAll();
+        Task<List<Article>> GetAllAsync();
     }
 }

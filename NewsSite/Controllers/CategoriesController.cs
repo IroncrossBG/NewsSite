@@ -16,9 +16,9 @@ namespace NewsSite.Controllers
             this.categoryService = categoryService;
         }
 
-        public IActionResult Index(string name)
+        public async Task<IActionResult> Index(string name)
         {
-            var result = categoryService.GetByName(name, true);
+            var result = await categoryService.GetByNameAsync(name, true);
             if (result == null)
             {
                 return View("ErrorStatus", 404);

@@ -9,6 +9,6 @@ namespace NewsSite.Services
 {
     public interface IIpInfoService
     {
-        Task<IPInfoRootObject> GetIpInfo(string ip, string token);
+        Task<IPInfoRootObject> GetIpInfoAsync(string ip, string token);
     }
 }

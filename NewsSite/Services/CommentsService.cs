@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NewsSite.Data;
 using NewsSite.Models.Data;
 using NewsSite.Models.Input;
@@ -15,7 +16,7 @@ namespace NewsSite.Services
         {
             this.db = db;
         }
-        public void Create(CreateEditCommentInputModel model)
+        public async Task CreateAsync(CreateEditCommentInputModel model)
         {
             var comment = new Comment
             {
@@ -24,17 +25,17 @@ namespace NewsSite.Services
                 ArticleId = model.ArticleId,
                 CreatedOn = DateTime.UtcNow
             };
-            db.Comments.Add(comment);
-            db.SaveChanges();
+            await db.Comments.AddAsync(comment);
+            await db.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var comment = this.db.Comments.FirstOrDefault(x => x.Id == id);
+            var comment = await this.db.Comments.FirstOrDefaultAsync(x => x.Id == id);
             if (comment != null)
             {
                 this.db.Remove(comment);
-                this.db.SaveChanges();
+                await this.db.SaveChangesAsync();
             }
         }
     }

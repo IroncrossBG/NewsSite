@@ -11,21 +11,21 @@ namespace NewsSite.Services
         static readonly HttpClient client = new HttpClient();
         static readonly OpenWeatherMap weather = new OpenWeatherMap(client);
         static readonly Dictionary<string, DictionaryWeatherModel> weatherData = new Dictionary<string, DictionaryWeatherModel>();
-        public OpenWeatherMapRootObject GetWeatherData(string cityName, string apiKey)
+        public async Task<OpenWeatherMapRootObject> GetWeatherData(string cityName, string apiKey)
         {
             if (weatherData.ContainsKey(cityName))
             {
                 if (DateTime.UtcNow >= weatherData[cityName].ExpiresOn)
                 {
-                    var rootObject = weather.GetWeatherData(cityName, apiKey);
-                    if (rootObject.Result.cod == 200)
+                    var rootObject = await weather.GetWeatherDataAsync(cityName, apiKey);
+                    if (rootObject.cod == 200)
                     {
                         weatherData[cityName] = new DictionaryWeatherModel
                         {
                             ExpiresOn = DateTime.UtcNow.AddHours(1),
-                            RootObject = rootObject.Result
+                            RootObject = rootObject
                         };
-                        return rootObject.Result;
+                        return rootObject;
                     }
                     return null;
                 }
@@ -33,15 +33,15 @@ namespace NewsSite.Services
             }
             else
             {
-                var rootObject = weather.GetWeatherData(cityName, apiKey);
-                if (rootObject.Result.cod == 200)
+                var rootObject = await weather.GetWeatherDataAsync(cityName, apiKey);
+                if (rootObject.cod == 200)
                 {
                     weatherData.Add(cityName, new DictionaryWeatherModel
                     {
                         ExpiresOn = DateTime.UtcNow.AddHours(1),
-                        RootObject = rootObject.Result
+                        RootObject = rootObject
                     });
-                    return rootObject.Result;
+                    return rootObject;
                 }
                 return null;
             }

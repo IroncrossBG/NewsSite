@@ -18,12 +18,13 @@ namespace NewsSite.ViewComponents
             this.articlesService = articlesService;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var articles = articlesService
-                .GetAll()
+            var articles = await articlesService
+                .GetAllAsync();
+            articles = articles
                 .OrderByDescending(x => x.CreatedOn)
-                .ToArray();
+                .ToList();
 
             var resultModel = new MainArticlesViewModel
             {

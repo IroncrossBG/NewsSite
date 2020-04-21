@@ -4,7 +4,7 @@
 @inject ICategoryService categoryService;
 @{
     ViewData["Title"] = "Create new article";
-    var categories = categoryService.GetAll();
+    var categories = await categoryService.GetAllAsync();
     var sanitizer = new HtmlSanitizer();
 }
 

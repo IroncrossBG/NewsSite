@@ -5,6 +5,6 @@ namespace NewsSite.Models.View
 {
     public class MainArticlesViewModel
     {
-        public virtual Article[] Articles { get; set; }
+        public virtual List<Article> Articles { get; set; }
     }
 }

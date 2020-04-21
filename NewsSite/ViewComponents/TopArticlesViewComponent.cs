@@ -18,11 +18,10 @@ namespace NewsSite.ViewComponents
             this.articlesService = articlesService;
         }
 
-        public IViewComponentResult Invoke(int count)
+        public async Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var articles = articlesService
-                .GetAll()
-                .ToList();
+            var articles = await articlesService
+                .GetAllAsync();
             var topRead = articles
                 .OrderByDescending(x => x.Views)
                 .Take(count)

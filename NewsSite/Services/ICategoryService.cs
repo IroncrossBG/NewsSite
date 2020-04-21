@@ -9,10 +9,10 @@ namespace NewsSite.Services
     public interface ICategoryService
     {
 
-        Category GetById(int id, bool returnArticles);
+        Task<Category> GetByIdAsync(int id, bool returnArticles);
 
-        Category GetByName(string name, bool returnArticles);
+        Task<Category> GetByNameAsync(string name, bool returnArticles);
 
-        IEnumerable<Category> GetAll();
+        Task<IEnumerable<Category>> GetAllAsync();
     }
 }

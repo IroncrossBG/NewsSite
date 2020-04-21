@@ -24,19 +24,19 @@ namespace NewsSite.ViewComponents
             this.configuration = configuration;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             var weather = new OpenWeatherMapRootObject();
 
             if (ip == "::1" || ip.StartsWith("192"))
             {
-                weather = weatherService.GetWeatherData("Sofia", configuration.GetSection("APIKeys").GetSection("OpenWeatherMap").Value);
+                weather = await weatherService.GetWeatherData("Sofia", configuration.GetSection("APIKeys").GetSection("OpenWeatherMap").Value);
             }
             else
             {
-                var ipInfo = ipInfoService.GetIpInfo(ip, configuration.GetSection("APIKeys").GetSection("IpInfo").Value);
-                weather = weatherService.GetWeatherData(ipInfo.Result.city, configuration.GetSection("APIKeys").GetSection("OpenWeatherMap").Value);
+                var ipInfo = await ipInfoService.GetIpInfoAsync(ip, configuration.GetSection("APIKeys").GetSection("IpInfo").Value);
+                weather = await weatherService.GetWeatherData(ipInfo.city, configuration.GetSection("APIKeys").GetSection("OpenWeatherMap").Value);
             }
 
             var result = weather;

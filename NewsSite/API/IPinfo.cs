@@ -16,7 +16,7 @@ namespace NewsSite.API
             this.client = client;
         }
 
-        public async Task<IPInfoRootObject> GetIpData(string ip, string token)
+        public async Task<IPInfoRootObject> GetIpDataAsync(string ip, string token)
         {
             try
             {

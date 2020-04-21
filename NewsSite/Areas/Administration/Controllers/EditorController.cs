@@ -26,11 +26,11 @@ namespace NewsSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateEditArticleInputModel model)
+        public async Task<IActionResult> Create(CreateEditArticleInputModel model)
         {
             if (ModelState.IsValid)
             {
-                articlesService.Add(new
+                await articlesService.AddAsync(new
                 CreateEditArticleInputModel
                 {
                     Title = model.Title,
@@ -40,20 +40,20 @@ namespace NewsSite.Controllers
                     ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
                 });
-                return RedirectToAction("Index");
+                return RedirectToAction("All");
             }
             return View(model);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            articlesService.Delete(id);
-            return RedirectToAction("Index");
+            await articlesService.DeleteAsync(id);
+            return RedirectToAction("All");
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var article = articlesService.GetById(id);
+            var article = await articlesService.GetByIdAsync(id);
             return View("Create", new CreateEditArticleInputModel
             {
                 Id = article.Id,
@@ -67,15 +67,15 @@ namespace NewsSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(CreateEditArticleInputModel model)
+        public async Task<IActionResult> Edit(CreateEditArticleInputModel model)
         {
-            articlesService.Edit(model);
-            return RedirectToAction("Index");
+            await articlesService.EditAsync(model);
+            return RedirectToAction("All");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> All()
         {
-            return View(articlesService.GetAll());
+            return View(await articlesService.GetAllAsync());
         }
     }
 }

@@ -19,7 +19,7 @@ namespace NewsSite.Services
             this.categoryService = categoryService;
             segabgScrapper = new SegabgScrapper();
         }
-        public void RunSegaScrapper(DateTime from, DateTime to)
+        public async Task RunSegaScrapper(DateTime from, DateTime to)
         {
             var articlesRaw = segabgScrapper.Run(from, to).Result;
 
@@ -40,18 +40,18 @@ namespace NewsSite.Services
                 resultArticle.ModifiedOn = DateTime.Parse(item["DateModified"]);
                 switch (item["Category"])
                 {
-                    case "observer": resultArticle.CategoryId = categoryService.GetByName("Мнения", false).Id; break;
-                    case "bulgaria": resultArticle.CategoryId = categoryService.GetByName("България", false).Id; break;
-                    case "economy": resultArticle.CategoryId = categoryService.GetByName("Икономика", false).Id; break;
-                    case "foreign": resultArticle.CategoryId = categoryService.GetByName("Свят", false).Id; break;
-                    case "culture": resultArticle.CategoryId = categoryService.GetByName("Култура", false).Id; break;
-                    case "education": resultArticle.CategoryId = categoryService.GetByName("Образование", false).Id; break;
-                    case "health": resultArticle.CategoryId = categoryService.GetByName("Здравеопазване", false).Id; break;
-                    default: resultArticle.CategoryId = categoryService.GetByName("Други", false).Id; break;
+                    case "observer": resultArticle.CategoryId = categoryService.GetByNameAsync("Мнения", false).Id; break;
+                    case "bulgaria": resultArticle.CategoryId = categoryService.GetByNameAsync("България", false).Id; break;
+                    case "economy": resultArticle.CategoryId = categoryService.GetByNameAsync("Икономика", false).Id; break;
+                    case "foreign": resultArticle.CategoryId = categoryService.GetByNameAsync("Свят", false).Id; break;
+                    case "culture": resultArticle.CategoryId = categoryService.GetByNameAsync("Култура", false).Id; break;
+                    case "education": resultArticle.CategoryId = categoryService.GetByNameAsync("Образование", false).Id; break;
+                    case "health": resultArticle.CategoryId = categoryService.GetByNameAsync("Здравеопазване", false).Id; break;
+                    default: resultArticle.CategoryId = categoryService.GetByNameAsync("Други", false).Id; break;
                 }
-                db.Add(resultArticle);
+                await db.AddAsync(resultArticle);
             }
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
     }
 }

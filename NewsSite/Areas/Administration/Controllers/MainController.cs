@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NewsSite.Areas.Administration.Models;
 using NewsSite.Data;
 using NewsSite.Services;
@@ -23,14 +24,20 @@ namespace NewsSite.Areas.Administration.Controllers
             this.db = db;
             this.userManager = userManager;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
             var model = new MainIndexViewModel()
             {
-                numberOfArticles = db.Articles.Count(),
-                numberOfUsers = userManager.Users.Count()
+                numberOfArticles = await db.Articles.CountAsync(),
+                numberOfUsers = await userManager.Users.CountAsync()
             };
             return View(model);
         }
+        //public IActionResult Scrapper()
+        //{
+        //    scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
+        //    return Redirect("/Editor/All");
+        //}
     }
 }

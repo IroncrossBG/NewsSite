@@ -26,17 +26,19 @@ namespace NewsSite.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Id(int id)
+        [HttpGet]
+        public async Task<IActionResult> Id(int id)
         {
-            var article = articlesService.GetById(id);
+            var article = await articlesService.GetByIdAsync(id);
             if (article == null)
             {
                 return View("ErrorStatus", 404);
             }
 
-            articlesService.IncreaseViews(id);
+            await articlesService.IncreaseViewsAsync(id);
             var result = new ArticleViewModel()
             {
+                Id = article.Id,
                 Title = article.Title,
                 Subtitle = article.Subtitle,
                 Author = article.Author,
@@ -62,14 +64,15 @@ namespace NewsSite.Controllers
                 Content = commentContent,
                 User = await userManager.GetUserAsync(this.HttpContext.User),
             };
-            commentsService.Create(result);
-            return RedirectToAction("Id", id);
+            await commentsService.CreateAsync(result);
+            return Redirect(string.Concat(id, "#comments"));
         }
 
-        public async Task<IActionResult> DeleteComment(int id)
+        [Authorize(Roles = "Administrator, Moderator")]
+        public async Task<IActionResult> DeleteComment(int articleId, int commentId)
         {
-            commentsService.Delete(id);
-            return Redirect(Request.Path);
+            await commentsService.DeleteAsync(commentId);
+            return Redirect(string.Concat("Id/", articleId, "#comments"));
         }
     }
 }

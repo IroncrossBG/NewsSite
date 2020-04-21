@@ -18,9 +18,9 @@ namespace NewsSite.ViewComponents
             this.categoryService = categoryService;
         }
 
-        public IViewComponentResult Invoke(string categoryName)
+        public async Task<IViewComponentResult> InvokeAsync(string categoryName)
         {
-            var category = categoryService.GetByName(categoryName, true);
+            var category = await categoryService.GetByNameAsync(categoryName, true);
             var articles = category.Articles.OrderByDescending(x => x.CreatedOn).Take(5).ToList();
             var resultModel = new LastArticlesViewModel
             {

@@ -43,26 +43,24 @@ namespace NewsSite.Areas.Administration.Controllers
                 };
 
                 var result = await userManager.CreateAsync(newUser, model.Password);
-                
+
                 if (result.Succeeded)
                 {
                     var findRole = await roleManager.FindByIdAsync(model.RoleId);
-                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(newUser, findRole.Name);
-                    newUserRole.Wait();
-                    if (newUserRole.IsCompletedSuccessfully)
-                    {
-                        return RedirectToAction("Index");
-                    }
+                    IdentityResult newUserRole = await userManager.AddToRoleAsync(newUser, findRole.Name);
+                    return RedirectToAction("Index");
                 }
             }
             return View(model);
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            var user = userManager.FindByIdAsync(id);
-            user.Wait();
-            userManager.DeleteAsync(user.Result);
+            var user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                userManager.DeleteAsync(user);
+            }
             return View("Index");
         }
     }

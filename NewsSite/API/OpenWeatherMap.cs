@@ -17,7 +17,7 @@ namespace NewsSite.API
             this.client = client;
         }
 
-        public async Task<OpenWeatherMapRootObject> GetWeatherData(string nameCity, string apiKey)
+        public async Task<OpenWeatherMapRootObject> GetWeatherDataAsync(string nameCity, string apiKey)
         {
             try
             {

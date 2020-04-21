@@ -2,7 +2,8 @@
 @using NewsSite.ViewComponents
 @inject ICategoryService categoryService;
 @{
-    var categories = categoryService.GetAll().OrderBy(x => x.Name).ToList();
+    var categories = await categoryService.GetAllAsync();
+    categories = categories.OrderBy(x => x.Name).ToList();
 }
 
 <!DOCTYPE html>

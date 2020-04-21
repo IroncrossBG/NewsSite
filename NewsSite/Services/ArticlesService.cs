@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace NewsSite.Services
 {
@@ -16,7 +17,7 @@ namespace NewsSite.Services
         {
             this.db = db;
         }
-        public void Add(CreateEditArticleInputModel model)
+        public async Task AddAsync(CreateEditArticleInputModel model)
         {
             var newArticle = new Article
             {
@@ -30,13 +31,13 @@ namespace NewsSite.Services
                 CategoryId = model.CategoryId
             };
 
-            db.Add(newArticle);
-            db.SaveChanges();
+            await db.AddAsync(newArticle);
+            await db.SaveChangesAsync();
         }
 
-        public void Edit(CreateEditArticleInputModel model)
+        public async Task EditAsync(CreateEditArticleInputModel model)
         {
-            var article = this.db.Articles.FirstOrDefault(x => x.Id == model.Id);
+            var article = await this.db.Articles.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (article != null)
             {
                 article.Title = model.Title;
@@ -46,32 +47,32 @@ namespace NewsSite.Services
                 article.ModifiedOn = DateTime.UtcNow;
                 article.ImageUrl = model.ImageUrl;
                 article.CategoryId = model.CategoryId;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var article = this.db.Articles.FirstOrDefault(x => x.Id == id);
+            var article = await this.db.Articles.FirstOrDefaultAsync(x => x.Id == id);
             if (article != null)
             {
                 this.db.Remove(article);
-                this.db.SaveChanges();
+                await this.db.SaveChangesAsync();
             }
         }
-        public void IncreaseViews(int id)
+        public async Task IncreaseViewsAsync(int id)
         {
-            var article = this.db.Articles.FirstOrDefault(x => x.Id == id);
+            var article = await this.db.Articles.FirstOrDefaultAsync(x => x.Id == id);
             if (article != null)
             {
                 article.Views += 1;
-                db.SaveChanges();
+                db.SaveChangesAsync();
             }
         }
 
-        public Article GetById(int id)
+        public async Task<Article> GetByIdAsync(int id)
         {
-            var article = this.db.Articles.Select(x => new Article
+            var article = await this.db.Articles.Select(x => new Article
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -94,17 +95,18 @@ namespace NewsSite.Services
                     User = y.User,
                 }).ToArray()
             })
-            .FirstOrDefault(x => x.Id == id);
+            .FirstOrDefaultAsync(x => x.Id == id);
             if (article == null)
             {
                 return null;
             }
             return article;
         }
-             
 
-        public IEnumerable<Article> GetAll()
-            => this.db.Articles.Select(x => new Article
+
+        public async Task<List<Article>> GetAllAsync()
+        {
+            var result = await this.db.Articles.Select(x => new Article
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -127,6 +129,8 @@ namespace NewsSite.Services
                     User = y.User,
                 }).ToArray()
             })
-            .ToArray();
+            .ToListAsync();
+            return result;
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace NewsSite.Services
 {
     public interface ICommentsService
     {
-        void Create(CreateEditCommentInputModel model);
+        Task CreateAsync(CreateEditCommentInputModel model);
 
-        public void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }

@@ -7,6 +7,6 @@ namespace NewsSite.Services
 {
     public interface IWeatherService
     {
-        OpenWeatherMapRootObject GetWeatherData(string cityName, string apiKey);
+        Task<OpenWeatherMapRootObject> GetWeatherData(string cityName, string apiKey);
     }
 }

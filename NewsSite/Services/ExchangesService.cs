@@ -11,20 +11,20 @@ namespace NewsSite.Services
         static readonly HttpClient client = new HttpClient();
         static readonly BnbCourses courses = new BnbCourses(client);
         static readonly Dictionary<string, List<List<string>>> exchanges = new Dictionary<string, List<List<string>>>();
-        public void Add(string url)
+        public async Task Add(string url)
         {
             string date = DateTime.Now.ToString("dd.MM.yyyy");
             if (!exchanges.ContainsKey(date))
             {
-                var exchange = courses.GetExchangesAsync(url).Result;
+                var exchange = await courses.GetExchangesAsync(url);
                 exchange.Remove(exchange.FirstOrDefault());
                 exchanges.Add(date, exchange);
             }
             else
             {
-                var exchange = courses.GetExchangesAsync(url).Result;
+                var exchange = await courses.GetExchangesAsync(url);
                 exchange.Remove(exchange.FirstOrDefault());
-                exchanges[date].AddRange(courses.GetExchangesAsync(url).Result);
+                exchanges[date].AddRange(await courses.GetExchangesAsync(url));
             }
         }
         public List<List<string>> Get(string date)

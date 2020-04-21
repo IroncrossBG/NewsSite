@@ -2,7 +2,7 @@
 @inject IArticlesService articlesService;
 @{
     ViewData["Title"] = "All";
-    var articles = articlesService.GetAll();
+    var articles = await articlesService.GetAllAsync();
 }
 
 <form class="h-100" style="overflow-y: scroll;">
