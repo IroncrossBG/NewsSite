@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NewsSite.Models.Input;
 using NewsSite.Services;
 using System;
 using System.Collections.Generic;
