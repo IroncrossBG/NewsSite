@@ -111,7 +111,6 @@ namespace NewsSite
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            app.UseExceptionHandler("/Home/Error");
             app.UseStatusCodePagesWithReExecute("/Home/ErrorStatus", "?statusCode={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();

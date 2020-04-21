@@ -1,0 +1,141 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    @if (User.IsInRole("Administrator"))
+    {
+        ViewData["Title"] = "Администрация";
+    }
+    else
+    {
+        ViewData["Title"] = "Редакция";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - NewsSite</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column">
+    <header>
+
+        <nav class="navbar main navbar-expand py-0" style="background-color:black">
+            <ul class="navbar-nav">
+                <li class="navbar-brand">
+                    <img style="height: 24px;" class="img-fluid" src="~/logo.png" />
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/"><i class="fas fa-home"></i></a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <vc:login></vc:login>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <main role="main" class="flex-fill h-100 w-100">
+        <div class="row h-100 w-100">
+            <nav class="col-2 navbar h-100 w-100">
+                <ul class="navbar-nav h-100 border-right w-100 overflow-hidden" style="background-color: white;">
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item">
+                            <h5>ПРОФИЛИ:</h5>
+                            <ul class="pl-3">
+                                <li class="navbar-nav h-100 w-100">
+                                    <a class="nav-link text-success" href=""><i class="fa fa-plus-square"></i> Добави</a>
+                                </li>
+                                <li class="navbar-nav h-100 w-100">
+                                    <a class="nav-link text-primary" asp-controller="Users" asp-action="Index"><i class="fa fa-user-circle"></i> Всички</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <h5>СТАТИИ:</h5>
+                        <ul class="pl-3">
+                            <li class="navbar-nav h-100 w-100">
+                                <a class="nav-link text-success" asp-controller="Editor" asp-action="Create"><i class="fa fa-plus-square"></i> Добави</a>
+                            </li>
+                            <li class="navbar-nav h-100 w-100">
+                                <a class="nav-link text-primary" asp-controller="Editor" asp-action="Index"><i class="fa fa-edit"></i> Всички</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <h5>СВАЛИ:</h5>
+                        <ul class="pl-3">
+                            <li class="navbar-nav h-100 w-100">
+                                <a class="nav-link text-warning" href=""><i class="fa fa-download"></i> SEGABG</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="col h-100 w-100 m-0 p-0">
+                @RenderBody()
+            </div>
+        </div>
+
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script>
+        function hideColumns() {
+            if (window.innerWidth <= 576) {
+                if ($(".rightColumn").is(":visible")) {
+                    $(".rightColumn").hide();
+                }
+                if ($(".leftColumn").hasClass("col-9")) {
+                    $(".leftColumn").removeClass("col-9");
+                    $(".leftColumn").addClass("col");
+                }
+            } else {
+                if ($(".rightColumn").is(":hidden")) {
+                    $(".rightColumn").show();
+                }
+                if ($(".leftColumn").hasClass("col")) {
+                    $(".leftColumn").removeClass("col");
+                    $(".leftColumn").addClass("col-9");
+                }
+            }
+        }
+
+        $('.nav-tabs > li > a').hover(function () {
+            $(this).tab('show');
+        });
+
+        window.onresize = hideColumns;
+        window.onload = hideColumns;
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

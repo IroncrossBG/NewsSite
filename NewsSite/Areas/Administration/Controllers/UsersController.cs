@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace NewsSite.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    [Authorize(Roles = "Administrator, Editor")]
-    public class MainController : Controller
+    [Authorize(Roles = "Administrator")]
+    public class UsersController : Controller
     {
         public IActionResult Index()
         {

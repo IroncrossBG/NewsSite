@@ -9,6 +9,7 @@ using NewsSite.Services;
 
 namespace NewsSite.Controllers
 {
+    [Area("Administration")]
     [Authorize(Roles = "Administrator, Editor")]
     public class EditorController : Controller
     {
@@ -39,7 +40,7 @@ namespace NewsSite.Controllers
                     ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
                 });
-                return RedirectToAction("All");
+                return RedirectToAction("Index");
             }
             return View(model);
         }
@@ -47,7 +48,7 @@ namespace NewsSite.Controllers
         public IActionResult Delete(int id)
         {
             articlesService.Delete(id);
-            return RedirectToAction("All");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
@@ -69,10 +70,10 @@ namespace NewsSite.Controllers
         public IActionResult Edit(CreateEditArticleInputModel model)
         {
             articlesService.Edit(model);
-            return RedirectToAction("All");
+            return RedirectToAction("Index");
         }
 
-        public IActionResult All()
+        public IActionResult Index()
         {
             return View(articlesService.GetAll());
         }
