@@ -13,7 +13,6 @@
             <th>Име</th>
             <th>Имейл</th>
             <th>Действия</th>
-            <th>Създаден на</th>
         </tr>
         @foreach (var user in allUsers)
         {
@@ -23,8 +22,7 @@
                 <td>@user.Email</td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-primary">Промени</button>
-                        <button class="btn btn-danger">Изтрий</button>
+                        <button asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Изтрий</button>
                     </div>
                 </td>
             </tr>

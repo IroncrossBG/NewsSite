@@ -57,5 +57,13 @@ namespace NewsSite.Areas.Administration.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Delete(string id)
+        {
+            var user = userManager.FindByIdAsync(id);
+            user.Wait();
+            userManager.DeleteAsync(user.Result);
+            return View("Index");
+        }
     }
 }
