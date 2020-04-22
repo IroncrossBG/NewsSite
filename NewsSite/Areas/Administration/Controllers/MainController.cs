@@ -18,11 +18,13 @@ namespace NewsSite.Areas.Administration.Controllers
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly IScrapperService scrapperService;
 
-        public MainController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
+        public MainController(ApplicationDbContext db, UserManager<IdentityUser> userManager, IScrapperService scrapperService)
         {
             this.db = db;
             this.userManager = userManager;
+            this.scrapperService = scrapperService;
         }
 
         public async Task<IActionResult> Index()
@@ -34,10 +36,12 @@ namespace NewsSite.Areas.Administration.Controllers
             };
             return View(model);
         }
-        //public IActionResult Scrapper()
-        //{
-        //    scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
-        //    return Redirect("/Editor/All");
-        //}
+
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Scrapper()
+        {
+            await scrapperService.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
+            return RedirectToAction("All", "Editor");
+        }
     }
 }

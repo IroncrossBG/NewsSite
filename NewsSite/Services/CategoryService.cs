@@ -17,6 +17,17 @@ namespace NewsSite.Services
             this.db = db;
         }
 
+        public async Task AddAsync(string name, string description)
+        {
+            var newCategory = new Category
+            {
+                Name = name,
+                Description = description
+            };
+
+            await db.AddAsync(newCategory);
+            await db.SaveChangesAsync();
+        }
         public async Task<Category> GetByIdAsync(int id, bool returnArticles)
         {
             var category = await this.db.Categories.FirstOrDefaultAsync(x => x.Id == id);

@@ -21,14 +21,17 @@ namespace NewsSite.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string categoryName)
         {
             var category = await categoryService.GetByNameAsync(categoryName, true);
-            var articles = category.Articles.OrderByDescending(x => x.CreatedOn).Take(5).ToList();
-            var resultModel = new LastArticlesViewModel
+            if (category != null)
             {
-                Title = category.Name,
-                Articles = articles
-            };
-
-            return View(resultModel);
+                var articles = category.Articles.OrderByDescending(x => x.CreatedOn).Take(5).ToList();
+                var resultModel = new LastArticlesViewModel
+                {
+                    Title = category.Name,
+                    Articles = articles
+                };
+                return View(resultModel);
+            }
+            return View();
         }
     }
 }

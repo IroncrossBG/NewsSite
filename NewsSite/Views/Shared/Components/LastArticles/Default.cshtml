@@ -1,18 +1,21 @@
 ﻿@model NewsSite.Models.View.LastArticlesViewModel
 
-<div class="row w-100">
-    <h5 class="componentTitle w-100 m-0"><i class="far fa-list-alt ml-1"></i> @Model.Title</h5>
-    <div class="card-group w-100">
-        @foreach (var article in Model.Articles)
-        {
-            <div class="card overflow-hidden">
-                <img src="@article.ImageUrl" class="card-img-top" style="height:15vh; object-fit: cover; object-position: 50% 0;"/>
-                <div class="card-body">
-                    <p class="card-title mainText">@article.Title</p>
-                    <p class="card-text text-muted">@article.CreatedOn.ToString("dd.MM.yyyy | HH:mm")</p>
-                    <a class="stretched-link" asp-controller="Articles" asp-action="Id" asp-route-id="@article.Id"></a>
+@if (Model != null)
+{
+    <div class="row w-100">
+        <h5 class="componentTitle w-100 m-0"><i class="far fa-list-alt ml-1"></i> @Model.Title</h5>
+        <div class="card-group shadow" w-100">
+            @foreach (var article in Model.Articles)
+            {
+                <div class="card overflow-hidden">
+                    <img src="@article.ImageUrl" class="card-img-top" style="height:15vh; object-fit: cover; object-position: 50% 0;" />
+                    <div class="card-body">
+                        <p class="card-title mainText">@article.Title</p>
+                        <p class="card-text text-muted">@article.CreatedOn.ToString("dd.MM.yyyy | HH:mm")</p>
+                        <a class="stretched-link" asp-controller="Articles" asp-action="Id" asp-route-id="@article.Id"></a>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+}

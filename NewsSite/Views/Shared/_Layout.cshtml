@@ -49,22 +49,98 @@
             </div>
         </nav>
 
-        <nav class="navbar category navbar-expand py-0">
-            <div class="container w-100">
-                <ul class="navbar-nav mx-auto w-100">
-                    <li class="nav-item" style="width:2.5%">
-                        <a class="nav-link category active py-3" href="/"><i class="fas fa-home"></i></a>
-                    </li>
 
-                    @foreach (var item in categories)
-                    {
-                        <li class="nav-item dropdown overflow-hidden w-auto">
-                            <a class="nav-link mainNav font-weight-bold py-3" asp-controller="Categories" asp-action="Index" asp-route-name="@item.Name">@item.Name.ToUpper()</a>
+        <nav class="navbar category shadow navbar-expand-lg p-0">
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="container w-100">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link category active py-3" href="/"><i class="fas fa-home"></i></a>
                         </li>
-                    }
-                </ul>
+
+                        <li class="nav-item dropdown w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                БЪЛГАРИЯ
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="България">Новини</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Политика">Политика</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Икономика">Икономика</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Финанси">Финанси</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Образование">Образование</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Здравеопазване">Здравеопазване</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Общество">Общество</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Криминални">Криминални</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" href="" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                СВЯТ
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Свят">Новини</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Балкани">Балкани</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Европа">Европа</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Америка">Америка</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Азия">Азия</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Африка">Африка</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Други">Други</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3 " asp-controller="Categories" asp-action="Index" asp-route-name="Региони">
+                                РЕГИОНИ
+                            </a>
+                        </li>
+
+                        <li class="nav-item w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3 " asp-controller="Categories" asp-action="Index" asp-route-name="Мнения">
+                                МНЕНИЯ
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item dropdown w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" href="" id="navbarDropdownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                КУЛТУРА
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Култура">Новини</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Театър">Театър</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Книги">Книги</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Филми">Филми</a>
+                                <a class="dropdown-item" asp-controller="Categories" asp-action="Index" asp-route-name="Музика">Музика</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" asp-controller="Categories" asp-action="Index" asp-route-name="Спорт">
+                                СПОРТ
+                            </a>
+                        </li>
+
+                        <li class="nav-item w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" asp-controller="Categories" asp-action="Index" asp-route-name="Наука">
+                                НАУКА
+                            </a>
+                        </li>
+
+                        <li class="nav-item w-auto">
+                            <a class="nav-link mainNav font-weight-bold py-3" asp-controller="Categories" asp-action="Index" asp-route-name="Лайфстайл">
+                                ЛАЙФСТАЙЛ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
+
     </header>
 
     <div class="container">

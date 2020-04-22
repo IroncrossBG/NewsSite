@@ -84,3 +84,13 @@ body {
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}

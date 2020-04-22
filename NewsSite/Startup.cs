@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +34,6 @@ namespace NewsSite
 
             string[] roles = { "Administrator", "Editor", "Moderator", "Member" };
 
-            //ADD ROLES
             foreach (var role in roles)
             {
                 Task<bool> hasRole = roleManager.RoleExistsAsync(role);
@@ -47,10 +46,8 @@ namespace NewsSite
                 }
             }
         }
-
         private void CreateAdminAccount(IServiceProvider serviceProvider)
         {
-
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
             Task<IdentityResult> roleResult;
@@ -75,6 +72,47 @@ namespace NewsSite
             }
         }
 
+        private void CreateCategories(IServiceProvider serviceProvider)
+        {
+            var categories = new List<string>()
+            {
+                "България",
+                "Политика",
+                "Икономика",
+                "Финанси",
+                "Образование",
+                "Здравеопазване",
+                "Общество",
+                "Криминални",
+                "Свят",
+                "Балкани",
+                "Европа",
+                "Америка",
+                "Азия",
+                "Африка",
+                "Други",
+                "Мнения",
+                "Региони",
+                "Култура",
+                "Театър",
+                "Книги",
+                "Филми",
+                "Музика",
+                "Спорт",
+                "Наука",
+                "Лайфстайл"
+            };
+            var db = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            var categoryCount = db.Categories.Count();
+            if (categoryCount == 0)
+            {
+                foreach (var item in categories)
+                {
+                    db.Categories.Add(new Category() { Name = item, Description = item });
+                }
+                db.SaveChanges();
+            }
+        }
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
@@ -133,10 +171,10 @@ namespace NewsSite
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
                 context.Database.Migrate();
+                CreateRoles(serviceProvider);
+                CreateAdminAccount(serviceProvider);
+                CreateCategories(serviceProvider);
             }
-
-            CreateRoles(serviceProvider);
-            CreateAdminAccount(serviceProvider);
         }
     }
 }

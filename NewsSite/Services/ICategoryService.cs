@@ -8,6 +8,7 @@ namespace NewsSite.Services
 {
     public interface ICategoryService
     {
+        Task AddAsync(string name, string description);
 
         Task<Category> GetByIdAsync(int id, bool returnArticles);
 
