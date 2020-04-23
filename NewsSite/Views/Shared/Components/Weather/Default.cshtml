@@ -2,7 +2,7 @@
 
 <div class="row w-100">
 
-    <div class="card shadow mb-3 w-100">
+    <div class="card shadow mb-3 w-100 overflow-hidden"">
         <div class="card-header">ВРЕМЕТО</div>
         <div class="card-body">
 
@@ -11,7 +11,7 @@
             <p class="card-text">@Model.Weather.description</p>
             <div class="d-flex">
                 <img src="@Model.IconUrl">
-                <p class="card-text display-4 font-weight-bold">@Model.Temperature°</p>
+                <p class="card-text display-4 font-weight-bold">@Model.Temperature°</p>           
             </div>
             <p class="card-text">
                 <i class="fa fa-thermometer-half" style="color:goldenrod"></i>
@@ -27,10 +27,7 @@
                 <i class="fa fa-thermometer-full" style="color: red;"></i>
                 Максимална: @Model.MaxTemperature°
             </p>
-            <p class="card-text">
-                <i class="fa fa-angle-double-down" style="color: #ccccff;"></i>
-                Налягане: @Model.Pressure hPa
-            </p>
+
             <p class="card-text">
                 <i class="fa fa-tint" style="color: #33b5e5;"></i>
                 Влажност: @Model.Humidity%

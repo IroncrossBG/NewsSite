@@ -13,13 +13,16 @@
             <div class="col-9 pr-2 pl-0 w-100 float-left leftColumn">
                 <div class="row w-100">
                     <h1>@Model.Title</h1>
-                    <p class="lead w-100"><a href="#">@Model.Author</a></p>
+                    <p class="lead w-100">@Model.Author</p>
                     <p class="m-0"><i class="far fa-clock"></i> @Model.CreatedOn.ToString("dd.MM.yyyy | HH.mm") | <i class="far fa-eye"></i> @Model.Views</p>
                 </div>
                 <hr class="row w-100" />
-                <div class="row w-100" style="height:80vh;">
-                    <img class="img-fluid rounded w-100 h-100" src="@Model.ImageUrl" style="object-fit: cover; object-position: 50% 0;">
-                </div>
+                @if (!string.IsNullOrEmpty(@Model.ImageUrl))
+                {
+                    <div class="row w-100" style="height:80vh;">
+                        <img class="img-fluid rounded w-100 h-100" src="@Model.ImageUrl" style="object-fit: cover; object-position: 50% 0;">
+                    </div>
+                }
                 <div class="row w-100" style="font-size:17px;">
                     <hr />
                     @Html.Raw(sanitizer.Sanitize(Model.Content))
