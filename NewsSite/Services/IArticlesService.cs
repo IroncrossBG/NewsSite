@@ -16,7 +16,7 @@ namespace NewsSite.Services
 
         Task IncreaseViewsAsync(int id);
 
-        Task<Article> GetByIdAsync(int id);
+        Article GetByIdAsync(int id);
 
         Task<List<Article>> GetAllAsync();
     }

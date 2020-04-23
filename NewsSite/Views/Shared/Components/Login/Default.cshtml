@@ -9,7 +9,7 @@
         }
         else if (User.IsInRole("Editor"))
         {
-            <a class="dropdown-item" href="#"><i class="fas fa-pen-fancy"></i> Редакция</a>
+            <a class="dropdown-item" asp-area="Administration" asp-controller="Main" asp-action="Index"><i class="fas fa-pen-fancy"></i> Редакция</a>
         }
         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fa fa-user-circle" aria-hidden="true"></i> Профил</a>
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

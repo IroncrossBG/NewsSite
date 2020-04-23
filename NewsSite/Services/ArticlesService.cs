@@ -66,13 +66,13 @@ namespace NewsSite.Services
             if (article != null)
             {
                 article.Views += 1;
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
             }
         }
 
-        public async Task<Article> GetByIdAsync(int id)
+        public Article GetByIdAsync(int id)
         {
-            var article = await this.db.Articles.Select(x => new Article
+            var article = this.db.Articles.Select(x => new Article
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -95,7 +95,7 @@ namespace NewsSite.Services
                     User = y.User,
                 }).ToArray()
             })
-            .FirstOrDefaultAsync(x => x.Id == id);
+            .FirstOrDefault(x => x.Id == id);
             if (article == null)
             {
                 return null;

@@ -50,7 +50,6 @@ namespace NewsSite
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            Task<IdentityResult> roleResult;
 
             Task<IdentityUser> adminUser = userManager.FindByNameAsync("admin");
             adminUser.Wait();

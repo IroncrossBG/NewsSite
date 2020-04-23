@@ -53,7 +53,7 @@ namespace NewsSite.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var article = await articlesService.GetByIdAsync(id);
+            var article = articlesService.GetByIdAsync(id);
             return View("Create", new CreateEditArticleInputModel
             {
                 Id = article.Id,

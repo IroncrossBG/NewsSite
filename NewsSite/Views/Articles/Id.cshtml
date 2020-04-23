@@ -10,9 +10,7 @@
 <body>
     <div class="container">
         <div class="container-fluid p-0 mt-1 mb-3">
-
-            <!-- Post Content Column -->
-            <div class="col-9 pr-2 pl-0 float-left leftColumn">
+            <div class="col-9 pr-2 pl-0 w-100 float-left leftColumn">
                 <div class="row w-100">
                     <h1>@Model.Title</h1>
                     <p class="lead w-100"><a href="#">@Model.Author</a></p>
@@ -22,9 +20,9 @@
                 <div class="row w-100" style="height:80vh;">
                     <img class="img-fluid rounded w-100 h-100" src="@Model.ImageUrl" style="object-fit: cover; object-position: 50% 0;">
                 </div>
-                <div class="row w-100">
+                <div class="row w-100" style="font-size:17px;">
                     <hr />
-                    <p class="lead">@Html.Raw(sanitizer.Sanitize(Model.Content))</p>
+                    @Html.Raw(sanitizer.Sanitize(Model.Content))
                 </div>
                 <div class="row w-100">
                     @if (SignInManager.IsSignedIn(User))
@@ -78,11 +76,12 @@
                     }
                 </div>
             </div>
-        </div>
 
-        <div class="col-3 p-0 float-right rightColumn">
-            <vc:search></vc:search>
-            <vc:top-articles count="10"></vc:top-articles>
+
+            <div class="col-3 p-0 float-right rightColumn">
+                <vc:search></vc:search>
+                <vc:top-articles count="10"></vc:top-articles>
+            </div>
         </div>
     </div>
 </body>

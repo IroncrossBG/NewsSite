@@ -29,7 +29,7 @@ namespace NewsSite.Controllers
         [HttpGet]
         public async Task<IActionResult> Id(int id)
         {
-            var article = await articlesService.GetByIdAsync(id);
+            var article = articlesService.GetByIdAsync(id);
             if (article == null)
             {
                 return View("ErrorStatus", 404);

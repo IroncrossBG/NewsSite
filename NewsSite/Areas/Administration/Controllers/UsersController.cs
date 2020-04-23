@@ -59,7 +59,7 @@ namespace NewsSite.Areas.Administration.Controllers
             var user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
-                userManager.DeleteAsync(user);
+                await userManager.DeleteAsync(user);
             }
             return View("Index");
         }
