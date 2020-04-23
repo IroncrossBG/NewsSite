@@ -1,7 +1,22 @@
 ﻿@model int
 
-@switch (Model)
-   {
-    case 404: <img src="~/404-not-found.jpg" /> break;
-    case 500: <img src="~/500-internal-server-error.jpg" /> break;
-}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div style="text-align: center; padding-top:30px; padding-bottom:30px;">
+            @switch (Model)
+            {
+                case 404:
+                    <img src="~/404-not-found.jpg" /> 
+                    <h1>404 Страницата не беше намерена.</h1>
+                    break;
+                case 500: 
+                    <img src="~/500-internal-server-error.jpg" />
+                    <h1>500 Сървърна грешка</h1>
+                    break;
+            }
+        </div>
+    </div>
+</div>

@@ -46,11 +46,6 @@ nav.navbar {
         background-color: gray;
     }
 
-    a.nav-link.social.mobile:hover {
-        color: #a4c639;
-        background-color: black;
-    }
-
     a.nav-link.social.facebook:hover {
         color: #3b5998;
         background-color: black;
