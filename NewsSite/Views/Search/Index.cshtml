@@ -4,16 +4,16 @@
 <h1>Намерени: @Model.Count</h1>
 <table class="table table-hover table-bordered table">
     <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Created</th>
+        <th>Заглавие</th>
+        <th>Автор</th>
+        <th>Качена на</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td><a asp-controller="Articles" asp-action="Id" asp-route-id="@item.Id">@item.Title</a></td>
             <td>@item.Author</td>
-            <td>@item.CreatedOn</td>
+            <td>@item.CreatedOn.ToString("dd.MM.yyyy | HH:mm")</td>
         </tr>
     }
 
