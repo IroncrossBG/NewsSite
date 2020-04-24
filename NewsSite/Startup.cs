@@ -15,6 +15,7 @@ using NewsSite.Data;
 using NewsSite.Services;
 using NewsSite.Models.Data;
 using NewsSite.Scrappers;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace NewsSite
 {
@@ -131,6 +132,7 @@ namespace NewsSite
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IScrapperService, ScrapperService>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddSingleton<IIpInfoService, IpInfoService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddSingleton<IExchangesService, ExchangesService>();
