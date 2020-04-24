@@ -13,10 +13,12 @@
     public class ExchangesViewComponent : ViewComponent
     {
         private readonly IExchangesService exchangesService;
+
         public ExchangesViewComponent(IExchangesService exchangesService)
         {
             this.exchangesService = exchangesService;
         }
+
         public async Task<IViewComponentResult> InvokeAsync(string filter)
         {
             var baseExchange = new List<List<string>>();
@@ -60,8 +62,10 @@
             {
                 modelExchanges = modelExchanges.OrderBy(x => listFilter.IndexOf(x.Code)).ToList();
             }
+
             return View(modelExchanges);
         }
+
         static protected ExchangesViewModel ConvertToModel(List<string> exchange)
         {
             var result = new ExchangesViewModel

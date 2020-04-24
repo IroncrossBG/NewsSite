@@ -40,8 +40,10 @@
                     ImageUrl = model.ImageUrl,
                     CategoryId = model.CategoryId,
                 });
+
                 return RedirectToAction("All");
             }
+
             return View(model);
         }
 

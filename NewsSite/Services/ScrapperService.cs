@@ -14,12 +14,14 @@
         private readonly ApplicationDbContext db;
         private readonly ICategoryService categoryService;
         private readonly SegabgScrapper segabgScrapper;
+
         public ScrapperService(ApplicationDbContext db, ICategoryService categoryService)
         {
             this.db = db;
             this.categoryService = categoryService;
             segabgScrapper = new SegabgScrapper();
         }
+
         public async Task RunSegaScrapper(DateTime from, DateTime to)
         {
             var articlesRaw = await segabgScrapper.Run(from, to);
@@ -66,8 +68,10 @@
                         resultArticle.CategoryId = categoryService.GetByNameAsync("Други", false).Result.Id;
                         break;
                 }
+
                 await db.AddAsync(resultArticle);
             }
+
             await db.SaveChangesAsync();
         }
     }

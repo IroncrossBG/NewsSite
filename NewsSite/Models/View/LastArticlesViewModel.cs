@@ -9,6 +9,7 @@
     public class LastArticlesViewModel
     {
         public string Title { get; set; }
+
         public virtual IEnumerable<Article> Articles { get; set; }
     }
 }

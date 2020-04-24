@@ -16,6 +16,7 @@
         {
             this.db = db;
         }
+
         public List<Article> Search(string input)
         {
             var searchQuery = input.Split(' ').Select(x => x.ToLower()).ToList();

@@ -12,6 +12,7 @@
     public class CategoryService : ICategoryService
     {
         private readonly ApplicationDbContext db;
+
         public CategoryService(ApplicationDbContext db)
         {
             this.db = db;
@@ -28,6 +29,7 @@
             await db.AddAsync(newCategory);
             await db.SaveChangesAsync();
         }
+
         public async Task<Category> GetByIdAsync(int id, bool returnArticles)
         {
             var category = await this.db.Categories.FirstOrDefaultAsync(x => x.Id == id);
@@ -35,6 +37,7 @@
             {
                 category.Articles = await this.db.Articles.Where(a => category.Id == a.CategoryId).ToArrayAsync();
             }
+
             return category;
         }
 
@@ -51,6 +54,7 @@
                 {
                     category.Articles = await this.db.Articles.Where(a => category.Id == a.CategoryId).ToArrayAsync();
                 }
+
                 return category;
             }
         }

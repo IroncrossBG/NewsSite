@@ -28,13 +28,6 @@
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-        }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
@@ -47,6 +40,7 @@
                         return RedirectToPage("./ForgotPasswordConfirmation");
                     }
                 }
+
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
@@ -64,6 +58,13 @@
             }
 
             return Page();
+        }
+
+        public class InputModel
+        {
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
         }
     }
 }

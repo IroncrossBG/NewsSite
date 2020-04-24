@@ -12,10 +12,12 @@
     public class CommentsService : ICommentsService
     {
         private readonly ApplicationDbContext db;
+
         public CommentsService(ApplicationDbContext db)
         {
             this.db = db;
         }
+
         public async Task CreateAsync(CreateEditCommentInputModel model)
         {
             var comment = new Comment

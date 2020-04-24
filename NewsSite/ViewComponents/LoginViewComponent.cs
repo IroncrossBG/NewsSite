@@ -18,6 +18,7 @@
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
             return View();

@@ -44,6 +44,7 @@
                     articles.Add(result);
                 }             
             }
+
             foreach (var link in bulgariaLinks)
             {
                 var result = await ScrapeArticle(link, "bulgaria");
@@ -53,9 +54,9 @@
                     articles.Add(result);
                 }
             }
+
             foreach (var link in economyLinks)
             {
-
                 var result = await ScrapeArticle(link, "economy");
                 var publishedDate = DateTime.Parse(result["DatePublished"]);
                 if (publishedDate >= fromTime && publishedDate <= toTime)
@@ -63,9 +64,9 @@
                     articles.Add(result);
                 }
             }
+
             foreach (var link in foreignLinks)
             {
-
                 var result = await ScrapeArticle(link, "foreign");
                 var publishedDate = DateTime.Parse(result["DatePublished"]);
                 if (publishedDate >= fromTime && publishedDate <= toTime)
@@ -73,6 +74,7 @@
                     articles.Add(result);
                 }
             }
+
             foreach (var link in cultureLinks)
             {
                 var result = await ScrapeArticle(link, "culture");
@@ -82,6 +84,7 @@
                     articles.Add(result);
                 }
             }
+
             foreach (var link in educationLinks)
             {
                 var result = await ScrapeArticle(link, "education");
@@ -91,6 +94,7 @@
                     articles.Add(result);
                 }
             }
+
             foreach (var link in healthLinks)
             {
                 var result = await ScrapeArticle(link, "health");
@@ -122,6 +126,7 @@
                 {
                     result = string.Concat("https://www.segabg.com", result);
                 }
+
                 resultLinks.Add(result);
             }
 
@@ -173,7 +178,7 @@
 
             if (resultImageUrl != null)
             {
-                result.Add("ImageUrl", resultImageUrl.GetAttributeValue("href", ""));
+                result.Add("ImageUrl", resultImageUrl.GetAttributeValue("href", String.Empty));
             }
             else
             {

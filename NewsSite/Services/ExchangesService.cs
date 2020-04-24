@@ -11,6 +11,7 @@
         static readonly HttpClient client = new HttpClient();
         static readonly BnbCourses courses = new BnbCourses(client);
         static readonly Dictionary<string, List<List<string>>> exchanges = new Dictionary<string, List<List<string>>>();
+
         public async Task Add(string url)
         {
             string date = DateTime.Now.ToString("dd.MM.yyyy");
@@ -27,6 +28,7 @@
                 exchanges[date].AddRange(await courses.GetExchangesAsync(url));
             }
         }
+
         public List<List<string>> Get(string date)
         {
             if (exchanges.ContainsKey(date))

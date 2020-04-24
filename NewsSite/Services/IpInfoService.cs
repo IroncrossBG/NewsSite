@@ -12,6 +12,7 @@
     {
         static readonly HttpClient client = new HttpClient();
         static readonly IPinfo ipInfo = new IPinfo(client);
+
         public async Task<IPInfoRootObject> GetIpInfoAsync(string ip, string token)
         {
             return await ipInfo.GetIpDataAsync(ip, token);

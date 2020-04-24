@@ -41,7 +41,6 @@
             }
 
             Email = email;
-            // Once you add a real email sender, you should remove this code that lets you confirm the account
 
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -51,7 +50,6 @@
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
-
 
             return Page();
         }

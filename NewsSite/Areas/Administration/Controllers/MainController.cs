@@ -1,5 +1,4 @@
-﻿
-namespace NewsSite.Areas.Administration.Controllers
+﻿namespace NewsSite.Areas.Administration.Controllers
 {
     using System;
     using System.Collections.Generic;

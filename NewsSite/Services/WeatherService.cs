@@ -5,11 +5,13 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using NewsSite.API;
+
     public class WeatherService : IWeatherService
     {
         static readonly HttpClient client = new HttpClient();
         static readonly OpenWeatherMap weather = new OpenWeatherMap(client);
         static readonly Dictionary<string, DictionaryWeatherModel> weatherData = new Dictionary<string, DictionaryWeatherModel>();
+
         public async Task<OpenWeatherMapRootObject> GetWeatherData(string cityName, string apiKey)
         {
             if (weatherData.ContainsKey(cityName))
@@ -26,8 +28,10 @@
                         };
                         return rootObject;
                     }
+
                     return null;
                 }
+
                 return weatherData[cityName].RootObject;
             }
             else
@@ -44,6 +48,7 @@
                         });
                     return rootObject;
                 }
+
                 return null;
             }
         }

@@ -51,6 +51,5 @@
         public string postal { get; set; }
 
         public string timezone { get; set; }
-
     }
 }

@@ -15,6 +15,7 @@
         {
             this.searchService = searchService;
         }
+
         [HttpGet]
         public IActionResult Index(string q)
         {

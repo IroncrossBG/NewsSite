@@ -1,5 +1,4 @@
-﻿
-namespace NewsSite.Models.Data
+﻿namespace NewsSite.Models.Data
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +12,7 @@ namespace NewsSite.Models.Data
         {
             User = new IdentityUser();
         }
+
         public int Id { get; set; }
 
         public string Content { get; set; }

@@ -21,6 +21,7 @@
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -51,6 +52,7 @@
                     return RedirectToAction("Index");
                 }
             }
+
             return View(model);
         }
 
@@ -61,6 +63,7 @@
             {
                 await userManager.DeleteAsync(user);
             }
+
             return View("Index");
         }
     }

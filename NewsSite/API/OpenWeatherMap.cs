@@ -32,8 +32,7 @@
                 else
                 {
                     throw new Exception("Invalid request");
-                }
-                
+                }           
             }
             catch (HttpRequestException e)
             {
@@ -42,12 +41,12 @@
             }
         }
     }
+
     public class Coord
     {
         public double lon { get; set; }
 
         public double lat { get; set; }
-
     }
 
     public class Weather
@@ -74,7 +73,6 @@
         public int pressure { get; set; }
 
         public int humidity { get; set; }
-
     }
 
     public class Wind
@@ -82,13 +80,11 @@
         public double speed { get; set; }
 
         public int deg { get; set; }
-
     }
 
     public class Clouds
     {
         public int all { get; set; }
-
     }
 
     public class Sys
@@ -102,7 +98,6 @@
         public int sunrise { get; set; }
 
         public int sunset { get; set; }
-
     }
 
     public class OpenWeatherMapRootObject
@@ -132,6 +127,5 @@
         public string name { get; set; }
 
         public int cod { get; set; }
-
     }
 }

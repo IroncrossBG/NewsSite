@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedArticles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

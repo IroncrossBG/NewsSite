@@ -8,7 +8,9 @@
     public interface IExchangesService
     {
         Task Add(string url);
+
         List<List<string>> Get(string date);
+
         bool Check(string date);
     }
 }

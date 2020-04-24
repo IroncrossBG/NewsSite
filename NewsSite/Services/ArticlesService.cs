@@ -13,10 +13,12 @@
     public class ArticlesService : IArticlesService
     {
         private readonly ApplicationDbContext db;
+
         public ArticlesService(ApplicationDbContext db)
         {
             this.db = db;
         }
+
         public async Task AddAsync(CreateEditArticleInputModel model)
         {
             var newArticle = new Article
@@ -60,6 +62,7 @@
                 await this.db.SaveChangesAsync();
             }
         }
+
         public async Task IncreaseViewsAsync(int id)
         {
             var article = await this.db.Articles.FirstOrDefaultAsync(x => x.Id == id);
@@ -100,9 +103,9 @@
             {
                 return null;
             }
+
             return article;
         }
-
 
         public async Task<List<Article>> GetAllAsync()
         {

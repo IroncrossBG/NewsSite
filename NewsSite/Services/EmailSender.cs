@@ -17,6 +17,7 @@
         {
             this.configuration = configuration;
         }
+
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             var apiKey = configuration.GetSection("APIKeys").GetSection("SendGrid").Value;

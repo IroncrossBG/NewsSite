@@ -6,6 +6,7 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
+
     public class BnbCourses
     {
         private readonly HttpClient client;
@@ -29,6 +30,7 @@
             {
                 throw new Exception("No courses!");
             }
+
             foreach (var childTr in trList)
             {
                 var resultCourse = new List<string>();
@@ -42,15 +44,17 @@
                         }
                         else
                         {
-                            resultCourse.Add("");
+                            resultCourse.Add(String.Empty);
                         }
                     }
                 }
+
                 if (resultCourse.Count == 5)
                 {
                     coursesRaw.Add(resultCourse);
                 }                
             }
+
             return coursesRaw;
         }
     }
