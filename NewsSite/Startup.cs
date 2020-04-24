@@ -51,6 +51,7 @@ namespace NewsSite
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
 
             Task<IdentityUser> adminUser = userManager.FindByNameAsync("admin");
             adminUser.Wait();
@@ -58,10 +59,10 @@ namespace NewsSite
             if (adminUser.Result == null)
             {
                 IdentityUser administrator = new IdentityUser();
-                administrator.Email = "admin@bgnovini.com";
-                administrator.UserName = "admin";
+                administrator.Email = configuration.GetSection("Admin").GetSection("Email").Value;
+                administrator.UserName = configuration.GetSection("Admin").GetSection("Username").Value;
 
-                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "Admin!23");
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, configuration.GetSection("Admin").GetSection("Password").Value);
                 newUser.Wait();
 
                 if (newUser.Result.Succeeded)
@@ -120,7 +121,7 @@ namespace NewsSite
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddUserManager<UserManager<IdentityUser>>()
