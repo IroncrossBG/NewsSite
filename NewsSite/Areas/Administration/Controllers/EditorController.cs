@@ -54,16 +54,18 @@
         public async Task<IActionResult> Edit(int id)
         {
             var article = articlesService.GetByIdAsync(id);
-            return View("Create", new CreateEditArticleInputModel
-            {
-                Id = article.Id,
-                Title = article.Title,
-                Author = article.Author,
-                Subtitle = article.Subtitle,
-                Content = article.Content,
-                ImageUrl = article.ImageUrl,
-                CategoryId = article.CategoryId
-            });
+            return View(
+                "Create",
+                new CreateEditArticleInputModel
+                {
+                    Id = article.Id,
+                    Title = article.Title,
+                    Author = article.Author,
+                    Subtitle = article.Subtitle,
+                    Content = article.Content,
+                    ImageUrl = article.ImageUrl,
+                    CategoryId = article.CategoryId
+                });
         }
 
         [HttpPost]

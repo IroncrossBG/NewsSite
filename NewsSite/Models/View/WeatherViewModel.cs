@@ -1,7 +1,7 @@
-﻿using NewsSite.API;
-
-namespace NewsSite.Models.View
+﻿namespace NewsSite.Models.View
 {
+    using NewsSite.API;
+
     public class WeatherViewModel
     {
         public string City { get; set; }

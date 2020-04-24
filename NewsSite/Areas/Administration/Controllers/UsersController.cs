@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using NewsSite.Areas.Administration.Models;
-
-namespace NewsSite.Areas.Administration.Controllers
+﻿namespace NewsSite.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using NewsSite.Areas.Administration.Models;
+
     [Area("Administration")]
     [Authorize(Roles = "Administrator")]
     public class UsersController : Controller

@@ -117,7 +117,7 @@
 
             for (int i = 0; i < mainClass.Count; i++)
             {
-                string result = mainClass[i].GetAttributeValue("href", "");
+                string result = mainClass[i].GetAttributeValue("href", String.Empty);
                 if (i != 0)
                 {
                     result = string.Concat("https://www.segabg.com", result);
@@ -150,7 +150,7 @@
             }
             else
             {
-                result.Add("Title", "");
+                result.Add("Title", String.Empty);
             }
 
             if (resultSubtitle != null)
@@ -159,7 +159,7 @@
             }
             else
             {
-                result.Add("Subtitle", "");
+                result.Add("Subtitle", String.Empty);
             }
 
             if (resultAuthor != null)
@@ -168,7 +168,7 @@
             }
             else
             {
-                result.Add("Author", "");
+                result.Add("Author", String.Empty);
             }
 
             if (resultImageUrl != null)
@@ -177,7 +177,7 @@
             }
             else
             {
-                result.Add("ImageUrl", "");
+                result.Add("ImageUrl", String.Empty);
             }
 
             if (resultContent != null)
@@ -186,7 +186,7 @@
             }
             else
             {
-                result.Add("Content", "");
+                result.Add("Content", String.Empty);
             }
 
             if (resultDatePublish != null)
@@ -195,7 +195,7 @@
             }
             else
             {
-                result.Add("DatePublished", "");
+                result.Add("DatePublished", String.Empty);
             }
 
             if (resultDateModified != null)
@@ -204,7 +204,7 @@
             }
             else
             {
-                result.Add("DateModified", "");
+                result.Add("DateModified", String.Empty);
             }
 
             result.Add("Category", category);

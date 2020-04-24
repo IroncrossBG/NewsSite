@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace NewsSite.Data.Migrations
+﻿namespace NewsSite.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class CommentFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

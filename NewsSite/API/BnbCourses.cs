@@ -42,7 +42,7 @@
                         }
                         else
                         {
-                            resultCourse.Add(String.Empty);
+                            resultCourse.Add("");
                         }
                     }
                 }

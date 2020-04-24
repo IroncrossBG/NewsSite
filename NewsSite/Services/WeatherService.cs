@@ -35,11 +35,13 @@
                 var rootObject = await weather.GetWeatherDataAsync(cityName, apiKey);
                 if (rootObject.cod == 200)
                 {
-                    weatherData.Add(cityName, new DictionaryWeatherModel
-                    {
-                        ExpiresOn = DateTime.UtcNow.AddHours(1),
-                        RootObject = rootObject
-                    });
+                    weatherData.Add(
+                        cityName,
+                        new DictionaryWeatherModel
+                        {
+                            ExpiresOn = DateTime.UtcNow.AddHours(1),
+                            RootObject = rootObject
+                        });
                     return rootObject;
                 }
                 return null;

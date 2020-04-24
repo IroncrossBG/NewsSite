@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NewsSite.Models.Data
+﻿namespace NewsSite.Models.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Threading.Tasks;
     public class Article
     {
         public Article()

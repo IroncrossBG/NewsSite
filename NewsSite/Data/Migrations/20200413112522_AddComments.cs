@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace NewsSite.Data.Migrations
+﻿namespace NewsSite.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddComments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

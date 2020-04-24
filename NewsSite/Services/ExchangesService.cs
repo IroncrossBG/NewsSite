@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public class ExchangesService : IExchangesService
     {
         static readonly HttpClient client = new HttpClient();
