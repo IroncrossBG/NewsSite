@@ -22,8 +22,6 @@ namespace NewsSite.Models.Data
 
         public virtual IdentityUser User { get; set; }
 
-        public virtual IEnumerable<Vote> Votes { get; set; }
-
         public DateTime CreatedOn { get; set; }
     }
 }
