@@ -61,6 +61,7 @@ namespace NewsSite
                 IdentityUser administrator = new IdentityUser();
                 administrator.Email = configuration.GetSection("Admin").GetSection("Email").Value;
                 administrator.UserName = configuration.GetSection("Admin").GetSection("Username").Value;
+                administrator.EmailConfirmed = true;
 
                 Task<IdentityResult> newUser = userManager.CreateAsync(administrator, configuration.GetSection("Admin").GetSection("Password").Value);
                 newUser.Wait();
