@@ -1,15 +1,15 @@
-﻿using NewsSite.Data;
-using NewsSite.Models.Data;
-using NewsSite.Models.Input;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Linq;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using NewsSite.Data;
+    using NewsSite.Models.Data;
+    using NewsSite.Models.Input;
+
     public class ArticlesService : IArticlesService
     {
         private readonly ApplicationDbContext db;

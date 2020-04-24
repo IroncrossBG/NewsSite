@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NewsSite.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NewsSite.Controllers
+﻿namespace NewsSite.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using NewsSite.Services;
+
     public class CategoriesController : Controller
     {
         private readonly ICategoryService categoryService;

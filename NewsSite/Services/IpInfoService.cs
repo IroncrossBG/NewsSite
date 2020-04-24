@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using NewsSite.API;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using NewsSite.API;
+
     public class IpInfoService : IIpInfoService
     {
         static readonly HttpClient client = new HttpClient();

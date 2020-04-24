@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-
-namespace NewsSite.Areas.Identity.Pages.Account.Manage
+﻿namespace NewsSite.Areas.Identity.Pages.Account.Manage
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

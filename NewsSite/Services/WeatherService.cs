@@ -1,11 +1,10 @@
-﻿using NewsSite.API;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using NewsSite.API;
     public class WeatherService : IWeatherService
     {
         static readonly HttpClient client = new HttpClient();

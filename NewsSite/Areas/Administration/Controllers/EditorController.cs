@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using NewsSite.Models.Input;
-using NewsSite.Services;
-
-namespace NewsSite.Controllers
+﻿namespace NewsSite.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using NewsSite.Models.Input;
+    using NewsSite.Services;
+
     [Area("Administration")]
     [Authorize(Roles = "Administrator, Editor")]
     public class EditorController : Controller

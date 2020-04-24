@@ -1,16 +1,16 @@
-﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NewsSite
+﻿namespace NewsSite
 {
+    using HtmlAgilityPack;
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
     public class BnbCourses
     {
         private readonly HttpClient client;
         private readonly HtmlDocument document;
+
         public BnbCourses(HttpClient client)
         {
             this.client = client;

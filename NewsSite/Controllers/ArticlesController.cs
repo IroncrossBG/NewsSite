@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using NewsSite.Models.Data;
-using NewsSite.Models.Input;
-using NewsSite.Models.View;
-using NewsSite.Services;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace NewsSite.Controllers
+﻿namespace NewsSite.Controllers
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Mvc;
+    using NewsSite.Models.Data;
+    using NewsSite.Models.Input;
+    using NewsSite.Models.View;
+    using NewsSite.Services;
+
     public class ArticlesController : Controller
     {
         private readonly IArticlesService articlesService;

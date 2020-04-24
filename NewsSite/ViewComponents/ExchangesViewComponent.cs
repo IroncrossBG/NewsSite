@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NewsSite.Models.View;
-using NewsSite.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace NewsSite.ViewComponents
+﻿namespace NewsSite.ViewComponents
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using NewsSite.Models.View;
+    using NewsSite.Services;
+
     [ViewComponent(Name = "Exchanges")]
     public class ExchangesViewComponent : ViewComponent
     {

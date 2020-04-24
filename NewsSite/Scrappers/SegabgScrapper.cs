@@ -1,15 +1,15 @@
-﻿using HtmlAgilityPack;
-using NewsSite.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-
-namespace NewsSite.Scrappers
+﻿namespace NewsSite.Scrappers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web;
+    using NewsSite.Models.Data;
+    using HtmlAgilityPack;
+
     public class SegabgScrapper
     {        
         private readonly Dictionary<string, string> categoriesLinks = new Dictionary<string, string>()

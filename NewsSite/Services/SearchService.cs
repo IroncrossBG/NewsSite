@@ -1,13 +1,13 @@
-﻿using NewsSite.Data;
-using NewsSite.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using NewsSite.Data;
+    using NewsSite.Models.Data;
+
     public class SearchService : ISearchService
     {
         private readonly ApplicationDbContext db;

@@ -1,8 +1,8 @@
-﻿using NewsSite.Models.Data;
-using System.Collections.Generic;
-
-namespace NewsSite.Models.View
+﻿namespace NewsSite.Models.View
 {
+    using System.Collections.Generic;
+    using NewsSite.Models.Data;
+
     public class TopArticlesViewModel
     {
         public virtual IEnumerable<Article> TopRead { get; set; }

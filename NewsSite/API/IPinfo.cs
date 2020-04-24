@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NewsSite.API
+﻿namespace NewsSite.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+
     public class IPinfo
     {
         private readonly HttpClient client;
@@ -37,12 +37,20 @@ namespace NewsSite.API
     public class IPInfoRootObject
     {
         public string ip { get; set; }
+
         public string city { get; set; }
+
         public string region { get; set; }
+
         public string country { get; set; }
+
         public string loc { get; set; }
+
         public string org { get; set; }
+
         public string postal { get; set; }
+
         public string timezone { get; set; }
+
     }
 }

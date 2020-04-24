@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-
-namespace NewsSite.ViewComponents
+﻿namespace NewsSite.ViewComponents
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     [ViewComponent(Name = "Login")]
     public class LoginViewComponent : ViewComponent
     {

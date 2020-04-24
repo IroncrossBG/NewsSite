@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using NewsSite.Data;
-using NewsSite.Models.Data;
-using NewsSite.Models.Input;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NewsSite.Services
+﻿namespace NewsSite.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using NewsSite.Data;
+    using NewsSite.Models.Data;
+    using NewsSite.Models.Input;
+
     public class CommentsService : ICommentsService
     {
         private readonly ApplicationDbContext db;

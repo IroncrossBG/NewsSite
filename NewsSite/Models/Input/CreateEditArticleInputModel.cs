@@ -1,9 +1,9 @@
-﻿using NewsSite.Models.Data;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace NewsSite.Models.Input
+﻿namespace NewsSite.Models.Input
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using NewsSite.Models.Data;
+
     public class CreateEditArticleInputModel
     {
         public int Id { get; set; }
