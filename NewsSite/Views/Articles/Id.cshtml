@@ -71,7 +71,7 @@
                                     }
                                     @comment.User.UserName
                                 </p>
-                                <p class="mt-0 font-italic">@comment.CreatedOn.ToString("dd.MM.yyyy | HH.mm")</p>
+                                <p class="mt-0 font-italic">@comment.CreatedOn.ToLocalTime().ToString("dd.MM.yyyy | HH.mm")</p>
                                 <p>@comment.Content</p>
 
                             </div>
