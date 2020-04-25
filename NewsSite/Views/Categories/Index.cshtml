@@ -4,6 +4,7 @@
 @{
     var sanitizer = new HtmlSanitizer();
     ViewData["Title"] = @Model.Name;
+    var articles = Model.Articles.OrderByDescending(x => x.CreatedOn).ToList();
 }
 
 <div class="container">
@@ -15,7 +16,7 @@
                 {
                     <h1>Няма намерени материали</h1>
                 }
-                @foreach (var item in Model.Articles)
+                @foreach (var item in articles)
                 {
                     <div class="card w-100 my-2">
                         <div class="row no-gutters">
