@@ -32,7 +32,7 @@
                                     }
                                     else
                                     {
-                                        <p class="card-text">@Html.Raw(sanitizer.Sanitize(@item.Content.Substring(0, 300) + "..."))</p>
+                                        <p class="card-text">@Html.Raw(sanitizer.Sanitize(@item.Content + "..."))</p>
                                     }
                                     <i class="far fa-clock"></i>
                                     @item.CreatedOn.ToString("dd.MM.yyyy | HH:mm") |
