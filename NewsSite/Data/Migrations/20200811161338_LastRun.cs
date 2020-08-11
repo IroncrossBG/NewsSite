@@ -1,18 +1,32 @@
-﻿namespace NewsSite.Data.Migrations
-{
-    using System;
-    using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class Refactor : Migration
+namespace NewsSite.Data.Migrations
+{
+    public partial class LastRun : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Votes");
+            migrationBuilder.CreateTable(
+                name: "LastRun",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    LastRun = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LastRun", x => x.id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LastRun");
+
             migrationBuilder.CreateTable(
                 name: "Votes",
                 columns: table => new

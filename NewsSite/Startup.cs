@@ -50,6 +50,7 @@
             services.AddSingleton<IIpInfoService, IpInfoService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddSingleton<IExchangesService, ExchangesService>();
+            services.AddHostedService<ScrapperBackgroundService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)

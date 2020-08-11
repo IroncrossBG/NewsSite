@@ -10,8 +10,8 @@ using NewsSite.Data;
 namespace NewsSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200424112500_Refactor")]
-    partial class Refactor
+    [Migration("20200811162414_typofix")]
+    partial class typofix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -306,6 +306,24 @@ namespace NewsSite.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("NewsSite.Models.Info.LastRunInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("LastRun")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LastRun");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
