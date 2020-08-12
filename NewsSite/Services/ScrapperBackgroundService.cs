@@ -25,9 +25,9 @@ namespace NewsSite.Services
                 using (var scope = serviceScopeFactory.CreateScope())
                 {
                     var scrapper = scope.ServiceProvider.GetRequiredService<IScrapperService>();
-                    System.Diagnostics.Debug.WriteLine("Running scrapper...");
+                    Console.WriteLine("Running scrapper..." + DateTime.Now.ToString());
                     await scrapper.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now);
-                    System.Diagnostics.Debug.WriteLine("Finished scrapper...");
+                    Console.WriteLine("Finished scrapper..." + DateTime.Now.ToString());
                 }
 
                 await Task.Delay(1800000, stoppingToken);
