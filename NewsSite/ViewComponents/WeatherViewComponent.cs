@@ -29,7 +29,7 @@
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             var weather = new OpenWeatherMapRootObject();
 
-            if (ip == "::1" || ip.StartsWith("192"))
+            if (ip == "::1" || ip.StartsWith("192") || ip.StartsWith("127"))
             {
                 weather = await weatherService.GetWeatherData("Sofia", configuration.GetSection("APIKeys").GetSection("OpenWeatherMap").Value);
             }
