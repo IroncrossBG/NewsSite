@@ -28,60 +28,62 @@
             //var lastRun = await db.LastRun.Select(x => x.LastRun).FirstAsync();
             //if (DateTime.Now.Subtract(lastRun).TotalMinutes >= 30 || lastRun == null)
             //{
-                var articlesRaw = await segabgScrapper.Run(from, to);
+            var articlesRaw = await segabgScrapper.Run(from, to);
 
-                foreach (var item in articlesRaw)
+            foreach (var item in articlesRaw)
+            {
+                if (db.Articles.Any(x => x.Title == item["Title"]))
                 {
-                    if (db.Articles.Any(x => x.Title == item["Title"]))
-                    {
-                        continue;
-                    }
-
-                    var resultArticle = new Article();
-                    resultArticle.Title = item["Title"];
-                    resultArticle.Subtitle = item["Subtitle"];
-                    resultArticle.Author = item["Author"];
-                    resultArticle.ImageUrl = item["ImageUrl"];
-                    resultArticle.Content = item["Content"];
-                    resultArticle.CreatedOn = DateTime.Parse(item["DatePublished"]);
-                    resultArticle.ModifiedOn = DateTime.Parse(item["DateModified"]);
-                    switch (item["Category"])
-                    {
-                        case "observer":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Мнения", false).Result.Id;
-                            break;
-                        case "bulgaria":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("България", false).Result.Id;
-                            break;
-                        case "economy":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Икономика", false).Result.Id;
-                            break;
-                        case "foreign":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Свят", false).Result.Id;
-                            break;
-                        case "culture":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Култура", false).Result.Id;
-                            break;
-                        case "education":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Образование", false).Result.Id;
-                            break;
-                        case "health":
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Здравеопазване", false).Result.Id;
-                            break;
-                        default:
-                            resultArticle.CategoryId = categoryService.GetByNameAsync("Други", false).Result.Id;
-                            break;
-                    }
-
-                    await db.AddAsync(resultArticle);
-
-                    var lastRunInfo = new LastRunInfo();
-                    lastRunInfo.Name = "SEGA SCRAPPER";
-                    lastRunInfo.LastRun = DateTime.Now;
-                    await db.AddAsync(lastRunInfo);
+                    continue;
                 }
 
-                await db.SaveChangesAsync();
+                var resultArticle = new Article();
+                resultArticle.Title = item["Title"];
+                resultArticle.Subtitle = item["Subtitle"];
+                resultArticle.Author = item["Author"];
+                resultArticle.ImageUrl = item["ImageUrl"];
+                resultArticle.Content = item["Content"];
+                resultArticle.CreatedOn = DateTime.Parse(item["DatePublished"]);
+                resultArticle.ModifiedOn = DateTime.Parse(item["DateModified"]);
+                Category category = new Category();
+                switch (item["Category"])
+                {
+                    case "observer":
+                        category = await categoryService.GetByNameAsync("Мнения", false);
+                        break;
+                    case "bulgaria":
+                        category = await categoryService.GetByNameAsync("България", false);
+                        break;
+                    case "economy":
+                        category = await categoryService.GetByNameAsync("Икономика", false);
+                        break;
+                    case "foreign":
+                        category = await categoryService.GetByNameAsync("Свят", false);
+                        break;
+                    case "culture":
+                        category = await categoryService.GetByNameAsync("Култура", false);
+                        break;
+                    case "education":
+                        category = await categoryService.GetByNameAsync("Образование", false);
+                        break;
+                    case "health":
+                        category = await categoryService.GetByNameAsync("Здравеопазване", false);
+                        break;
+                    default:
+                        category = await categoryService.GetByNameAsync("Други", false);
+                        break;
+                }
+                resultArticle.CategoryId = category.Id;
+
+                await db.AddAsync(resultArticle);
+
+                var lastRunInfo = new LastRunInfo();
+                lastRunInfo.Name = "SEGA SCRAPPER";
+                lastRunInfo.LastRun = DateTime.Now;
+                await db.AddAsync(lastRunInfo);
+            }
+
+            await db.SaveChangesAsync();
             //}    
         }
     }
