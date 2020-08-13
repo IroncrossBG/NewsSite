@@ -18,7 +18,8 @@
     using NewsSite.Services;
     using NewsSite.Scrappers;
     using NewsSite.Models.Data;
-
+    using Hangfire;
+    using Hangfire.SqlServer;
 
     public class Startup
     {
@@ -31,6 +32,20 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(
+                config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                    .UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(
+                        this.Configuration.GetConnectionString("DefaultConnection"),
+                        new SqlServerStorageOptions
+                        {
+                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                            QueuePollInterval = TimeSpan.Zero,
+                            UseRecommendedIsolationLevel = true,
+                            UsePageLocksOnDequeue = true,
+                            DisableGlobalLocks = true,
+                        }));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -50,7 +65,6 @@
             services.AddSingleton<IIpInfoService, IpInfoService>();
             services.AddSingleton<IWeatherService, WeatherService>();
             services.AddSingleton<IExchangesService, ExchangesService>();
-            services.AddHostedService<ScrapperBackgroundService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -84,6 +98,8 @@
                 endpoints.MapRazorPages();
             });
 
+            app.UseHangfireServer(new BackgroundJobServerOptions { WorkerCount = 2 });
+
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
@@ -92,6 +108,12 @@
                 CreateAdminAccount(serviceProvider);
                 CreateCategories(serviceProvider);
             }
+
+            //Scrapping every 30 minutes
+            RecurringJob.AddOrUpdate<IScrapperService>("scrapper", s => s.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now),
+            Cron.Hourly());
+            //Trigger scrapper on application start
+            RecurringJob.Trigger("scrapper");
         }
 
         private void CreateRoles(IServiceProvider serviceProvider)

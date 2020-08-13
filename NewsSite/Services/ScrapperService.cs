@@ -25,9 +25,7 @@
 
         public async Task RunSegaScrapper(DateTime from, DateTime to)
         {
-            //var lastRun = await db.LastRun.Select(x => x.LastRun).FirstAsync();
-            //if (DateTime.Now.Subtract(lastRun).TotalMinutes >= 30 || lastRun == null)
-            //{
+            Console.WriteLine($"[{DateTime.Now}] Running scrapper...");
             var articlesRaw = await segabgScrapper.Run(from, to);
 
             foreach (var item in articlesRaw)
@@ -84,7 +82,7 @@
             }
 
             await db.SaveChangesAsync();
-            //}    
+            Console.WriteLine($"[{DateTime.Now}] Finished scrapper!");
         }
     }
 }
