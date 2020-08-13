@@ -112,8 +112,6 @@
             //Scrapping every 30 minutes
             RecurringJob.AddOrUpdate<IScrapperService>("scrapper", s => s.RunSegaScrapper(DateTime.Now.AddDays(-10), DateTime.Now),
             Cron.Hourly());
-            //Trigger scrapper on application start
-            RecurringJob.Trigger("scrapper");
         }
 
         private void CreateRoles(IServiceProvider serviceProvider)
