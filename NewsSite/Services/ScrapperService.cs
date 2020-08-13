@@ -7,7 +7,6 @@
     using Microsoft.EntityFrameworkCore;
     using NewsSite.Data;
     using NewsSite.Models.Data;
-    using NewsSite.Models.Info;
     using NewsSite.Scrappers;
 
     public class ScrapperService : IScrapperService
@@ -72,13 +71,7 @@
                         break;
                 }
                 resultArticle.CategoryId = category.Id;
-
                 await db.AddAsync(resultArticle);
-
-                var lastRunInfo = new LastRunInfo();
-                lastRunInfo.Name = "SEGA SCRAPPER";
-                lastRunInfo.LastRun = DateTime.Now;
-                await db.AddAsync(lastRunInfo);
             }
 
             await db.SaveChangesAsync();
