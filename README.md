@@ -24,3 +24,9 @@ Using:
 - SendGrid for mailing.
 - Newtonsoft.Json for JSON processing.
 - Bootstrap for styling.
+
+Main page
+![Screenshot](main.jpg)
+
+Admin dashboard
+![Screenshot](admin.jpg)
