@@ -29,4 +29,4 @@ Main page
 ![Screenshot](main.jpg)
 
 Admin dashboard
-![Screenshot](admin.jpg)
+![Screenshot](dash.jpg)
